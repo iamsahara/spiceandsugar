@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import CakeColorPicker from "@/components/CakeColorPicker";
 import { useState } from "react";
 
 const CakeCanvas = dynamic(() => import("../components/CakeCanvas"), { ssr: false });
@@ -17,7 +18,7 @@ export default function Home() {
         <button onClick={() => setSelectedCake("round")}>Round</button>
         <button onClick={() => setSelectedCake("square")}>Square</button>
       </div>
-
+      <CakeColorPicker selectedColor={color} onColorChange={setColor} />
       <CakeCanvas selectedCake={selectedCake} color={color} />
     </div>
   );
