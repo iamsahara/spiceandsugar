@@ -7,20 +7,14 @@ interface CakeCanvasProps {
   color: string;
 }
 
-const cakeImages: Record<string, string> = {
-  round: "/roundcake.png",
-  square: "/rectanglecake.png",
-};
-
 const CakeCanvas: React.FC<CakeCanvasProps> = ({ selectedCake, color }) => {
   const canvasRef = useRef<any>(null);
-  const [fabricInstance, setFabricInstance] = useState<any>(null);
+  const [fabricInstance, setFabricInstance] = useState<typeof import("fabric") | null>(null);
   const [canvas, setCanvas] = useState<any>(null);
 
   useEffect(() => {
     import("fabric").then((fabricModule) => {
-      const Fabric = fabricModule.default || fabricModule;
-      setFabricInstance(Fabric);
+      setFabricInstance(fabricModule.default || fabricModule);
     }).catch((error) => {
       console.error("❌ Error loading Fabric.js:", error);
     });
@@ -28,7 +22,11 @@ const CakeCanvas: React.FC<CakeCanvasProps> = ({ selectedCake, color }) => {
 
   useEffect(() => {
     if (!fabricInstance) return;
-
+    const FabricCanvas = fabricInstance?.Canvas;
+    if (!FabricCanvas) {
+      console.error("❌ Fabric.js Canvas is undefined.");
+      return;
+    }
     const newCanvas = new fabricInstance.Canvas("cakeCanvas", {
       backgroundColor: "transparent",
       width: 500,
@@ -38,38 +36,53 @@ const CakeCanvas: React.FC<CakeCanvasProps> = ({ selectedCake, color }) => {
     canvasRef.current = newCanvas;
     setCanvas(newCanvas);
 
-    loadCakeImage(newCanvas, selectedCake);
+    drawCake(newCanvas, selectedCake);
 
-    return () => {
-      newCanvas.dispose();
-    };
-  }, [fabricInstance, selectedCake]);
+    return () => newCanvas.dispose();
+  }, [fabricInstance, selectedCake, color]);
 
-  const loadCakeImage = (canvas: any, shape: string) => {
-    if (!fabricInstance) return;
-    canvas.clear();
+  // ✅ Function to create a 3D rectangle or circle
+  const drawCake = (canvas: any, shape: "round" | "square") => {
+    if (!fabricInstance || !canvas) return;
 
-    fabricInstance.Image.fromURL(cakeImages[shape], (img: any) => {
-      img.scaleToWidth(300);
-      img.set({ left: 100, top: 50, selectable: false });
+    canvas.clear(); // Clear previous shapes
 
-      canvas.add(img);
-      applyCakeColor(canvas, img);
-    });
-  };
+    let cake;
+    if (shape === "square") {
+      cake = new fabricInstance.Rect({
+        width: 200,
+        height: 200,
+        left: 150,
+        top: 150,
+        fill: color,
+        rx: 20, // Rounded corners
+        ry: 20,
+        selectable: false,
+        shadow: new fabricInstance.Shadow({
+          color: "rgba(0, 0, 0, 0.3)",
+          blur: 20,
+          offsetX: 10,
+          offsetY: 10,
+        }),
+      });
+    } else {
+      cake = new fabricInstance.Circle({
+        radius: 100,
+        left: 150,
+        top: 120,
+        fill: color,
+        selectable: false,
+        shadow: new fabricInstance.Shadow({
+          color: "rgba(0, 0, 0, 0.3)",
+          blur: 20,
+          offsetX: 10,
+          offsetY: 10,
+        }),
+      });
+    }
 
-  const applyCakeColor = (canvas: any, cakeImg: any) => {
-    const colorOverlay = new fabricInstance.Rect({
-      left: cakeImg.left,
-      top: cakeImg.top,
-      width: cakeImg.width,
-      height: cakeImg.height,
-      fill: color,
-      opacity: 0.5,
-      selectable: false,
-    });
-
-    canvas.add(colorOverlay);
+    canvas.add(cake);
+    canvas.renderAll();
   };
 
   return (

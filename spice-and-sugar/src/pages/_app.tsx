@@ -1,27 +1,24 @@
-import "@/styles/globals.css"; // ✅ Import global CSS
-import type { AppProps } from "next/app";
-import Head from "next/head"; // ✅ Add Head for fonts
+import dynamic from "next/dynamic";
+import { useState } from "react";
 
-export default function App({ Component, pageProps }: AppProps) {
+const CakeCanvas = dynamic(() => import("../components/CakeCanvas"), { ssr: false });
+
+export default function Home() {
+  const [selectedCake, setSelectedCake] = useState<"round" | "square">("round"); // ✅ Fixed Type
+  const [color, setColor] = useState("#F3E5AB");
+
   return (
-    <>
-      <Head>
-        {/* ✅ Load Google Fonts Correctly */}
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Geist+Sans:wght@400;700&family=Geist+Mono:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <Component {...pageProps} />
-    </>
+    <div>
+      <h1>Spice and Sugar</h1>
+      <p>Welcome to our cake customization store!</p>
+      
+      {/* ✅ Add buttons to change cake shape */}
+      <div>
+        <button onClick={() => setSelectedCake("round")}>Round</button>
+        <button onClick={() => setSelectedCake("square")}>Square</button>
+      </div>
+
+      <CakeCanvas selectedCake={selectedCake} color={color} />
+    </div>
   );
 }
