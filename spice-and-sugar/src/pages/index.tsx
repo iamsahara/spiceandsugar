@@ -3,7 +3,7 @@ import { useState } from "react";
 const CakeCanvas = dynamic(() => import("../components/CakeCanvas"), { ssr: false });
 
 export default function Home() {
-  const [selectedCake, setSelectedCake] = useState("round");
+  const [selectedCake, setSelectedCake] = useState<"round" | "square">("round");
   const [color, setColor] = useState("#F3E5AB");
   return (
     <div>
