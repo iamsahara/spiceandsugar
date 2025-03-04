@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Box, Typography, Button, Stack } from "@mui/material";
+import { Box, Typography, Button, Stack, Grid } from "@mui/material";
 
 interface Step3Props {
   onNext: () => void;
@@ -32,38 +32,53 @@ const Step3Color: React.FC<Step3Props> = ({ onNext, onBack, updateOrder, orderDe
   }, [selectedColor]);
 
   return (
-    <Box textAlign="center" p={3}>
+    <Box textAlign="center" p={2}>
+
       {/* 🎨 Heading */}
-      <Typography variant="h5" sx={{ fontWeight: 700, color: "#673AB7", mb: 2 }}>
-        Choose Your Cake Color
+      <Typography variant="h6" sx={{ fontWeight: 700, color: "#673AB7", mb: 2 }}>
+        Pick Your Cake Color 🎨
       </Typography>
 
-      {/* 🎨 Color Selection */}
-      <Stack direction="row" spacing={1} justifyContent="center" flexWrap="wrap">
+      {/* 🎨 Color Selection Grid */}
+      <Grid container spacing={1} justifyContent="center">
         {cakeColors.map((cake) => (
-          <Button
-            key={cake.value}
-            onClick={() => setSelectedColor(cake.value)}
-            variant={selectedColor === cake.value ? "contained" : "outlined"}
-            sx={{
-              textTransform: "none",
-              borderRadius: 2,
-              px: 2,
-              py: 1,
-              fontWeight: "bold",
-              bgcolor: selectedColor === cake.value ? cake.value : "white",
-              color: selectedColor === cake.value ? "white" : "#673AB7",
-              border: "2px solid #673AB7",
-              "&:hover": { bgcolor: cake.value, color: "white" },
-            }}
-          >
-            {cake.name}
-          </Button>
+          <Grid item key={cake.value}>
+            <Button
+              onClick={() => setSelectedColor(cake.value)}
+              variant={selectedColor === cake.value ? "contained" : "outlined"}
+              sx={{
+                width: 45,
+                height: 45,
+                minWidth: "unset",
+                borderRadius: "50%",
+                bgcolor: cake.value,
+                border: selectedColor === cake.value ? "3px solid #673AB7" : "2px solid #E0E0E0",
+                transition: "all 0.3s",
+                "&:hover": {
+                  transform: "scale(1.1)",
+                  border: "3px solid #512DA8",
+                },
+              }}
+            />
+          </Grid>
         ))}
-      </Stack>
+      </Grid>
 
-      {/* 🎨 Selected Color Preview */}
-      <Box mt={3} p={2} borderRadius={2} bgcolor={selectedColor} width={100} height={100} mx="auto" />
+      {/* 🎨 Selected Color Preview (Glassy) */}
+      <Box
+        mt={3}
+        p={1}
+        borderRadius={3}
+        width={80}
+        height={80}
+        mx="auto"
+        bgcolor={selectedColor}
+        sx={{
+          boxShadow: "0px 4px 15px rgba(0,0,0,0.2)",
+          border: "2px solid white",
+          backdropFilter: "blur(5px)",
+        }}
+      />
 
     </Box>
   );

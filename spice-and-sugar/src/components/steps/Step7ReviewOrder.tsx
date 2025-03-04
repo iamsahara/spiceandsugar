@@ -76,12 +76,6 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
           ⚠ {errorMessage}
         </Typography>
       )}
-
-      <Stack direction="row" spacing={2} mt={3}>
-        <Button variant="contained" color="success" onClick={handlePayment} disabled={isProcessing}>
-          {isProcessing ? "Processing..." : "Confirm & Pay"}
-        </Button>
-      </Stack>
     </Box>
   );
 };

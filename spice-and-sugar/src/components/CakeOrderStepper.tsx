@@ -39,13 +39,14 @@ const CakeOrderStepper = () => {
     customText: "",
     price: 19,
   });
-
-  // 🔹 Update order details from each step
   const updateOrderDetails = (updatedData: Partial<typeof orderDetails>) => {
     setOrderDetails((prevDetails) => ({ ...prevDetails, ...updatedData }));
   };
 
   const handleNext = () => {
+    if (activeStep === 5) {
+      updateOrderDetails({ customText: orderDetails.customText });
+    }
     setActiveStep((prevStep) => prevStep + 1);
   };
 
@@ -116,16 +117,17 @@ const CakeOrderStepper = () => {
         return null;
     }
   };
+  
 
   return (
     <Box
       sx={{
-        maxWidth: 500, // ✅ Reduce width
+        maxWidth: 500,
         margin: "auto",
-        padding: "15px", // ✅ Reduce padding
+        padding: "15px",
         background: "rgba(255, 255, 255, 0.2)",
         backdropFilter: "blur(10px)",
-        borderRadius: "12px", // ✅ Make border-radius smaller
+        borderRadius: "12px",
         boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
         border: "1px solid rgba(255, 255, 255, 0.2)",
       }}
@@ -135,7 +137,7 @@ const CakeOrderStepper = () => {
         align="center"
         sx={{ mb: 2, color: "#673AB7", fontWeight: "bold", fontSize: "1.4rem" }}
       >
-   Spend 2 Minutes, Get Your Cake, Your Way! 🎨
+        Spend 2 Minutes, Get Your Cake, Your Way! 🎨
       </Typography>
 
       <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 2 }}>
@@ -153,9 +155,8 @@ const CakeOrderStepper = () => {
           mt: 2,
           fontWeight: "bold",
           fontSize: "1.2rem",
-          color: "#388E3C", // ✅ Calming green (trust & affordability)
-          backgroundColor: "rgba(56, 142, 60, 0.1)", // Subtle green background
-          padding: "6px 12px",
+          color: "#388E3C",
+          backgroundColor: "rgba(56, 142, 60, 0.1)",
           borderRadius: "8px",
           display: "inline-block",
           letterSpacing: "0.5px",

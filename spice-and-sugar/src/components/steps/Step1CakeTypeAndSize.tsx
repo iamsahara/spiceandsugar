@@ -11,18 +11,16 @@ interface Step1Props {
 const Step1CakeTypeAndSize: React.FC<Step1Props> = ({ onNext, updateOrder, orderDetails = {} }) => {
   const [selectedCakeType, setSelectedCakeType] = useState<"simple" | "creamy">(orderDetails.cakeType || "simple");
   const [selectedWeight, setSelectedWeight] = useState<number>(orderDetails.weight || 1);
-  const [price, setPrice] = useState(orderDetails.price || 19); // Default for simple cake
+  const [price, setPrice] = useState(orderDetails.price || 18.65);
 
   useEffect(() => {
-    const basePrice = selectedCakeType === "simple" ? 19 : 29;
+    const basePrice = selectedCakeType === "simple" ? 18.65 : 27.99 ;
     setPrice(basePrice * selectedWeight);
     updateOrder({ cakeType: selectedCakeType, weight: selectedWeight, price: basePrice * selectedWeight });
   }, [selectedCakeType, selectedWeight, updateOrder]);
 
   return (
     <Box textAlign="center" p={1}>
-
-      {/* 🏷️ Cake Type Selection */}
       <Typography variant="h6" sx={{ color: "#673AB7", fontWeight: "bold", mb: 1 }}>
         Choose Your Cake Type
       </Typography>
@@ -43,7 +41,7 @@ const Step1CakeTypeAndSize: React.FC<Step1Props> = ({ onNext, updateOrder, order
             onClick={() => setSelectedCakeType(type as "simple" | "creamy")}
           >
             <CardContent>
-              <img src={`/cake-${type}.png`} alt={`${type} cake`} width="100%" />
+            <img src={`/cake-${type}.png`} alt={`${type} cake`} width="100%" />
               <Typography fontWeight="bold" mt={1}>{type === "simple" ? "Simple Cake 🍞" : "Creamy Cake 🎂"}</Typography>
               <Typography color="secondary">${type === "simple" ? "18.65/kg" : "27.99/kg"}</Typography>
             </CardContent>
