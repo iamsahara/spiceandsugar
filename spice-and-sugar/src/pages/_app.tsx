@@ -1,25 +1,14 @@
-import dynamic from "next/dynamic";
-import CakeColorPicker from "@/components/CakeColorPicker";
-import { useState } from "react";
+import "@/styles/globals.scss";
+import type { AppProps } from "next/app";
+import theme from "@/styles/theme";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
-const CakeCanvas = dynamic(() => import("../components/CakeCanvas"), { ssr: false });
-
-export default function Home() {
-  const [selectedCake, setSelectedCake] = useState<"round" | "square">("round"); // ✅ Fixed Type
-  const [color, setColor] = useState("#F3E5AB");
-
+export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div>
-      <h1>Spice and Sugar</h1>
-      <p>Welcome to our cake customization store!</p>
-      
-      {/* ✅ Add buttons to change cake shape */}
-      <div>
-        <button onClick={() => setSelectedCake("round")}>Round</button>
-        <button onClick={() => setSelectedCake("square")}>Square</button>
-      </div>
-      <CakeColorPicker selectedColor={color} onColorChange={setColor} />
-      <CakeCanvas selectedCake={selectedCake} color={color} />
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
