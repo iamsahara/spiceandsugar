@@ -56,7 +56,7 @@ const Step5Toppings: React.FC<Step5Props> = ({ onNext, onBack, updateOrder, orde
   return (
     <Box textAlign="center" p={2}>
       {/* 🏷️ Title */}
-      <Typography variant="h6" sx={{ fontWeight: 700, color: "#673AB7", mb: 1 }}>
+      <Typography variant="h6" sx={{ fontWeight: 700, color: "#8EC5C0", mb: 1 }}>
         Choose Your Toppings
       </Typography>
       <Typography variant="body2" sx={{ color: "gray", mb: 2 }}>

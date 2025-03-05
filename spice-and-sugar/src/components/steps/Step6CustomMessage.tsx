@@ -19,7 +19,7 @@ const Step6CustomMessage: React.FC<Step6Props> = ({ onNext, onBack, updateOrder,
 
   return (
     <Box textAlign="center" p={3}>
-      <Typography variant="h5" sx={{ fontWeight: 700, color: "#673AB7", mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: "#8EC5C0", mb: 2 }}>
         Add a Custom Message 🎂
       </Typography>
 
@@ -34,9 +34,9 @@ const Step6CustomMessage: React.FC<Step6Props> = ({ onNext, onBack, updateOrder,
           mb: 3,
           borderRadius: 2,
           "& .MuiOutlinedInput-root": {
-            "& fieldset": { borderColor: "#673AB7" },
-            "&:hover fieldset": { borderColor: "#512DA8" },
-            "&.Mui-focused fieldset": { borderColor: "#512DA8" },
+            "& fieldset": { borderColor: "#8EC5C0" },
+            "&:hover fieldset": { borderColor: "#8EC5C0" },
+            "&.Mui-focused fieldset": { borderColor: "#8EC5C0" },
           },
         }}
       />

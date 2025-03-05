@@ -186,8 +186,8 @@ const CakeOrderStepper = () => {
             fontSize: "0.7rem",
             px: 1,
             py: 1,
-            bgcolor: "#673AB7",
-            "&:hover": { bgcolor: "#512DA8" },
+            bgcolor: "#8EC5C0",
+            "&:hover": { bgcolor: "#8EC5C0" },
           }}
         >
           {activeStep === steps.length - 1 ? "Finish" : "Next"}

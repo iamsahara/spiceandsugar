@@ -59,7 +59,7 @@ const Step3Color: React.FC<Step3Props> = ({ onNext, updateOrder, orderDetails })
       ) : (
         // 🟣 **Creamy Cake - Choose Base Flavor & Color**
         <>
-          <Typography variant="h6" sx={{ fontWeight: 700, color: "#673AB7", mb: 2 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, color: "#8EC5C0", mb: 2 }}>
             Choose Your Base Flavor 🍫
           </Typography>
 
@@ -76,9 +76,9 @@ const Step3Color: React.FC<Step3Props> = ({ onNext, updateOrder, orderDetails })
                   px: 3,
                   py: 1.5,
                   bgcolor: selectedBase === flavor.value ? "#FF4081" : "white",
-                  color: selectedBase === flavor.value ? "white" : "#673AB7",
-                  border: "2px solid #673AB7",
-                  "&:hover": { bgcolor: "#512DA8", color: "white" },
+                  color: selectedBase === flavor.value ? "white" : "#8EC5C0",
+                  border: "2px solid #8EC5C0",
+                  "&:hover": { bgcolor: "#8EC5C0", color: "white" },
                 }}
               >
                 {flavor.name}
@@ -87,7 +87,7 @@ const Step3Color: React.FC<Step3Props> = ({ onNext, updateOrder, orderDetails })
           </Stack>
 
           {/* 🎨 Cake Color Selection */}
-          <Typography variant="h6" sx={{ fontWeight: 700, color: "#673AB7", mb: 2 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, color: "#8EC5C0", mb: 2 }}>
             Pick Your Cake Color 🎨
           </Typography>
 
@@ -104,11 +104,11 @@ const Step3Color: React.FC<Step3Props> = ({ onNext, updateOrder, orderDetails })
                       minWidth: "unset",
                       borderRadius: "50%",
                       bgcolor: cake.value,
-                      border: selectedColor === cake.value ? "3px solid #673AB7" : "2px solid #E0E0E0",
+                      border: selectedColor === cake.value ? "3px solid #8EC5C0" : "2px solid #E0E0E0",
                       transition: "all 0.3s",
                       "&:hover": {
                         transform: "scale(1.1)",
-                        border: "3px solid #512DA8",
+                        border: "3px solid #8EC5C0",
                       },
                     }}
                   />

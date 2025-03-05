@@ -22,7 +22,7 @@ const Step2ShapeAndLevels: React.FC<Step2Props> = ({ updateOrder, orderDetails }
 
   return (
     <Box textAlign="center" p={2}>
-      <Typography variant="h6" sx={{ fontWeight: "bold", color: "#673AB7", mb: 1 }}>
+      <Typography variant="h6" sx={{ fontWeight: "bold", color: "#8EC5C0", mb: 1 }}>
         Select Cake Shape
       </Typography>
 
@@ -46,13 +46,13 @@ const Step2ShapeAndLevels: React.FC<Step2Props> = ({ updateOrder, orderDetails }
             }}
             onClick={() => setSelectedShape(shape as "round" | "square")}
           >
-            <Typography fontWeight="bold" fontSize="0.9rem" color={selectedShape === shape ? "white" : "#673AB7"}>
+            <Typography fontWeight="bold" fontSize="0.9rem" color={selectedShape === shape ? "white" : "#8EC5C0"}>
               {shape === "round" ? "Round" : "Square"}
             </Typography>
           </Card>
         ))}
       </Stack>
-      <Typography variant="h6" sx={{ fontWeight: "bold", color: "#673AB7", mt: 3, mb: 1 }}>
+      <Typography variant="h6" sx={{ fontWeight: "bold", color: "#8EC5C0", mt: 3, mb: 1 }}>
         Select Cake Levels
       </Typography>
 
@@ -65,10 +65,10 @@ const Step2ShapeAndLevels: React.FC<Step2Props> = ({ updateOrder, orderDetails }
               fontWeight: "bold",
               fontSize: "0.8rem",
               minWidth: 60,
-              bgcolor: cakeLevel === level ? "#673AB7" : "white",
-              color: cakeLevel === level ? "white" : "#673AB7",
-              border: "2px solid #673AB7",
-              "&:hover": { bgcolor: "#512DA8", color: "white" },
+              bgcolor: cakeLevel === level ? "#8EC5C0" : "white",
+              color: cakeLevel === level ? "white" : "#8EC5C0",
+              border: "2px solid #8EC5C0",
+              "&:hover": { bgcolor: "#8EC5C0", color: "white" },
             }}
             onClick={() => setCakeLevel(level as 1 | 2 | 3)}
           >

@@ -31,7 +31,7 @@ const Step1CakeTypeAndSize: React.FC<Step1Props> = ({ onNext, updateOrder, order
 
   return (
     <Box textAlign="center" p={1}>
-      <Typography variant="h6" sx={{ color: "#673AB7", fontSize: "1rem", fontWeight: "bold", mb: 1 }}>
+      <Typography variant="h6" sx={{ color: "#8EC5C0", fontSize: "1rem", fontWeight: "bold", mb: 1 }}>
         Choose Your Cake Type
       </Typography>
       <Stack direction="row" justifyContent="center" spacing={3}>
@@ -62,7 +62,7 @@ const Step1CakeTypeAndSize: React.FC<Step1Props> = ({ onNext, updateOrder, order
           </Card>
         ))}
       </Stack>
-      <Typography variant="h6" sx={{ color: "#673AB7", fontWeight: "bold", fontSize: "1rem", mt: 3, mb: 1 }}>
+      <Typography variant="h6" sx={{ color: "#8EC5C0", fontWeight: "bold", fontSize: "1rem", mt: 3, mb: 1 }}>
         Select Cake Size (kg)
       </Typography>
       <FormControl fullWidth>

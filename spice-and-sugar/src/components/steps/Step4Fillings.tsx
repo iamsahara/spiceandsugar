@@ -63,7 +63,7 @@ const Step4Fillings: React.FC<Step4Props> = ({ updateOrder, orderDetails }) => {
 
   return (
     <Box textAlign="center" p={1} sx={{ m: "1" }}>
-      <Typography variant="h6" sx={{ fontWeight: 700, color: "#673AB7", mb: 1 }}>
+      <Typography variant="h6" sx={{ fontWeight: 700, color: "#8EC5C0", mb: 1 }}>
         Choose Your Fillings 🍰
       </Typography>
 
