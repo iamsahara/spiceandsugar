@@ -6,76 +6,77 @@ interface Step4Props {
   onNext: () => void;
   onBack: () => void;
   updateOrder: (updatedData: Partial<{ filling: string[]; price: number }>) => void;
-  orderDetails: { cakeType: string; filling: string[]; price: number };
+  orderDetails: { cakeType: string; filling: string[]; price: number; basePrice: number };
 }
 
-// 🥜 **Fillings by Cake Type**
-const simpleCakeFillings = ["Apple", "Cinnamon", "Carrot", "Walnuts", "Pistachio"];
-const creamyCakeFillings = ["Chocolate", "Strawberry", "Blueberry", "Cherry", "Banana", "Raspberry", "Kiwi"];
+const simpleCakeFillings = [
+  { name: "Apple", price: 0 },
+  { name: "Cinnamon", price: 0 },
+  { name: "Carrot", price: 0 },
+  { name: "Walnuts", price: 3.99 },
+  { name: "Pistachio", price: 7.99 },
+];
+
+const creamyCakeFillings = [
+  { name: "Chocolate", price: 7.99 },
+  { name: "Strawberry", price: 7.99 },
+  { name: "Blueberry", price: 7.99 },
+  { name: "Cherry", price: 7.99 },
+  { name: "Banana", price: 7.99 },
+  { name: "Raspberry", price: 7.99 },
+  { name: "Kiwi", price: 7.99 },
+];
 
 const Step4Fillings: React.FC<Step4Props> = ({ onNext, onBack, updateOrder, orderDetails }) => {
   const [selectedFillings, setSelectedFillings] = useState<string[]>(orderDetails.filling || []);
-  const [price, setPrice] = useState(orderDetails.price);
-
-  // ✅ Get available fillings based on cake type
+  const [totalPrice, setTotalPrice] = useState(orderDetails.price);
   const availableFillings = orderDetails.cakeType === "simple" ? simpleCakeFillings : creamyCakeFillings;
+  useEffect(() => {
+    let basePrice = orderDetails.basePrice ?? orderDetails.price; 
+    let additionalCost = selectedFillings.reduce((total, fillingName) => {
+      const filling = availableFillings.find((f) => f.name === fillingName);
+      return total + (filling?.price ?? 0); 
+    }, 0);
 
-  // ✅ Toggle Filling Selection
-  const handleSelectFilling = (filling: string) => {
-    let newFillings = selectedFillings.includes(filling)
-      ? selectedFillings.filter((item) => item !== filling) // Remove
-      : [...selectedFillings, filling]; // Add
-
-    setSelectedFillings(newFillings);
-
-    // ✅ Adjust price for **Walnuts & Pistachio**
-    let additionalCost = 0;
-    if (newFillings.includes("Walnuts")) additionalCost += 3.99;
-    if (newFillings.includes("Pistachio")) additionalCost += 7.99;
-    additionalCost += newFillings.length * 7.99; // ✅ Each Filling Adds +$7.99
-
-    // ✅ Free fillings for **Simple Cake**
-    if (orderDetails.cakeType === "simple") {
-      additionalCost -= (["Apple", "Cinnamon", "Carrot"].filter(f => newFillings.includes(f)).length * 7.99);
+    let newTotalPrice = basePrice + additionalCost;
+    if (isNaN(newTotalPrice)) {
+      newTotalPrice = basePrice;
     }
 
-    setPrice(orderDetails.price + additionalCost);
-  };
+    setTotalPrice(newTotalPrice);
+    updateOrder({
+      filling: selectedFillings,
+      price: newTotalPrice,
+    });
+  }, [selectedFillings, orderDetails.basePrice, availableFillings]); 
 
-  // ✅ Update Global Order & Go Next
-  const handleNext = () => {
-    updateOrder({ filling: selectedFillings, price });
-    onNext();
+  const handleSelectFilling = (filling: string) => {
+    setSelectedFillings((prev) =>
+      prev.includes(filling) ? prev.filter((item) => item !== filling) : [...prev, filling]
+    );
   };
 
   return (
-    <Box textAlign="center" p={3}>
-      {/* 🏷️ **Heading** */}
-      <Typography variant="h5" fontWeight="bold" color="primary">
-        Choose Your Fillings 🍰
+    <Box textAlign="center" p={1} sx={{ m:"1"}}>
+     <Typography variant="h6" sx={{ fontWeight: 700, color: "#673AB7", mb: 1 }}>
+        Choose Your Fillings
       </Typography>
-      <Typography variant="body1" sx={{ mb: 2, color: "gray" }}>
-        Select the best fillings for your cake!
-      </Typography>
-
-      {/* 🍓 **Filling Selection** */}
-      <Stack direction="row" spacing={1} justifyContent="center" flexWrap="wrap">
+      <Stack direction="row" spacing={1.5} justifyContent="center" flexWrap="wrap">
         {availableFillings.map((filling) => (
           <Button
-            key={filling}
-            variant={selectedFillings.includes(filling) ? "contained" : "outlined"}
-            onClick={() => handleSelectFilling(filling)}
-            color={selectedFillings.includes(filling) ? "secondary" : "primary"}
+            key={filling.name}
+            variant={selectedFillings.includes(filling.name) ? "contained" : "outlined"}
+            onClick={() => handleSelectFilling(filling.name)}
+            color={selectedFillings.includes(filling.name) ? "secondary" : "primary"}
             sx={{
               fontWeight: "bold",
               textTransform: "capitalize",
-              borderRadius: 3,
-              px: 3,
-              py: 1.5,
-              fontSize: "0.9rem",
+              px: 1,
+              py: 1.2,
+              fontSize: "0.7rem",
             }}
           >
-            {filling} {["Walnuts", "Pistachio"].includes(filling) ? "(+$3.99/$7.99)" : ""}
+            {filling.name} {filling.price > 0 ? `(+$${filling.price.toFixed(2)})` : "(Free)"}
           </Button>
         ))}
       </Stack>

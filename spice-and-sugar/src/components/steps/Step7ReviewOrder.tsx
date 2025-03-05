@@ -63,14 +63,10 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
         <strong>Levels:</strong> {orderDetails.levels} <br />
         <strong>Color:</strong> {orderDetails.color} <br />
         <strong>Weight:</strong> {orderDetails.weight} kg <br />
-        <strong>Filling:</strong> {orderDetails.filling || "None"} <br />
+        <strong>Filling:</strong> {orderDetails.filling.length ? orderDetails.filling.join(", ") : "None"} <br />
         <strong>Toppings:</strong> {orderDetails.toppings.length ? orderDetails.toppings.join(", ") : "None"} <br />
         <strong>Custom Message:</strong> {orderDetails.customText || "None"} <br />
-        <Typography variant="h6" color="primary" mt={2}>
-          Total Price: ${orderDetails.price.toFixed(2)}
-        </Typography>
       </Typography>
-
       {errorMessage && (
         <Typography color="error" mt={2}>
           ⚠ {errorMessage}

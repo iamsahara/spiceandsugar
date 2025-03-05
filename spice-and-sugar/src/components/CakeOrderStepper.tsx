@@ -17,8 +17,8 @@ import Step6CustomMessage from "./steps/Step6CustomMessage";
 import Step7ReviewOrder from "./steps/Step7ReviewOrder";
 
 const steps = [
-  "Cake Type & Size",
-  "Shape & Levels",
+  "Size",
+  "Shape",
   "Color",
   "Fillings",
   "Toppings",
@@ -117,29 +117,21 @@ const CakeOrderStepper = () => {
         return null;
     }
   };
-  
 
   return (
     <Box
       sx={{
-        maxWidth: 500,
+        maxWidth: 600, 
         margin: "auto",
         padding: "15px",
         background: "rgba(255, 255, 255, 0.2)",
         backdropFilter: "blur(10px)",
-        borderRadius: "12px",
+        borderRadius: "12px", 
         boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
         border: "1px solid rgba(255, 255, 255, 0.2)",
+       overflow:"hidden"
       }}
     >
-      <Typography
-        variant="h5"
-        align="center"
-        sx={{ mb: 2, color: "#673AB7", fontWeight: "bold", fontSize: "1.4rem" }}
-      >
-        Spend 2 Minutes, Get Your Cake, Your Way! 🎨
-      </Typography>
-
       <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 2 }}>
         {steps.map((label) => (
           <Step key={label}>
@@ -154,9 +146,9 @@ const CakeOrderStepper = () => {
         sx={{
           mt: 2,
           fontWeight: "bold",
-          fontSize: "1.2rem",
+          fontSize: "1rem",
           color: "#388E3C",
-          backgroundColor: "rgba(56, 142, 60, 0.1)",
+          backgroundColor: "rgba(56, 142, 60, 0.1)", 
           borderRadius: "8px",
           display: "inline-block",
           letterSpacing: "0.5px",

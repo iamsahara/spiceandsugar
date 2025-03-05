@@ -9,6 +9,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  SelectChangeEvent,
 } from "@mui/material";
 
 interface Step5Props {
@@ -39,25 +40,32 @@ const Step5Toppings: React.FC<Step5Props> = ({ onNext, onBack, updateOrder, orde
   const [toppings, setToppings] = useState<string[]>(orderDetails.toppings || []);
   const [price, setPrice] = useState(orderDetails.price);
 
-  // 🔄 Update Global Order State when toppings change
+  // ✅ Update price and toppings
   useEffect(() => {
-    updateOrder({ toppings, price: orderDetails.price + (toppings.length > 0 ? 4.99 : 0) });
+    const additionalCost = toppings.length > 0 ? 4.99 : 0; // Apply one-time charge for any toppings
+    setPrice(orderDetails.price + additionalCost);
+    updateOrder({ toppings, price: orderDetails.price + additionalCost });
   }, [toppings]);
 
-  const handleSelectTopping = (event: any) => {
-    const value = event.target.value as string[];
-    setToppings(value);
+  // ✅ Handle multiple toppings selection
+  const handleSelectTopping = (event: SelectChangeEvent<string[]>) => {
+    const selectedToppings = event.target.value as string[];
+    setToppings(selectedToppings);
   };
 
   return (
-    <Box textAlign="center" p={3}>
-      <Typography variant="h5" sx={{ fontWeight: 700, color: "#673AB7", mb: 2 }}>
+    <Box textAlign="center" p={2}>
+      {/* 🏷️ Title */}
+      <Typography variant="h6" sx={{ fontWeight: 700, color: "#673AB7", mb: 1 }}>
         Choose Your Toppings
+      </Typography>
+      <Typography variant="body2" sx={{ color: "gray", mb: 2 }}>
+        One-time charge: **$4.99** for unlimited toppings 🍰
       </Typography>
 
       {/* 🏷️ Toppings Dropdown */}
       <FormControl fullWidth sx={{ mb: 2 }}>
-        <InputLabel>Select Toppings (One-Time $4.99)</InputLabel>
+        <InputLabel>Select Toppings</InputLabel>
         <Select
           multiple
           value={toppings}

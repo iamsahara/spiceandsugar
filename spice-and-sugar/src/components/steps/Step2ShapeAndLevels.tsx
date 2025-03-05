@@ -22,7 +22,6 @@ const Step2ShapeAndLevels: React.FC<Step2Props> = ({ updateOrder, orderDetails }
 
   return (
     <Box textAlign="center" p={2}>
-      {/* 🏷️ Choose Cake Shape */}
       <Typography variant="h6" sx={{ fontWeight: "bold", color: "#673AB7", mb: 1 }}>
         Select Cake Shape
       </Typography>
@@ -53,8 +52,6 @@ const Step2ShapeAndLevels: React.FC<Step2Props> = ({ updateOrder, orderDetails }
           </Card>
         ))}
       </Stack>
-
-      {/* 🍰 Choose Cake Levels */}
       <Typography variant="h6" sx={{ fontWeight: "bold", color: "#673AB7", mt: 3, mb: 1 }}>
         Select Cake Levels
       </Typography>
