@@ -23,7 +23,7 @@ const steps = [
   "Fillings",
   "Toppings",
   "Message",
-  "Review & Pay",
+  "Review",
 ];
 
 const CakeOrderStepper = () => {
@@ -120,18 +120,23 @@ const CakeOrderStepper = () => {
 
   return (
     <Box
-      sx={{
-        maxWidth: 600, 
-        margin: "auto",
-        padding: "15px",
-        background: "rgba(255, 255, 255, 0.2)",
-        backdropFilter: "blur(10px)",
-        borderRadius: "12px", 
-        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-        border: "1px solid rgba(255, 255, 255, 0.2)",
-       overflow:"hidden"
-      }}
-    >
+    sx={{
+      minWidth: 470,
+      minHeight: 530,
+      margin: "auto",
+      padding: "20px",
+      background: "rgba(255, 255, 255, 0.2)",
+      backdropFilter: "blur(10px)",
+      borderRadius: "12px",
+      boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+      border: "1px solid rgba(255, 255, 255, 0.2)",
+      display: "flex",
+      flexDirection: "column", 
+      justifyContent: "space-between", 
+      alignItems: "center",
+      overflow: "auto", 
+    }}
+  >
       <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 2 }}>
         {steps.map((label) => (
           <Step key={label}>
@@ -156,7 +161,7 @@ const CakeOrderStepper = () => {
       >
         Total: ${orderDetails.price.toFixed(2)}
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2, gap:9 }}>
         <Button
           variant="contained"
           color="secondary"
@@ -172,7 +177,6 @@ const CakeOrderStepper = () => {
         >
           Back
         </Button>
-
         <Button
           variant="contained"
           color="primary"

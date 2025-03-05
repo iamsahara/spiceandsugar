@@ -31,8 +31,6 @@ const Step1CakeTypeAndSize: React.FC<Step1Props> = ({ onNext, updateOrder, order
 
   return (
     <Box textAlign="center" p={1}>
-
-      {/* 🍰 Cake Type Selection */}
       <Typography variant="h6" sx={{ color: "#673AB7", fontSize: "1rem", fontWeight: "bold", mb: 1 }}>
         Choose Your Cake Type
       </Typography>
@@ -64,23 +62,19 @@ const Step1CakeTypeAndSize: React.FC<Step1Props> = ({ onNext, updateOrder, order
           </Card>
         ))}
       </Stack>
-
-      {/* ⚖️ Cake Size Selection */}
       <Typography variant="h6" sx={{ color: "#673AB7", fontWeight: "bold", fontSize: "1rem", mt: 3, mb: 1 }}>
         Select Cake Size (kg)
       </Typography>
-
-      {/* 🏷️ Dropdown for Cake Weight */}
       <FormControl fullWidth>
-        <InputLabel>Weight (kg) & Servings</InputLabel>
+        <InputLabel></InputLabel>
         <Select
           value={selectedWeight}
           onChange={(e) => setSelectedWeight(e.target.value as number)}
           sx={{
             borderRadius: 3,
             fontWeight: "bold",
-            bgcolor: "rgba(255,255,255,0.3)", // Transparent Glass Look
-            backdropFilter: "blur(12px)", // Soft Blur
+            bgcolor: "rgba(255,255,255,0.3)", 
+            backdropFilter: "blur(12px)",
           }}
         >
           {weightOptions.map(({ weight, serves }) => (
