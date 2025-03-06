@@ -8,28 +8,29 @@ import {
   StepLabel,
   Typography,
 } from "@mui/material";
-import Step1CakeTypeAndSize from "./steps/Step1CakeTypeAndSize";
-import Step2ShapeAndLevels from "./steps/Step2ShapeAndLevels";
-import Step3Color from "./steps/Step3Color";
-import Step4Fillings from "./steps/Step4Fillings";
-import Step5Toppings from "./steps/Step5Toppings";
-import Step6CustomMessage from "./steps/Step6CustomMessage";
-import Step7ReviewOrder from "./steps/Step7ReviewOrder";
+import Step1CakeSelection from "./steps/Step1CakeSelection";
+import Step2FillingsToppings from "./steps/Step2fillingsToppings";
+import Step3FlavorColorMessage from "./steps/Step3FlavorColorMessage";
+import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 
-const steps = [
-  "Size",
-  "Shape",
-  "Color",
-  "Fillings",
-  "Toppings",
-  "Message",
-  "Review",
-];
+const steps: string[] = ["Type", "Flavor", "Message", "Review"];
 
-const CakeOrderStepper = () => {
-  const [activeStep, setActiveStep] = useState(0);
-  const [orderDetails, setOrderDetails] = useState({
-    cakeType: "simple",
+interface OrderDetails {
+  cakeType: "Butter Cake" | "Sponge Cake";
+  shape: "round" | "square";
+  levels: number;
+  color?: string;
+  weight: number;
+  filling: string[] | null;
+  toppings: string[];
+  customText: string;
+  price: number;
+}
+
+const CakeOrderStepper: React.FC = () => {
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [orderDetails, setOrderDetails] = useState<OrderDetails>({
+    cakeType: "Butter Cake",
     shape: "round",
     levels: 1,
     color: "#F3E5AB",
@@ -39,26 +40,30 @@ const CakeOrderStepper = () => {
     customText: "",
     price: 19,
   });
-  const updateOrderDetails = (updatedData: Partial<typeof orderDetails>) => {
+
+  const updateOrderDetails = (updatedData: Partial<OrderDetails>): void => {
     setOrderDetails((prevDetails) => ({ ...prevDetails, ...updatedData }));
   };
 
-  const handleNext = () => {
-    if (activeStep === 5) {
+  // 🔹 **Handle Next Step**
+  const handleNext = (): void => {
+    if (activeStep === 2) {
       updateOrderDetails({ customText: orderDetails.customText });
     }
     setActiveStep((prevStep) => prevStep + 1);
   };
 
-  const handleBack = () => {
+  // 🔙 **Handle Back Step**
+  const handleBack = (): void => {
     setActiveStep((prevStep) => prevStep - 1);
   };
 
-  const renderStepContent = (step: number) => {
+  // 📌 **Render Step Content**
+  const renderStepContent = (step: number): JSX.Element | null => {
     switch (step) {
       case 0:
         return (
-          <Step1CakeTypeAndSize
+          <Step1CakeSelection
             onNext={handleNext}
             updateOrder={updateOrderDetails}
             orderDetails={orderDetails}
@@ -66,7 +71,7 @@ const CakeOrderStepper = () => {
         );
       case 1:
         return (
-          <Step2ShapeAndLevels
+          <Step2FillingsToppings
             onNext={handleNext}
             onBack={handleBack}
             updateOrder={updateOrderDetails}
@@ -75,7 +80,7 @@ const CakeOrderStepper = () => {
         );
       case 2:
         return (
-          <Step3Color
+          <Step3FlavorColorMessage
             onNext={handleNext}
             onBack={handleBack}
             updateOrder={updateOrderDetails}
@@ -84,34 +89,7 @@ const CakeOrderStepper = () => {
         );
       case 3:
         return (
-          <Step4Fillings
-            onNext={handleNext}
-            onBack={handleBack}
-            updateOrder={updateOrderDetails}
-            orderDetails={orderDetails}
-          />
-        );
-      case 4:
-        return (
-          <Step5Toppings
-            onNext={handleNext}
-            onBack={handleBack}
-            updateOrder={updateOrderDetails}
-            orderDetails={orderDetails}
-          />
-        );
-      case 5:
-        return (
-          <Step6CustomMessage
-            onNext={handleNext}
-            onBack={handleBack}
-            updateOrder={updateOrderDetails}
-            orderDetails={orderDetails}
-          />
-        );
-      case 6:
-        return (
-          <Step7ReviewOrder onBack={handleBack} orderDetails={orderDetails} />
+          <Step4ReviewOrder onBack={handleBack} orderDetails={orderDetails} />
         );
       default:
         return null;
@@ -120,79 +98,98 @@ const CakeOrderStepper = () => {
 
   return (
     <Box
-    sx={{
-      minWidth: 470,
-      minHeight: 530,
-      margin: "auto",
-      padding: "20px",
-      background: "rgba(255, 255, 255, 0.2)",
-      backdropFilter: "blur(10px)",
-      borderRadius: "12px",
-      boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
-      display: "flex",
-      flexDirection: "column", 
-      justifyContent: "space-between", 
-      alignItems: "center",
-      overflow: "auto", 
-    }}
-  >
+      sx={{
+        maxWidth: 470,
+        minWidth: 470,
+        minHeight: 650,
+        maxHeight: 650,
+        margin: "auto",
+        padding: "20px",
+        background: "rgba(255, 255, 255, 0.2)",
+        backdropFilter: "blur(10px)",
+        borderRadius: "12px",
+        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+        border: "1px solid rgba(255, 255, 255, 0.2)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center",
+        overflow: "auto",
+      }}
+    >
       <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 2 }}>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel sx={{ fontSize: "0.8rem" }}>{label}</StepLabel>{" "}
+        {steps.map((label, index) => (
+          <Step key={index}>
+            <StepLabel sx={{ fontSize: "0.8rem" }}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-      <Box sx={{ mt: 3 }}>{renderStepContent(activeStep)}</Box>
-      <Typography
-        variant="h6"
-        align="center"
-        sx={{
-          mt: 2,
-          fontWeight: "bold",
-          fontSize: "1rem",
-          color: "#388E3C",
-          backgroundColor: "rgba(56, 142, 60, 0.1)", 
-          borderRadius: "8px",
-          display: "inline-block",
-          letterSpacing: "0.5px",
-        }}
-      >
-        Total: ${orderDetails.price.toFixed(2)}
-      </Typography>
-      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2, gap:9 }}>
-        <Button
-          variant="contained"
-          color="secondary"
-          disabled={activeStep === 0}
-          onClick={handleBack}
+
+      <Box sx={{ mt: 3, width: "100%" }}>{renderStepContent(activeStep)}</Box>
+
+      {/* ✅ Show Total Price Except on Review Step */}
+      {activeStep !== 3 && (
+        <Typography
+          variant="h6"
+          align="center"
           sx={{
-            fontSize: "0.9rem",
+            mt: 2,
+            fontWeight: "bold",
+            fontSize: "1rem",
+            color: "#388E3C",
+            backgroundColor: "rgba(56, 142, 60, 0.1)",
+            borderRadius: "8px",
+            display: "inline-block",
+            letterSpacing: "0.5px",
             px: 2,
             py: 1,
-            bgcolor: "#FF4081",
-            "&:hover": { bgcolor: "#E91E63" },
           }}
         >
-          Back
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleNext}
-          disabled={activeStep === steps.length - 1}
+          Total: ${orderDetails.price.toFixed(2)}
+        </Typography>
+      )}
+
+      {/* ✅ Hide Navigation Buttons on Review Step */}
+      {activeStep !== 3 && (
+        <Box
           sx={{
-            fontSize: "0.7rem",
-            px: 1,
-            py: 1,
-            bgcolor: "#8EC5C0",
-            "&:hover": { bgcolor: "#8EC5C0" },
+            display: "flex",
+            justifyContent: "space-between",
+            mt: 3,
+            gap: 3,
           }}
         >
-          {activeStep === steps.length - 1 ? "Finish" : "Next"}
-        </Button>
-      </Box>
+          <Button
+            variant="contained"
+            color="secondary"
+            disabled={activeStep === 0}
+            onClick={handleBack}
+            sx={{
+              fontSize: "0.9rem",
+              px: 2,
+              py: 1,
+              bgcolor: "#FF4081",
+              "&:hover": { bgcolor: "#E91E63" },
+            }}
+          >
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleNext}
+            sx={{
+              fontSize: "0.9rem",
+              px: 2,
+              py: 1,
+              bgcolor: "#8EC5C0",
+              "&:hover": { bgcolor: "#8EC5C0" },
+            }}
+          >
+            {activeStep === steps.length - 1 ? "Finish" : "Next"}
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };
