@@ -53,7 +53,7 @@ const Step3FlavorColorMessage: React.FC<Step3Props> = ({
             sx={{
               fontSize: "1.15rem",
               fontWeight: "bold",
-              color: "#FF4081",
+              color: "var( --secondary-color)",
               textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
             }}
           >
@@ -81,7 +81,7 @@ const Step3FlavorColorMessage: React.FC<Step3Props> = ({
           sx={{
             fontSize: "1.15rem",
             fontWeight: "bold",
-            color: "#FF4081",
+            color: "var( --secondary-color)",
             textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
           }}
         >
@@ -96,9 +96,9 @@ const Step3FlavorColorMessage: React.FC<Step3Props> = ({
           sx={{
             borderRadius: 2,
             "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: "#8EC5C0" },
-              "&:hover fieldset": { borderColor: "#8EC5C0" },
-              "&.Mui-focused fieldset": { borderColor: "#8EC5C0" },
+              "& fieldset": { borderColor: "var( --primary-color)" },
+              "&:hover fieldset": { borderColor: "var( --primary-color)" },
+              "&.Mui-focused fieldset": { borderColor: "var( --primary-color)" },
             },
           }}
         />

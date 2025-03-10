@@ -85,7 +85,7 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
 
   return (
     <Box p={3}>
-      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "#FF4081", mb: 1 }}>
+      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)", mb: 1 }}>
         ⑤ Flavor
       </Typography>
       <FormControl fullWidth variant="outlined">
@@ -97,7 +97,7 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
           ))}
         </Select>
       </FormControl>
-      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "#FF4081", mt: 3, mb: 1 }}>
+      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)", mt: 3, mb: 1 }}>
         ⑥ Fillings
       </Typography>
       <FormControl fullWidth variant="outlined">
@@ -109,7 +109,7 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
     renderValue={(selected) => (
       <Stack direction="row" spacing={1} flexWrap="wrap">
         {selected.map((filling) => (
-          <Chip key={filling} label={filling} sx={{ bgcolor: "#FF4081", color: "white", fontWeight: "bold" }} />
+          <Chip key={filling} label={filling} sx={{ bgcolor: "var( --secondary-color)", color: "white", fontWeight: "bold" }} />
         ))}
       </Stack>
     )}
@@ -122,7 +122,7 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
   </Select>
 </FormControl>
 
-      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "#FF4081", mt: 3, mb: 1 }}>
+      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)", mt: 3, mb: 1 }}>
         ⑦ Toppings (One-Time charge $4.99)
       </Typography>
       <FormControl fullWidth variant="outlined">
@@ -133,7 +133,7 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
           renderValue={(selected) => (
             <Stack direction="row" spacing={2} flexWrap="wrap">
               {selected.map((topping) => (
-                <Chip key={topping} label={topping} sx={{ bgcolor: "#FF4081", color: "white", fontWeight: "bold" }} />
+                <Chip key={topping} label={topping} sx={{ bgcolor: "var( --secondary-color)", color: "white", fontWeight: "bold" }} />
               ))}
             </Stack>
           )}

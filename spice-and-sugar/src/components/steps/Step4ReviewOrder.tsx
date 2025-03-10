@@ -79,8 +79,8 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
       >
         <CardContent>
           <Stack direction="row" alignItems="center" spacing={1} mb={1}>
-            <ShoppingCartIcon sx={{ color: "#FF4081" }} />
-            <Typography variant="h5" fontWeight="bold" color="#FF4081">
+            <ShoppingCartIcon sx={{ color: "var( --secondary-color)" }} />
+            <Typography variant="h5" fontWeight="bold" color="var( --secondary-color)">
               Review Your Order
             </Typography>
           </Stack>
@@ -114,7 +114,7 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
             py: 1,
             width: "100%",
             maxWidth: "350px",
-            bgcolor: "#8EC5C0",
+            bgcolor: "var( --primary-color)",
             borderRadius: 8,
             boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
             textTransform: "none",
@@ -181,8 +181,8 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
           px: 2,
           py: 1,
           borderRadius: 8,
-          border: "2px solid #FF4081",
-          color: "#FF4081",
+          border: "2px solid var( --secondary-color)",
+          color: "var( --secondary-color)",
           "&:hover": { bgcolor: "rgba(255, 64, 129, 0.1)" },
         }}
       >

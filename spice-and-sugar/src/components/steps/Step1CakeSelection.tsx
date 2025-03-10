@@ -50,7 +50,7 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
     <Box p={2} >
       <Grid container spacing={2} alignItems="center"  direction="column">
         <Grid item xs={4}>
-          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "#FF4081" }}>
+          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
             ① Type
           </Typography>
         </Grid>
@@ -63,7 +63,7 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
                   width: 80,
                   height: 130,
                   borderRadius: "8px",
-                  border: selectedCakeType === type ? "2px solid #FF4081" : "2px solid #E0E0E0",
+                  border: selectedCakeType === type ? "2px solid var( --secondary-color)" : "2px solid #E0E0E0",
                   cursor: "pointer",
                   transition: "all 0.3s",
                   "&:hover": { transform: "scale(1.05)" },
@@ -85,7 +85,7 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
         </Grid>
 
         <Grid item xs={4}>
-          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "#FF4081" }}>
+          <Typography variant="h6" sx={{ fontSize: "0.8rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
             ② Size
           </Typography>
         </Grid>
@@ -94,7 +94,7 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
             <Select
               value={selectedWeight}
               onChange={(e) => setSelectedWeight(e.target.value as number)}
-              sx={{ ffontSize: "0.8rem", fontWeight: "bold", borderRadius: 2, bgcolor: "rgba(255,255,255,0.3)", backdropFilter: "blur(1px)"}}
+              sx={{ fontSize: "0.8rem", fontWeight: "bold", borderRadius: 2, bgcolor: "rgba(255,255,255,0.3)", backdropFilter: "blur(1px)"}}
             >
               {weightOptions.map(({ weight, serves }) => (
                 <MenuItem key={weight} value={weight}>
@@ -105,7 +105,7 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
           </FormControl>
         </Grid>
         <Grid item xs={4}>
-          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "#FF4081" }}>
+          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
             ③ Shape
           </Typography>
         </Grid>
@@ -126,7 +126,7 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
         </Grid>
 
         <Grid item xs={4}>
-          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "#FF4081" }}>
+          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
             ④ Tiers
           </Typography>
         </Grid>
@@ -140,10 +140,11 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
                   minWidth: 5,
                   fontWeight: "bold",
                   fontSize: "0.7rem",
-                  bgcolor: cakeTiers === tier ? "#8EC5C0" : "white",
-                  color: cakeTiers === tier ? "white" : "#8EC5C0",
-                  border: "2px solid #FF4081",
-                  "&:hover": { bgcolor: "#8EC5C0", color: "white" },
+                  color:"black",
+                  bgcolor: cakeTiers === tier ? "var( --primary-color)" : "white",
+                  color: cakeTiers === tier ? "white" : "var( --primary-color)",
+                  border: "2px solid var( --secondary-color)",
+                  "&:hover": { bgcolor: "var( --primary-color)", color: "white" },
                 }}
                 onClick={() => setCakeTiers(tier)}
               >

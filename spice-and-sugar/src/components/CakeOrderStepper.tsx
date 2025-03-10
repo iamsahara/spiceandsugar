@@ -164,7 +164,7 @@ const CakeOrderStepper: React.FC = () => {
               fontSize: "0.9rem",
               px: 2,
               py: 1,
-              bgcolor: "#FF4081",
+              bgcolor: "var( --secondary-color)",
               "&:hover": { bgcolor: "#E91E63" },
             }}
           >
@@ -178,8 +178,8 @@ const CakeOrderStepper: React.FC = () => {
               fontSize: "0.9rem",
               px: 2,
               py: 1,
-              bgcolor: "#8EC5C0",
-              "&:hover": { bgcolor: "#8EC5C0" },
+              bgcolor: "var( --primary-color)",
+              "&:hover": { bgcolor: "var( --primary-color)" },
             }}
           >
             {activeStep === steps.length - 1 ? "Finish" : "Next"}
