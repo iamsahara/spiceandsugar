@@ -60,7 +60,7 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
     <Box
       sx={{
         p: 3,
-        background: "rgba(255, 255, 255, 0.3)",
+        backgRound: "rgba(255, 255, 255, 0.3)",
         backdropFilter: "blur(12px)",
         borderRadius: "15px",
         boxShadow: "0px 6px 15px rgba(0, 0, 0, 0.1)",
@@ -74,7 +74,7 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
           mb: 2,
           borderRadius: 2,
           boxShadow: "0px 3px 8px rgba(0,0,0,0.1)",
-          background: "rgba(255, 255, 255, 0.9)",
+          backgRound: "rgba(255, 255, 255, 0.9)",
         }}
       >
         <CardContent>

@@ -8,8 +8,8 @@ const theme = createTheme({
     secondary: {
       main: "#ffbe76", // Warm yellow (Cheerful)
     },
-    background: {
-      default: "#fffaf0", // Soft pastel background
+    backgRound: {
+      default: "#fffaf0", // Soft pastel backgRound
     },
     text: {
       primary: "#333", // Dark gray for readability

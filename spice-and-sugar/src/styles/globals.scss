@@ -3,17 +3,17 @@
 :root {
   --primary-color:  #8EC5C0;
   --secondary-color: #FF4081;
-  --background-color: #fff8f1;
+  --backgRound-color: #fff8f1;
   --text-color: #333;
   --button-hover:  #7AB8AE;
 }
 
 body {
-  background-image: url("/background.png"); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  backgRound-image: url("/backgRound.png"); 
+  backgRound-size: cover;
+  backgRound-position: center;
+  backgRound-repeat: no-repeat;
+  backgRound-attachment: fixed;
   font-family: "Poppins", sans-serif; 
   color: #333; 
   margin: 0;
@@ -31,7 +31,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--button-hover);
+  backgRound-color: var(--button-hover);
   color: black;
 }
 

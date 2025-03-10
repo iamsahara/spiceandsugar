@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 name: "Custom Cake Order",
                 description: `Cake Type: ${orderDetails.cakeType}, Color: ${orderDetails.color}`,
               },
-              unit_amount: Math.round(orderDetails.price * 100), // Convert to cents
+              unit_amount: Math.Round(orderDetails.price * 100), // Convert to cents
             },
             quantity: 1,
           },

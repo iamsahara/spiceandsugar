@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -18,7 +17,7 @@ const steps: string[] = ["Type", "Flavor", "Message", "Review"];
 
 interface OrderDetails {
   cakeType: "Butter Cake" | "Sponge Cake";
-  shape: "round" | "square";
+  shape: "Round" | "square";
   levels: number;
   color?: string;
   weight: number;
@@ -28,24 +27,23 @@ interface OrderDetails {
   price: number;
 }
 
-const CakeOrderStepper: React.FC = () => {
+const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [orderDetails, setOrderDetails] = useState<OrderDetails>({
     cakeType: "Butter Cake",
-    shape: "round",
+    shape: "Round",
     levels: 1,
     color: "#F3E5AB",
     weight: 1,
     filling: null,
     toppings: [],
     customText: "",
-    price: 19,
+    price: 18.99,
   });
 
   const updateOrderDetails = (updatedData: Partial<OrderDetails>): void => {
     setOrderDetails((prevDetails) => ({ ...prevDetails, ...updatedData }));
   };
-
 
   const handleNext = (): void => {
     if (activeStep === 2) {
@@ -54,11 +52,9 @@ const CakeOrderStepper: React.FC = () => {
     setActiveStep((prevStep) => prevStep + 1);
   };
 
-
   const handleBack = (): void => {
     setActiveStep((prevStep) => prevStep - 1);
   };
-
 
   const renderStepContent = (step: number): React.ReactNode => {
     switch (step) {
@@ -88,9 +84,7 @@ const CakeOrderStepper: React.FC = () => {
           />
         );
       case 3:
-        return (
-          <Step4ReviewOrder onBack={handleBack} orderDetails={orderDetails} />
-        );
+        return <Step4ReviewOrder onBack={handleBack} orderDetails={orderDetails} />;
       default:
         return null;
     }
@@ -105,7 +99,7 @@ const CakeOrderStepper: React.FC = () => {
         maxHeight: 650,
         margin: "auto",
         padding: "20px",
-        background: "rgba(255, 255, 255, 0.2)",
+        backgRound: "rgba(255, 255, 255, 0.2)",
         backdropFilter: "blur(10px)",
         borderRadius: "12px",
         boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
@@ -117,6 +111,10 @@ const CakeOrderStepper: React.FC = () => {
         overflow: "auto",
       }}
     >
+      <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}>
+        Welcome, {userName}! 🎉
+      </Typography>
+
       <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 2 }}>
         {steps.map((label, index) => (
           <Step key={index}>
@@ -126,6 +124,7 @@ const CakeOrderStepper: React.FC = () => {
       </Stepper>
 
       <Box sx={{ mt: 3, width: "100%" }}>{renderStepContent(activeStep)}</Box>
+
       {activeStep !== 3 && (
         <Typography
           variant="h6"
@@ -135,7 +134,7 @@ const CakeOrderStepper: React.FC = () => {
             fontWeight: "bold",
             fontSize: "1rem",
             color: "#388E3C",
-            backgroundColor: "rgba(56, 142, 60, 0.1)",
+            backgRoundColor: "rgba(56, 142, 60, 0.1)",
             borderRadius: "8px",
             display: "inline-block",
             letterSpacing: "0.5px",
@@ -146,6 +145,7 @@ const CakeOrderStepper: React.FC = () => {
           Total: ${orderDetails.price.toFixed(2)}
         </Typography>
       )}
+
       {activeStep !== 3 && (
         <Box
           sx={{
@@ -164,7 +164,7 @@ const CakeOrderStepper: React.FC = () => {
               fontSize: "0.9rem",
               px: 2,
               py: 1,
-              bgcolor: "var( --secondary-color)",
+              bgcolor: "var(--secondary-color)",
               "&:hover": { bgcolor: "#E91E63" },
             }}
           >
@@ -178,8 +178,8 @@ const CakeOrderStepper: React.FC = () => {
               fontSize: "0.9rem",
               px: 2,
               py: 1,
-              bgcolor: "var( --primary-color)",
-              "&:hover": { bgcolor: "var( --primary-color)" },
+              bgcolor: "var(--primary-color)",
+              "&:hover": { bgcolor: "var(--primary-color)" },
             }}
           >
             {activeStep === steps.length - 1 ? "Finish" : "Next"}

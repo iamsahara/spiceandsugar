@@ -1,77 +1,28 @@
 "use client";
-import { Box, Typography, Container } from "@mui/material";
-import CakeOrderStepper from "@/components/CakeOrderStepper";
-import { motion } from "framer-motion";
+import Home from "@/components/Home";
+import { useState, useEffect } from "react";
+import UserAuth from "@/components/UserAuth";
 
-export default function Home() {
+export default function IndexPage() {
+  const [userName, setUserName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("guestUser");
+    if (savedUser) {
+      const parsedUser = JSON.parse(savedUser);
+      if (parsedUser.name) {
+        setUserName(parsedUser.name);
+      }
+    }
+  }, []);
+
   return (
-    <Container
-      maxWidth="lg"
-      sx={{
-        textAlign: "left", 
-        py: 3,
-        px: 4,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start", 
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, x: -15 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        style={{ position: "relative" }}
-      >
-        <Typography
-          variant="h3"
-          fontWeight="900"
-          sx={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "3.2rem",
-            display: "inline-block",
-            padding: "10px 0px",
-            background: "linear-gradient(90deg, #FF3366, #FF69B4, #FF6B81)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: `
-              2px 2px 8px rgba(255, 51, 102, 0.4),
-              0px 0px 12px rgba(255, 105, 180, 0.4)
-            `,
-          }}
-        >
-          Velora Cake 
-        </Typography>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-      >
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: "'Quicksand', sans-serif",
-            fontWeight: "500",
-            letterSpacing: "1px",
-            background: "linear-gradient(90deg, #FF5E78, #FF82A9)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "0px 0px 12px rgba(255, 94, 120, 0.5)",
-          }}
-        >
-          🍰 Fresh, Healthy & Custom-Made Cakes!
-        </Typography>
-      </motion.div>
-      <Box
-        sx={{
-          mt: 4,
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <CakeOrderStepper />
-      </Box>
-    </Container>
+    <div>
+      {!userName ? (
+        <UserAuth onAuthSuccess={(name) => setUserName(name)} />
+      ) : (
+        <Home userName={userName} />
+      )}
+    </div>
   );
 }
