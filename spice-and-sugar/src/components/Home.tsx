@@ -30,8 +30,8 @@ export default function Home({ userName }: { userName: string }) {
             fontSize: "3.2rem",
             display: "inline-block",
             padding: "10px 0px",
-            backgRound: "linear-gradient(90deg, #FF3366, #FF69B4, #FF6B81)",
-            WebkitBackgRoundClip: "text",
+            background: "linear-gradient(90deg, #FF3366, #FF69B4, #FF6B81)", // ✅ Fixed
+            WebkitBackgroundClip: "text", // ✅ Fixed
             WebkitTextFillColor: "transparent",
             textShadow: `
               2px 2px 8px rgba(255, 51, 102, 0.4),
@@ -53,10 +53,9 @@ export default function Home({ userName }: { userName: string }) {
             fontFamily: "'Quicksand', sans-serif",
             fontWeight: "500",
             letterSpacing: "1px",
-            backgRound: "linear-gradient(90deg, #FF5E78, #FF82A9)",
-            WebkitBackgRoundClip: "text",
+            background: "linear-gradient(90deg, #FF5E78, #FF82A9)", 
+            WebkitBackgroundClip: "text", 
             WebkitTextFillColor: "transparent",
-            color: "FFSE78",
             textShadow: "0px 0px 12px rgba(255, 94, 120, 0.5)",
           }}
         >

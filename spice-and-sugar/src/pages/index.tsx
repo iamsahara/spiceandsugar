@@ -1,27 +1,34 @@
 "use client";
-import Home from "@/components/Home";
 import { useState, useEffect } from "react";
 import UserAuth from "@/components/UserAuth";
+import Home from "@/components/Home";
 
 export default function IndexPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("guestUser");
     if (savedUser) {
-      const parsedUser = JSON.parse(savedUser);
-      if (parsedUser.name) {
-        setUserName(parsedUser.name);
+      const user = JSON.parse(savedUser);
+      if (user?.name) {
+        setUserName(user.name);
+        setIsAuthenticated(true);
       }
     }
   }, []);
 
   return (
     <div>
-      {!userName ? (
-        <UserAuth onAuthSuccess={(name) => setUserName(name)} />
+      {!isAuthenticated ? (
+        <UserAuth
+          onAuthSuccess={(name) => {
+            setUserName(name);
+            setIsAuthenticated(true);
+          }}
+        />
       ) : (
-        <Home userName={userName} />
+        <Home userName={userName || "Guest"} />
       )}
     </div>
   );

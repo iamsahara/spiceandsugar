@@ -13,11 +13,11 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
     const guestUser = localStorage.getItem("guestUser");
     if (guestUser) {
       const parsedUser = JSON.parse(guestUser);
-      if (parsedUser.name) {
+      if (parsedUser.name && parsedUser.email) {
         onAuthSuccess(parsedUser.name);
       }
     }
-  }, [onAuthSuccess]);
+  }, []); // ✅ Empty dependency array ensures this runs only once on mount
 
   const handleGuestSignIn = () => {
     if (!user.name.trim() || !user.email.trim()) {
@@ -25,8 +25,8 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
       return;
     }
 
-    localStorage.setItem("guestUser", JSON.stringify(user));
-    onAuthSuccess(user.name);
+    localStorage.setItem("guestUser", JSON.stringify(user)); // ✅ Save user data
+    onAuthSuccess(user.name); // ✅ Move to stepper
   };
 
   return (
