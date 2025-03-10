@@ -5,18 +5,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import PaymentIcon from "@mui/icons-material/Payment";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-
-const colorNames: Record<string, string> = {
-  "#FDFBF6": "White",
-  "#FF6B81": "Strawberry",
-  "#F4D03F": "Lemon",
-  "#5A3B9C": "Blueberry",
-  "#597D35": "Matcha",
-  "#C41E3A": "Red Velvet",
-  "#4E342E": "Chocolate Brown",
-  "#7B5B3A": "Coffee",
-};
-
 interface Step7Props {
   onBack: () => void;
   orderDetails: {
@@ -102,7 +90,7 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
             <strong>Cake Type:</strong> {orderDetails.cakeType} <br />
             <strong>Shape:</strong> {orderDetails.shape} <br />
             <strong>Tiers:</strong> {orderDetails.levels} <br />
-            <strong>Color:</strong> {colorNames[orderDetails.color] || orderDetails.color} <br />
+            <strong>Color:</strong> {orderDetails.color} <br />
             <strong>Weight:</strong> {orderDetails.weight} kg <br />
             <strong>Filling:</strong> {orderDetails.filling?.length ? orderDetails.filling.join(", ") : "None"} <br />
             <strong>Toppings:</strong> {orderDetails.toppings.length ? orderDetails.toppings.join(", ") : "None"} <br />

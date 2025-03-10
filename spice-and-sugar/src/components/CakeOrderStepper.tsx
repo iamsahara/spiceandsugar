@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useState } from "react";
 import {
   Box,
@@ -9,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import Step1CakeSelection from "./steps/Step1CakeSelection";
-import Step2FillingsToppings from "./steps/Step2fillingsToppings";
+import Step2FillingsToppings from "./steps/Step2FillingsToppings";
 import Step3FlavorColorMessage from "./steps/Step3FlavorColorMessage";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 
@@ -45,7 +46,7 @@ const CakeOrderStepper: React.FC = () => {
     setOrderDetails((prevDetails) => ({ ...prevDetails, ...updatedData }));
   };
 
-  // 🔹 **Handle Next Step**
+
   const handleNext = (): void => {
     if (activeStep === 2) {
       updateOrderDetails({ customText: orderDetails.customText });
@@ -53,13 +54,13 @@ const CakeOrderStepper: React.FC = () => {
     setActiveStep((prevStep) => prevStep + 1);
   };
 
-  // 🔙 **Handle Back Step**
+
   const handleBack = (): void => {
     setActiveStep((prevStep) => prevStep - 1);
   };
 
-  // 📌 **Render Step Content**
-  const renderStepContent = (step: number): JSX.Element | null => {
+
+  const renderStepContent = (step: number): React.ReactNode => {
     switch (step) {
       case 0:
         return (
@@ -73,7 +74,6 @@ const CakeOrderStepper: React.FC = () => {
         return (
           <Step2FillingsToppings
             onNext={handleNext}
-            onBack={handleBack}
             updateOrder={updateOrderDetails}
             orderDetails={orderDetails}
           />
@@ -126,8 +126,6 @@ const CakeOrderStepper: React.FC = () => {
       </Stepper>
 
       <Box sx={{ mt: 3, width: "100%" }}>{renderStepContent(activeStep)}</Box>
-
-      {/* ✅ Show Total Price Except on Review Step */}
       {activeStep !== 3 && (
         <Typography
           variant="h6"
@@ -148,8 +146,6 @@ const CakeOrderStepper: React.FC = () => {
           Total: ${orderDetails.price.toFixed(2)}
         </Typography>
       )}
-
-      {/* ✅ Hide Navigation Buttons on Review Step */}
       {activeStep !== 3 && (
         <Box
           sx={{

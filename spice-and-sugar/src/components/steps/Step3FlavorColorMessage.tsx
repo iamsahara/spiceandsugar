@@ -37,7 +37,7 @@ const Step3FlavorColorMessage: React.FC<Step3Props> = ({
 }) => {
   const [selectedColor, setSelectedColor] = useState(
     orderDetails.color || "White"
-  ); // Default to White
+  ); 
   const [customText, setCustomText] = useState(orderDetails.customText || "");
 
   useEffect(() => {
