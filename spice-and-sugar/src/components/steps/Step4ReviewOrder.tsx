@@ -143,28 +143,7 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
             "&:hover": { bgcolor: "#333" },
           }}
         >
-          🖤 Pay with Apple Pay
-        </Button>
-
-        <Button
-          variant="contained"
-          onClick={handlePayment}
-          disabled={isProcessing}
-          sx={{
-            fontSize: "0.9rem",
-            px: 2,
-            py: 1,
-            width: "100%",
-            maxWidth: "350px",
-            bgcolor: "#4285F4",
-            color: "white",
-            borderRadius: 8,
-            boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
-            textTransform: "none",
-            "&:hover": { bgcolor: "#357AE8" },
-          }}
-        >
-          🔵 Pay with Google Pay
+           Pay with Apple Pay
         </Button>
       </Stack>
       {errorMessage && (
