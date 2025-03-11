@@ -3,17 +3,16 @@ import { Box, Container, Typography } from "@mui/material";
 import CakeOrderStepper from "@/components/CakeOrderStepper";
 import { motion } from "framer-motion";
 
-export default function Home({ userName }: { userName: string }) {
+export default function Header({ userName }: { userName: string }) {
   return (
     <Container
       maxWidth="lg"
       sx={{
         textAlign: "left",
-        py: 3,
-        px: 4,
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
+        zIndex:3
       }}
     >
       <motion.div
@@ -29,8 +28,7 @@ export default function Home({ userName }: { userName: string }) {
             fontFamily: "'Playfair Display', serif",
             fontSize: "3.2rem",
             display: "inline-block",
-            padding: "10px 0px",
-            background: "linear-gradient(90deg, #FF3366, #FF69B4, #FF6B81)", // ✅ Fixed
+            background: "linear-gradient(90deg, #FF3366, #FF69B4, #FF6B81)", 
             WebkitBackgroundClip: "text", 
             WebkitTextFillColor: "transparent",
             textShadow: `
@@ -55,23 +53,12 @@ export default function Home({ userName }: { userName: string }) {
             letterSpacing: "1px",
             background: "linear-gradient(90deg, #FF5E78, #FF82A9)", 
             WebkitBackgroundClip: "text", 
-            WebkitTextFillColor: "transparent",
             textShadow: "0px 0px 12px rgba(255, 94, 120, 0.5)",
           }}
         >
           🍰 Fresh, Healthy & Custom-Made Cakes!
         </Typography>
       </motion.div>
-      <Box
-        sx={{
-          mt: 4,
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <CakeOrderStepper userName={userName} />
-      </Box>
     </Container>
   );
 }

@@ -12,6 +12,7 @@ import Step1CakeSelection from "./steps/Step1CakeSelection";
 import Step2FillingsToppings from "./steps/Step2FillingsToppings";
 import Step3FlavorColorMessage from "./steps/Step3FlavorColorMessage";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
+import Header from "./Header";
 
 const steps: string[] = ["Type", "Flavor", "Message", "Review"];
 
@@ -91,24 +92,26 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   };
 
   return (
+    <div>
+    <Header/>
     <Box
       sx={{
-        maxWidth: 470,
-        minWidth: 470,
-        minHeight: 650,
-        maxHeight: 650,
-        margin: "auto",
-        padding: "20px",
-        backgRound: "rgba(255, 255, 255, 0.2)",
-        backdropFilter: "blur(10px)",
-        borderRadius: "12px",
-        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-        border: "1px solid rgba(255, 255, 255, 0.2)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-        overflow: "auto",
+          maxWidth: 470,
+          minWidth: 470,
+          minHeight: 650,
+          maxHeight: 650,
+          margin:"10rem",
+          padding: "20px",
+          backgRound: "rgba(255, 255, 255, 0.2)",
+          backdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "center",
+          overflow: "auto",
       }}
     >
       <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}>
@@ -187,6 +190,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         </Box>
       )}
     </Box>
+    </div>
   );
 };
 

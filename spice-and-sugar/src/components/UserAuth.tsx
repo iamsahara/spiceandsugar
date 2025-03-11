@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
+import Header from "./Header";
 
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
@@ -36,19 +37,30 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
   }, []);
 
   return (
+    <div>
+    <Header/>
     <Box
       sx={{
-        maxWidth: 400,
-        mx: "auto",
-        p: 4,
-        textAlign: "center",
-        bgcolor: "white",
-        borderRadius: 4,
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          maxWidth: 470,
+          minWidth: 470,
+          minHeight: 650,
+          maxHeight: 650,
+          margin:"10rem",
+          padding: "20px",
+          backgRound: "rgba(255, 255, 255, 0.2)",
+          backdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "center",
+          overflow: "auto",
       }}
     >
-      <Typography variant="h5" fontWeight="bold" color="primary" mb={2}>
-        Welcome to Velora Cake! 🍰
+      <Typography variant="h5" fontWeight="bold" color="primary" mb={1}>
+      Please enter your details
       </Typography>
 
       <TextField
@@ -57,7 +69,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         variant="outlined"
         value={user.name}
         onChange={(e) => setUser({ ...user, name: e.target.value })}
-        sx={{ mb: 2 }}
+        sx={{ mb: 1 }}
       />
 
       <TextField
@@ -90,6 +102,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         Continue as Guest
       </Button>
     </Box>
+    </div>
   );
 };
 

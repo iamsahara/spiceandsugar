@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import UserAuth from "@/components/UserAuth";
-import Home from "@/components/Home";
+import Header from "@/components/Header";
 
 export default function IndexPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,7 +28,7 @@ export default function IndexPage() {
           }}
         />
       ) : (
-        <Home userName={userName || "Guest"} />
+        <Header userName={userName || "Guest"} />
       )}
     </div>
   );
