@@ -48,7 +48,7 @@ const availableToppings = [
   "🍇 Grape",
 ];
 
-const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails }) => {
+const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails}) => {
   const [selectedFlavor, setSelectedFlavor] = useState(orderDetails.baseFlavor || "Vanilla");
   const [selectedFillings, setSelectedFillings] = useState<string[]>(orderDetails.filling ?? []);
   const [selectedToppings, setSelectedToppings] = useState<string[]>(orderDetails.toppings ?? []);
@@ -79,7 +79,6 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
       extraCharge = 7.99;  
     }
 
-    // ✅ Use basePrice here (stable initial price).
     const newTotalPrice = basePrice + extraCharge;
 
     setPrice(newTotalPrice);

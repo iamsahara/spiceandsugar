@@ -14,19 +14,29 @@ import Step2FillingsToppings from "./steps/Step2FillingsToppings";
 import Step3FlavorColorMessage from "./steps/Step3FlavorColorMessage";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { styled } from "@mui/material/styles";
+import { useRouter } from "next/navigation";
+
 
 const steps: string[] = ["Type", "Flavor", "Message", "Review"];
 
 interface OrderDetails {
-  cakeType: "Butter Cake" | "Sponge Cake";
+  cakeType: "Butter Cake" | "Sponge Cake" | "Fondant Cake";
   shape: "Round" | "square";
   levels: number;
-  color?: string;
+  color: string;
   weight: number;
-  filling: string[] | null;
+  filling: string[];
   toppings: string[];
   customText: string;
   price: number;
+}
+
+interface StepProps {
+  onNext: () => void;
+  updateOrder: (
+    updatedData: Partial<OrderDetails>
+  ) => void;
+  orderDetails: OrderDetails;
 }
 
 const CustomConnector = styled(StepConnector)(({ theme }) => ({
@@ -48,6 +58,7 @@ const CustomConnector = styled(StepConnector)(({ theme }) => ({
 }));
 
 const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
+  const router = useRouter();
   const [activeStep, setActiveStep] = useState<number>(0);
   const [orderDetails, setOrderDetails] = useState<OrderDetails>({
     cakeType: "Butter Cake",
@@ -55,7 +66,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
     levels: 1,
     color: "#F3E5AB",
     weight: 1,
-    filling: null,
+    filling: [],
     toppings: [],
     customText: "",
     price: 18.99,
@@ -76,6 +87,10 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
     setActiveStep((prevStep) => prevStep - 1);
   };
 
+  const handleBackToLogin = () => {
+    router.push("/");
+  };
+
   const renderStepContent = (step: number): React.ReactNode => {
     switch (step) {
       case 0:
@@ -84,6 +99,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
             onNext={handleNext}
             updateOrder={updateOrderDetails}
             orderDetails={orderDetails}
+            onBack={handleBackToLogin}
           />
         );
       case 1:

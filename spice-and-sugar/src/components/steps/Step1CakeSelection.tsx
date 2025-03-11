@@ -1,11 +1,36 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Box, Button, Card, CardContent, Typography, Stack, FormControl, Select, MenuItem, Grid } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  Stack,
+  FormControl,
+  Select,
+  MenuItem,
+  Grid,
+} from "@mui/material";
 
-interface StepProps {
+interface OrderDetails {
+  cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
+  weight: number;
+  shape: string;
+  levels: number;
+  price: number;
+}
+
+interface Step1CakeSelectionProps {
+
   onNext: () => void;
+
   updateOrder: (updatedData: Partial<OrderDetails>) => void;
+
   orderDetails: OrderDetails;
+
+  onBack: () => void;
+
 }
 
 const availableShapes = ["Square", "Round", "Heart", "Rectangle"];
@@ -19,10 +44,19 @@ const weightOptions = [
   { weight: 5, serves: "20-25 people" },
 ];
 
-const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) => {
-  const [selectedCakeType, setSelectedCakeType] = useState<"Sponge Cake" | "Butter Cake" | "Fondant Cake">(orderDetails.cakeType || "Sponge Cake");
-  const [selectedWeight, setSelectedWeight] = useState<number>(orderDetails.weight || 1);
-  const [selectedShape, setSelectedShape] = useState<string>(orderDetails.shape || 1);
+const Step1CakeSelection: React.FC<Step1CakeSelectionProps> = ({
+  orderDetails,
+  updateOrder,
+}) => {
+  const [selectedCakeType, setSelectedCakeType] = useState<
+    "Sponge Cake" | "Butter Cake" | "Fondant Cake"
+  >(orderDetails.cakeType || "Sponge Cake");
+  const [selectedWeight, setSelectedWeight] = useState<number>(
+    orderDetails.weight || 1
+  );
+  const [selectedShape, setSelectedShape] = useState<string>(
+    orderDetails.shape || 1
+  );
   const [cakeTiers, setCakeTiers] = useState<number>(orderDetails.levels || 1);
   const [price, setPrice] = useState(orderDetails.price || 18.65);
 
@@ -36,21 +70,34 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
         basePrice = 27.99;
         break;
       case "Fondant Cake":
-        basePrice = 38.00; 
+        basePrice = 38.0;
         break;
       default:
         basePrice = 18.65;
     }
     const calculatedPrice = basePrice * selectedWeight * cakeTiers;
     setPrice(calculatedPrice);
-    updateOrder({ cakeType: selectedCakeType, weight: selectedWeight, shape: selectedShape, levels: cakeTiers, price: calculatedPrice });
+    updateOrder({
+      cakeType: selectedCakeType,
+      weight: selectedWeight,
+      shape: selectedShape,
+      levels: cakeTiers,
+      price: calculatedPrice,
+    });
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
   return (
-    <Box p={2} >
-      <Grid container spacing={2} alignItems="center"  direction="column">
+    <Box p={2}>
+      <Grid container spacing={2} alignItems="center" direction="column">
         <Grid item xs={4}>
-          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: "1.15rem",
+              fontWeight: "bold",
+              color: "var( --secondary-color)",
+            }}
+          >
             ① Type
           </Typography>
         </Grid>
@@ -63,20 +110,36 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
                   width: 80,
                   height: 130,
                   borderRadius: "8px",
-                  border: selectedCakeType === type ? "2px solid var( --secondary-color)" : "2px solid #E0E0E0",
+                  border:
+                    selectedCakeType === type
+                      ? "2px solid var( --secondary-color)"
+                      : "2px solid #E0E0E0",
                   cursor: "pointer",
                   transition: "all 0.3s",
                   "&:hover": { transform: "scale(1.05)" },
                 }}
-                onClick={() => setSelectedCakeType(type as "Sponge Cake" | "Butter Cake" | "Fondant Cake")}
+                onClick={() =>
+                  setSelectedCakeType(
+                    type as "Sponge Cake" | "Butter Cake" | "Fondant Cake"
+                  )
+                }
               >
                 <CardContent sx={{ textAlign: "center", p: 1 }}>
-                <img src={`/cake-${type}.png`} alt={`${type} cake`} width="100%" />
+                  <img
+                    src={`/cake-${type}.png`}
+                    alt={`${type} cake`}
+                    width="100%"
+                  />
                   <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
                     {type}
                   </Typography>
                   <Typography sx={{ fontSize: "0.7rem" }} color="black">
-                    ${type === "Sponge Cake" ? "18.65/kg" : type === "Butter Cake" ? "27.99/kg" : "38.00/kg"}
+                    $
+                    {type === "Sponge Cake"
+                      ? "18.65/kg"
+                      : type === "Butter Cake"
+                      ? "27.99/kg"
+                      : "38.00/kg"}
                   </Typography>
                 </CardContent>
               </Card>
@@ -85,7 +148,14 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
         </Grid>
 
         <Grid item xs={4}>
-          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: "1.15rem",
+              fontWeight: "bold",
+              color: "var( --secondary-color)",
+            }}
+          >
             ② Size
           </Typography>
         </Grid>
@@ -94,7 +164,13 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
             <Select
               value={selectedWeight}
               onChange={(e) => setSelectedWeight(e.target.value as number)}
-              sx={{ fontSize: "0.8rem", fontWeight: "bold", borderRadius: 2, bgcolor: "rgba(255,255,255,0.3)", backdropFilter: "blur(1px)"}}
+              sx={{
+                fontSize: "0.8rem",
+                fontWeight: "bold",
+                borderRadius: 2,
+                bgcolor: "rgba(255,255,255,0.3)",
+                backdropFilter: "blur(1px)",
+              }}
             >
               {weightOptions.map(({ weight, serves }) => (
                 <MenuItem key={weight} value={weight}>
@@ -105,7 +181,14 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
           </FormControl>
         </Grid>
         <Grid item xs={4}>
-          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: "1.15rem",
+              fontWeight: "bold",
+              color: "var( --secondary-color)",
+            }}
+          >
             ③ Shape
           </Typography>
         </Grid>
@@ -114,7 +197,13 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
             <Select
               value={selectedShape}
               onChange={(e) => setSelectedShape(e.target.value)}
-              sx={{ fontSize: "0.8rem", fontWeight: "bold", borderRadius: 2, bgcolor: "rgba(255,255,255,0.3)", backdropFilter: "blur(1px)" }}
+              sx={{
+                fontSize: "0.8rem",
+                fontWeight: "bold",
+                borderRadius: 2,
+                bgcolor: "rgba(255,255,255,0.3)",
+                backdropFilter: "blur(1px)",
+              }}
             >
               {availableShapes.map((shape) => (
                 <MenuItem key={shape} value={shape}>
@@ -126,7 +215,14 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
         </Grid>
 
         <Grid item xs={4}>
-          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: "1.15rem",
+              fontWeight: "bold",
+              color: "var( --secondary-color)",
+            }}
+          >
             ④ Tiers
           </Typography>
         </Grid>
@@ -140,11 +236,16 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
                   minWidth: 5,
                   fontWeight: "bold",
                   fontSize: "0.7rem",
-                  color:"black",
-                  bgcolor: cakeTiers === tier ? "var( --primary-color)" : "white",
-                  color: cakeTiers === tier ? "white" : "var( --primary-color)",
+                  color: "black",
+                  bgcolor:
+                    cakeTiers === tier ? "var( --primary-color)" : "white",
+                  colour:
+                    cakeTiers === tier ? "white" : "var( --primary-color)",
                   border: "2px solid var( --secondary-color)",
-                  "&:hover": { bgcolor: "var( --primary-color)", color: "white" },
+                  "&:hover": {
+                    bgcolor: "var( --primary-color)",
+                    color: "white",
+                  },
                 }}
                 onClick={() => setCakeTiers(tier)}
               >
@@ -158,4 +259,4 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
   );
 };
 
-export default StepCakeSelection;
+export default Step1CakeSelection;

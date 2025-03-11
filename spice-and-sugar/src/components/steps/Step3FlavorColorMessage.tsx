@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 
 interface Step3Props {
-  onNext: () => void;
   updateOrder: (
     updatedData: Partial<{ color?: string; customText: string }>
   ) => void;

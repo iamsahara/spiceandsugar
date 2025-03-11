@@ -5,7 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import PaymentIcon from "@mui/icons-material/Payment";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-interface Step7Props {
+interface Step4Props {
   onBack: () => void;
   orderDetails: {
     cakeType: string;
@@ -22,7 +22,7 @@ interface Step7Props {
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || "");
 
-const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
+const Step4ReviewOrder: React.FC<Step4Props> = ({ onBack, orderDetails }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -171,4 +171,4 @@ const Step7ReviewOrder: React.FC<Step7Props> = ({ onBack, orderDetails }) => {
   );
 };
 
-export default Step7ReviewOrder;
+export default Step4ReviewOrder;
