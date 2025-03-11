@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
@@ -8,6 +9,7 @@ interface UserAuthProps {
 
 const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
   const [user, setUser] = useState({ name: "", email: "", phone: "" });
+  const router = useRouter(); 
 
   useEffect(() => {
     const guestUser = localStorage.getItem("guestUser");
@@ -17,7 +19,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         onAuthSuccess(parsedUser.name);
       }
     }
-  }, []); // ✅ Empty dependency array ensures this runs only once on mount
+  }, [onAuthSuccess]); 
 
   const handleGuestSignIn = () => {
     if (!user.name.trim() || !user.email.trim()) {
@@ -25,9 +27,13 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
       return;
     }
 
-    localStorage.setItem("guestUser", JSON.stringify(user)); // ✅ Save user data
-    onAuthSuccess(user.name); // ✅ Move to stepper
+    localStorage.setItem("guestUser", JSON.stringify(user)); 
+    onAuthSuccess(user.name); 
+    router.push("/stepper"); 
   };
+  useEffect(() => {
+    localStorage.removeItem("guestUser");
+  }, []);
 
   return (
     <Box
