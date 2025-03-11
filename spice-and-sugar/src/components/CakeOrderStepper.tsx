@@ -12,7 +12,7 @@ import Step1CakeSelection from "./steps/Step1CakeSelection";
 import Step2FillingsToppings from "./steps/Step2FillingsToppings";
 import Step3FlavorColorMessage from "./steps/Step3FlavorColorMessage";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
-import Header from "./Header";
+
 
 const steps: string[] = ["Type", "Flavor", "Message", "Review"];
 
@@ -92,8 +92,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   };
 
   return (
-    <div>
-    <Header/>
     <Box
       sx={{
           maxWidth: 470,
@@ -190,7 +188,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         </Box>
       )}
     </Box>
-    </div>
   );
 };
 

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import Header from "./Header";
+
 
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
@@ -37,8 +37,6 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
   }, []);
 
   return (
-    <div>
-    <Header/>
     <Box
       sx={{
           maxWidth: 470,
@@ -102,7 +100,6 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         Continue as Guest
       </Button>
     </Box>
-    </div>
   );
 };
 

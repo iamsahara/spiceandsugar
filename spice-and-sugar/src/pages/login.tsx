@@ -1,5 +1,4 @@
 import UserAuth from "../components/UserAuth";
-import Header from "@/components/Header";
 
 const LoginPage = () => {
 
