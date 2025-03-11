@@ -16,21 +16,22 @@ import {
 interface OrderDetails {
   cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
   weight: number;
-  shape: string;
+  shape: "Square" | "Round"| "Heart"|"Rectangle";
   levels: number;
   price: number;
 }
 
-interface Step1CakeSelectionProps {
-
-  onNext: () => void;
-
-  updateOrder: (updatedData: Partial<OrderDetails>) => void;
-
-  orderDetails: OrderDetails;
-
+interface Step1Props {
   onBack: () => void;
-
+  onNext: () => void;
+  orderDetails: {
+    cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
+    weight: number;
+    shape: "Square" | "Round"| "Heart"|"Rectangle";
+    levels: number;
+    price: number;
+  };
+  updateOrder: (updatedData: Partial<OrderDetails>) => void;
 }
 
 const availableShapes = ["Square", "Round", "Heart", "Rectangle"];
@@ -44,7 +45,7 @@ const weightOptions = [
   { weight: 5, serves: "20-25 people" },
 ];
 
-const Step1CakeSelection: React.FC<Step1CakeSelectionProps> = ({
+const Step1CakeSelection: React.FC<Step1Props> = ({
   orderDetails,
   updateOrder,
 }) => {
@@ -54,9 +55,9 @@ const Step1CakeSelection: React.FC<Step1CakeSelectionProps> = ({
   const [selectedWeight, setSelectedWeight] = useState<number>(
     orderDetails.weight || 1
   );
-  const [selectedShape, setSelectedShape] = useState<string>(
-    orderDetails.shape || 1
-  );
+  const [selectedShape, setSelectedShape] = useState<
+    "Square" | "Round" | "Heart" | "Rectangle"
+  >(orderDetails.shape || "Square");
   const [cakeTiers, setCakeTiers] = useState<number>(orderDetails.levels || 1);
   const [price, setPrice] = useState(orderDetails.price || 18.65);
 
@@ -196,7 +197,7 @@ const Step1CakeSelection: React.FC<Step1CakeSelectionProps> = ({
           <FormControl sx={{ width: "280px" }}>
             <Select
               value={selectedShape}
-              onChange={(e) => setSelectedShape(e.target.value)}
+              onChange={(e) => setSelectedShape(e.target.value as "Square" | "Round" | "Heart" | "Rectangle")}
               sx={{
                 fontSize: "0.8rem",
                 fontWeight: "bold",

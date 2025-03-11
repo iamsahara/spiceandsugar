@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 interface Step2Props {
+  onBack: () => void;
   onNext: () => void;
   updateOrder: (
     updatedData: Partial<{

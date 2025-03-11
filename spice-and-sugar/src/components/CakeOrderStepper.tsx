@@ -16,12 +16,11 @@ import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 
-
 const steps: string[] = ["Type", "Flavor", "Message", "Review"];
 
 interface OrderDetails {
   cakeType: "Butter Cake" | "Sponge Cake" | "Fondant Cake";
-  shape: "Round" | "square";
+  shape: "Round" | "Square" | "Heart" | "Rectangle";
   levels: number;
   color: string;
   weight: number;
@@ -33,9 +32,7 @@ interface OrderDetails {
 
 interface StepProps {
   onNext: () => void;
-  updateOrder: (
-    updatedData: Partial<OrderDetails>
-  ) => void;
+  updateOrder: (updatedData: Partial<OrderDetails>) => void;
   orderDetails: OrderDetails;
 }
 
@@ -106,6 +103,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         return (
           <Step2FillingsToppings
             onNext={handleNext}
+            onBack={handleBack}
             updateOrder={updateOrderDetails}
             orderDetails={orderDetails}
           />
