@@ -85,7 +85,7 @@ const StepCakeSelection: React.FC<StepProps> = ({ updateOrder, orderDetails }) =
         </Grid>
 
         <Grid item xs={4}>
-          <Typography variant="h6" sx={{ fontSize: "0.8rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
+          <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var( --secondary-color)" }}>
             ② Size
           </Typography>
         </Grid>

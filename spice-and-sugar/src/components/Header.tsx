@@ -1,6 +1,5 @@
 "use client";
-import { Box, Container, Typography } from "@mui/material";
-import CakeOrderStepper from "@/components/CakeOrderStepper";
+import {Container, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 
 export default function Header({ userName }: { userName: string }) {
@@ -51,6 +50,7 @@ export default function Header({ userName }: { userName: string }) {
             fontFamily: "'Quicksand', sans-serif",
             fontWeight: "500",
             letterSpacing: "1px",
+            mb:10,
             background: "linear-gradient(90deg, #FF5E78, #FF82A9)", 
             WebkitBackgroundClip: "text", 
             textShadow: "0px 0px 12px rgba(255, 94, 120, 0.5)",

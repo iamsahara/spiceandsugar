@@ -38,27 +38,28 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
 
   return (
     <Box
-      sx={{
-          maxWidth: 470,
-          minWidth: 470,
-          minHeight: 650,
-          maxHeight: 650,
-          margin:"10rem",
-          padding: "20px",
-          backgRound: "rgba(255, 255, 255, 0.2)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-          overflow: "auto",
-      }}
+    sx={{
+      maxWidth: 470,
+      minWidth: 470,
+      minHeight: 400,
+      maxHeight: 400,
+      margin:"auto",
+      padding: "15px",
+      mt:"60px",
+      backgRound: "rgba(255, 255, 255, 0.2)",
+      backdropFilter: "blur(10px)",
+      borderRadius: "12px",
+      boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+      border: "1px solid rgba(255, 255, 255, 0.2)",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+      overflow: "auto",
+  }}
     >
-      <Typography variant="h5" fontWeight="bold" color="primary" mb={1}>
-      Please enter your details
+      <Typography variant="h5" fontWeight="bold" color="primary" mb={1} width={"100%"}>
+   Your Details!
       </Typography>
 
       <TextField
