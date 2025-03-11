@@ -55,7 +55,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
       }}
     >
       <Typography variant="h5" fontWeight="bold" color="primary" mb={1} width={"100%"}>
-        Your Details!
+       Your Details!
       </Typography>
 
       <TextField
@@ -111,7 +111,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         onClick={handleGuestSignIn}
         sx={{ py: 1.5, fontWeight: "bold" }}
       >
-        Continue as Guest
+        Continue
       </Button>
     </Box>
   );
