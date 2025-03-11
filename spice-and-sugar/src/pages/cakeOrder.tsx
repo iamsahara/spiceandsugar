@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import CakeOrderStepper from "../components/CakeOrderStepper";
 
-const Stepper = () => {
+const CakeOrder = () => {
   const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -21,4 +21,4 @@ const Stepper = () => {
   return <CakeOrderStepper userName={userName} />;
 };
 
-export default Stepper;
+export default CakeOrder;

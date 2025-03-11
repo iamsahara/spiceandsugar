@@ -29,7 +29,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
 
     localStorage.setItem("guestUser", JSON.stringify(user)); 
     onAuthSuccess(user.name); 
-    router.push("/stepper"); 
+    router.push("/cakeOrder"); 
   };
   useEffect(() => {
     localStorage.removeItem("guestUser");

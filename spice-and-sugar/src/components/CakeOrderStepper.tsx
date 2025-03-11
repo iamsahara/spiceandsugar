@@ -112,7 +112,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
       }}
     >
       <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}>
-        Welcome, {userName}! 🎉
+        Welcome, {userName}! 
       </Typography>
 
       <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 2 }}>

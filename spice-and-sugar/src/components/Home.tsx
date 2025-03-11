@@ -31,7 +31,7 @@ export default function Home({ userName }: { userName: string }) {
             display: "inline-block",
             padding: "10px 0px",
             background: "linear-gradient(90deg, #FF3366, #FF69B4, #FF6B81)", // ✅ Fixed
-            WebkitBackgroundClip: "text", // ✅ Fixed
+            WebkitBackgroundClip: "text", 
             WebkitTextFillColor: "transparent",
             textShadow: `
               2px 2px 8px rgba(255, 51, 102, 0.4),
