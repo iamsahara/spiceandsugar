@@ -1,11 +1,35 @@
-import CakeCustomizer from "@/components/CakeCustomizer";
+"use client";
+import { useState, useEffect } from "react";
+import UserAuth from "@/components/UserAuth";
+import Header from "@/components/Header";
 
-export default function Home() {
+export default function IndexPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userName, setUserName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("guestUser");
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      if (user?.name) {
+        setUserName(user.name);
+        setIsAuthenticated(true);
+      }
+    }
+  }, []);
+
   return (
     <div>
-      <h1>Spice and Sugar</h1>
-      <p>Welcome to our cake customization store!</p>
-      <CakeCustomizer />
+      {!isAuthenticated ? (
+        <UserAuth
+          onAuthSuccess={(name) => {
+            setUserName(name);
+            setIsAuthenticated(true);
+          }}
+        />
+      ) : (
+        <Header userName={userName || ""}/>
+      )}
     </div>
   );
 }

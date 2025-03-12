@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+:root {
+  --primary-color:  #8EC5C0;
+  --secondary-color: #FF4081;
+  --backgRound-color: #fff8f1;
+  --text-color: #333;
+  --button-hover:  #7AB8AE;
+}
+
+body {
+  backgRound-image: url("/backgRound.png"); 
+  backgRound-size: cover;
+  backgRound-position: center;
+  backgRound-repeat: no-repeat;
+  backgRound-attachment: fixed;
+  font-family: "Poppins", sans-serif; 
+  color: #333; 
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  backgRound-color: var(--button-hover);
+  color: black;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+}
+
+h1 {
+  color: var(--primary-color);
+}
