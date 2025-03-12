@@ -11,16 +11,29 @@ import {
   TextField,
   Link,
 } from "@mui/material";
+import { CldUploadWidget, CldImage } from "next-cloudinary";
 import PaymentIcon from "@mui/icons-material/Payment";
 import AppleIcon from "@mui/icons-material/Apple";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
+const colorHexMap: Record<string, string> = {
+  White: "#FFFFFF",
+  Red: "#FF0000",
+  Blue: "#0000FF",
+  Green: "#008000",
+  Pink: "#FFC0CB",
+  Yellow: "#FFFF00",
+  Orange: "#FFA500",
+  Purple: "#800080",
+  Brown: "#964B00",
+};
+
 interface Step4Props {
   onBack: () => void;
   orderDetails: {
     cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
-    shape: "Square" | "Round"| "Heart"|"Rectangle";
+    shape: "Square" | "Round" | "Heart" | "Rectangle";
     levels: number;
     color: string;
     weight: number;
@@ -28,21 +41,26 @@ interface Step4Props {
     toppings: string[];
     customText: string;
     price: number;
+    imageUrl?: string;
   };
+  updateOrder: (data: { imageUrl: string }) => void;
 }
 
-const Step4ReviewOrder: React.FC<Step4Props> = ({ onBack, orderDetails }) => {
+const Step4ReviewOrder: React.FC<Step4Props> = ({
+  onBack,
+  orderDetails,
+  updateOrder,
+}) => {
   const [extraDescription, setExtraDescription] = useState("");
 
-  const cakeDescription = `A ${orderDetails.levels}-tier ${orderDetails.shape.toLowerCase()} ${
-    orderDetails.cakeType
-  } with ${orderDetails.color} color, ${
-    orderDetails.filling?.length
-      ? `filled with ${orderDetails.filling.join(", ")}`
-      : "without filling"
-  }, topped with ${
-    orderDetails.toppings.length ? orderDetails.toppings.join(", ") : "no toppings"
-  }${orderDetails.customText ? `, and the message: "${orderDetails.customText}"` : ""}.`;
+  const cakeDescription = `
+  A ${orderDetails.levels}-tier ${orderDetails.shape.toLowerCase()} ${orderDetails.cakeType} 
+  with ${orderDetails.color} color,
+  ${orderDetails.filling?.length ? `filled with ${orderDetails.filling.join(", ")}` : "without filling"},
+  topped with ${orderDetails.toppings.length ? orderDetails.toppings.join(", ") : "no toppings"}${
+    orderDetails.customText ? `, and the message: "${orderDetails.customText}"` : ""
+  }.
+`;
 
   return (
     <Box
@@ -77,6 +95,41 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({ onBack, orderDetails }) => {
           </Typography>
         </CardContent>
       </Card>
+
+      {orderDetails.imageUrl && (
+        <CldImage
+          src={orderDetails.imageUrl}
+          width={250}
+          height={250}
+          alt="Cake reference"
+          style={{ borderRadius: "10px", marginBottom: "15px" }}
+        />
+      )}
+
+      <CldUploadWidget
+        uploadPreset="<your_upload_preset>" // replace with your actual preset from Cloudinary
+        onSuccess={(result) => {
+          if (result.info && typeof result.info === "object") {
+            const uploadedImage = result.info.public_id;
+            updateOrder({ imageUrl: uploadedImage });
+          }
+        }}
+      >
+        {({ open }) => (
+          <Button
+            variant="contained"
+            onClick={() => open()}
+            sx={{
+              borderRadius: 3,
+              bgcolor: "var(--primary-color)",
+              my: 1,
+              textTransform: "none",
+            }}
+          >
+            Upload Image of Cake Idea 📸
+          </Button>
+        )}
+      </CldUploadWidget>
 
       <Box sx={{ mb: 2 }}>
         <Typography variant="subtitle2" fontWeight="bold" gutterBottom>
