@@ -55,9 +55,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           filling,
           toppings,
           custom_text: customText,
-          price,
+          total_price: price,
           image_url: imageUrl,
-          extra_description: extraDescription,
+          extra_notes: extraDescription,
         },
       ])
       .select()
