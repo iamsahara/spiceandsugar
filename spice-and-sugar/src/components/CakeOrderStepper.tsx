@@ -68,11 +68,9 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
     customText: "",
     price: 18.99,
   });
-
-  const updateOrderDetails = (updatedData: Partial<OrderDetails>): void => {
+  const updateOrderDetails = (updatedData: Partial<OrderDetails>) => {
     setOrderDetails((prevDetails) => ({ ...prevDetails, ...updatedData }));
   };
-
   const handleNext = (): void => {
     if (activeStep === 2) {
       updateOrderDetails({ customText: orderDetails.customText });
@@ -119,7 +117,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         );
       case 3:
         return (
-          <Step4ReviewOrder onBack={handleBack} orderDetails={orderDetails} />
+          <Step4ReviewOrder onBack={handleBack} onNext={handleNext} orderDetails={orderDetails}  updateOrder={updateOrderDetails}/>
         );
       default:
         return null;
