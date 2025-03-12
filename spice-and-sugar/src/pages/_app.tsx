@@ -51,7 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header userName={userName} orderDetails={orderDetails} />
+      <Header userName={userName} />
       <Component {...pageProps} orderDetails={orderDetails} updateOrderDetails={updateOrderDetails} />
     </ThemeProvider>
   );
