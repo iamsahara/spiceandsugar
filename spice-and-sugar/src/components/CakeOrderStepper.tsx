@@ -125,6 +125,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   };
 
   return (
+    
     <Box
       sx={{
         maxWidth: 470,
