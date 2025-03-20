@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Box,
   Button,
@@ -17,6 +17,7 @@ import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 
 const steps: string[] = ["Type", "Flavor", "Message", "Review"];
+
 
 interface OrderDetails {
   cakeType: "Butter Cake" | "Sponge Cake" | "Fondant Cake";
@@ -159,26 +160,43 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           fontSize: "1.1rem",
         }}
       >
-        Customize Your Perfect Cake, {userName}! 🎂
+        Ready to bake your perfect cake in 2 minutess{userName}?
         <br />
         <span
           style={{ fontSize: "0.9rem", fontWeight: "normal", opacity: 0.8 }}
         >
-          (Takes just 5 minutes) ⏳
+         Lets get started! 
         </span>
       </Typography>
-      <Stepper
-        activeStep={activeStep}
-        alternativeLabel
-        connector={<CustomConnector />}
-        sx={{ width: "100%", justifyContent: "space-between", mb: 2 }}
-      >
-        {steps.map((label, index) => (
-          <Step key={index} sx={{ flex: 1 }}>
-            <StepLabel sx={{ fontSize: "0.8rem" }}>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+ <Stepper
+  activeStep={activeStep}
+  alternativeLabel
+  connector={<CustomConnector />}
+  sx={{
+    width: "100%",
+    justifyContent: "space-between",
+    mb: 2,
+    "& .MuiStepLabel-root": {
+      fontSize: "1rem",
+      fontWeight: "600",
+      color: "var(--primary-color)",
+    },
+    "& .MuiStepLabel-active": {
+      color: "#388E3C", // Active color
+    },
+    "& .MuiStepLabel-completed": {
+      color: "#388E3C", // Completed color
+    },
+  }}
+>
+  {steps.map((label, index) => (
+    <Step key={index} sx={{ flex: 1 }}>
+      <StepLabel sx={{ fontSize: "1rem", fontWeight: "600", textTransform: "capitalize" }}>
+        {label}
+      </StepLabel>
+    </Step>
+  ))}
+</Stepper>
 
       <Box sx={{ mt: 1, width: "100%" }}>{renderStepContent(activeStep)}</Box>
 

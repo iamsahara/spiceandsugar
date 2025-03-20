@@ -12,6 +12,16 @@ import {
   MenuItem,
   Grid,
 } from "@mui/material";
+import Lottie from "lottie-react";
+import animation3 from "../../../public/animations/5.json";
+import animation4 from "../../../public/animations/4.json";
+import animation5 from "../../../public/animations/3.json";
+
+const tierAnimations = [
+  { tier: 1, animation: animation3 },
+  { tier: 2, animation: animation4 },
+  { tier: 3, animation: animation5 },
+];
 
 interface OrderDetails {
   cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
@@ -99,7 +109,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               color: "var( --secondary-color)",
             }}
           >
-            ① Type
+            ① Select Type
           </Typography>
         </Grid>
         <Grid item xs={8}>
@@ -157,7 +167,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               color: "var( --secondary-color)",
             }}
           >
-            ② Size
+            ② Select Size
           </Typography>
         </Grid>
         <Grid item xs={8}>
@@ -190,7 +200,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               color: "var( --secondary-color)",
             }}
           >
-            ③ Shape
+            ③ Select Shape
           </Typography>
         </Grid>
         <Grid item xs={8}>
@@ -224,36 +234,20 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               color: "var( --secondary-color)",
             }}
           >
-            ④ Tiers
+            ④ Select Tiers
           </Typography>
         </Grid>
         <Grid item xs={8}>
-          <Stack direction="row" spacing={1}>
-            {[1, 2, 3].map((tier) => (
-              <Button
-                key={tier}
-                variant={cakeTiers === tier ? "contained" : "outlined"}
-                sx={{
-                  minWidth: 5,
-                  fontWeight: "bold",
-                  fontSize: "0.7rem",
-                  color: "black",
-                  bgcolor:
-                    cakeTiers === tier ? "var( --primary-color)" : "white",
-                  colour:
-                    cakeTiers === tier ? "white" : "var( --primary-color)",
-                  border: "2px solid var( --secondary-color)",
-                  "&:hover": {
-                    bgcolor: "var( --primary-color)",
-                    color: "white",
-                  },
-                }}
-                onClick={() => setCakeTiers(tier)}
-              >
-                {tier}-Tier
-              </Button>
-            ))}
-          </Stack>
+        <Stack direction="row" spacing={3}>
+          {tierAnimations.map(({ tier, animation }) => (
+            <Box key={tier} textAlign="center" onClick={() => setCakeTiers(tier)} sx={{ cursor: "pointer" }}>
+              <Lottie animationData={animation} style={{ width: 100, height: 100 }} />
+              <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" }}>
+                {tier} Tier
+              </Typography>
+            </Box>
+          ))}
+        </Stack>
         </Grid>
       </Grid>
     </Box>

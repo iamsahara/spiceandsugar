@@ -1,8 +1,12 @@
 "use client";
-import {Container, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 
-export default function Header({ userName }: { userName: string }) {
+interface HeaderProps {
+  userName?: string; // Optional userName to handle both logged-in and non-logged-in states
+}
+
+export default function Header({ userName }: HeaderProps) {
   return (
     <Container
       maxWidth="lg"
@@ -10,14 +14,17 @@ export default function Header({ userName }: { userName: string }) {
         textAlign: "left",
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-start",
-        zIndex:3
+        justifyContent: "center", 
+        alignItems: "center",
+        zIndex: 3,
+        paddingTop: "2rem",  
+        paddingBottom: "2rem",  
       }}
     >
       <motion.div
-        initial={{ opacity: 0, x: -15 }}
+        initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         style={{ position: "relative" }}
       >
         <Typography
@@ -25,40 +32,30 @@ export default function Header({ userName }: { userName: string }) {
           fontWeight="900"
           sx={{
             fontFamily: "'Playfair Display', serif",
-            fontSize: "3.2rem",
+            fontSize: "4rem",  
             display: "inline-block",
             background: "linear-gradient(90deg, #FF3366, #FF69B4, #FF6B81)", 
             WebkitBackgroundClip: "text", 
-            WebkitTextFillColor: "transparent",
-            textShadow: `
-              2px 2px 8px rgba(255, 51, 102, 0.4),
-              0px 0px 12px rgba(255, 105, 180, 0.4)
-            `,
+            color: "transparent"
           }}
         >
-          Velora Cake
+          Velora
         </Typography>
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, x: -10 }}
+        initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
       >
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: "'Quicksand', sans-serif",
-            fontWeight: "500",
-            letterSpacing: "1px",
-            mb:10,
-            background: "linear-gradient(90deg, #FF5E78, #FF82A9)", 
-            WebkitBackgroundClip: "text", 
-            textShadow: "0px 0px 12px rgba(255, 94, 120, 0.5)",
-          }}
-        >
-          🍰 Fresh, Healthy & Custom-Made Cakes!
-        </Typography>
       </motion.div>
+      {userName && (
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.6 }}
+        >
+        </motion.div>
+      )}
     </Container>
   );
 }
