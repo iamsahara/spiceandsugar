@@ -1,118 +1,145 @@
-"use client";
-import { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 
 interface UserAuthProps {
-  onAuthSuccess: (name: string, imageFile?: File | null) => void;
+  onAuthSuccess: (name: string) => void;
 }
 
 const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
   const [user, setUser] = useState({ name: "", email: "", phone: "" });
-  const [cakeImage, setCakeImage] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     localStorage.removeItem("guestUser");
   }, []);
 
-  const handleGuestSignIn = () => {
+  const handleGuestSignIn = async () => {
     if (!user.name.trim() || !user.email.trim()) {
-      alert("Name and Email are required!");
+      setErrorMessage("Name and Email are required!");
       return;
     }
 
-    localStorage.setItem("guestUser", JSON.stringify(user));
-    onAuthSuccess(user.name, cakeImage);
-    router.push("/cakeOrder");
+    setIsSubmitting(true);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create user.");
+      }
+
+      const data = await response.json();
+      console.log("✅ User saved:", data);
+
+      localStorage.setItem("guestUser", JSON.stringify(data.user));
+      onAuthSuccess(user.name);
+      router.push("/cakeOrder");
+    } catch (error) {
+      console.error("❌ Error saving user:", error);
+      setErrorMessage("Failed to sign in. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0] || null;
-    setCakeImage(file);
-  };
 
   return (
-    <Box
-      sx={{
-        maxWidth: 470,
-        minWidth: 470,
-        minHeight: 500,
-        maxHeight: 500,
-        margin: "auto",
-        padding: "15px",
-        mt: "60px",
-        background: "rgba(255, 255, 255, 0.2)",
-        backdropFilter: "blur(10px)",
-        borderRadius: "12px",
-        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-        border: "1px solid rgba(255, 255, 255, 0.2)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-        overflow: "auto",
-      }}
-    >
-      <Typography variant="h5" fontWeight="bold" color="primary" mb={1} width={"100%"}>
-       Your Details!
-      </Typography>
-
-      <TextField
-        fullWidth
-        label="Name"
-        variant="outlined"
-        value={user.name}
-        onChange={(e) => setUser({ ...user, name: e.target.value })}
-        sx={{ mb: 1 }}
-      />
-
-      <TextField
-        fullWidth
-        label="Email"
-        type="email"
-        variant="outlined"
-        value={user.email}
-        onChange={(e) => setUser({ ...user, email: e.target.value })}
-        sx={{ mb: 2 }}
-      />
-
-      <TextField
-        fullWidth
-        label="Phone (Optional)"
-        type="tel"
-        variant="outlined"
-        value={user.phone}
-        onChange={(e) => setUser({ ...user, phone: e.target.value })}
-        sx={{ mb: 2 }}
-      />
-
-      <Box width="100%" sx={{ mb: 2 }}>
-        <Typography variant="body1" sx={{ mb: 1, fontWeight: "bold", color: "#555" }}>
-          Upload Image of Cake Idea (optional)
-        </Typography>
-        <input
-          accept="image/*"
-          type="file"
-          onChange={handleImageUpload}
-          style={{ width: "100%" }}
+    <Box>
+      <Box
+        sx={{
+          mb: "auto",
+          padding: "10px",
+          minHeight: "800px",
+          // background: "rgba(255, 255, 255, 0.2)",
+          // backdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          overflow: "hidden",
+          marginLeft:"1rem",
+          marginRight:"1rem"
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            color="pallette.text.primary"
+            flex={1}
+          >
+            Start Your Journey Here!
+          </Typography>
+        </Box>
+        <TextField
+          fullWidth
+          label="Name"
+          variant="outlined"
+          value={user.name}
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
+          sx={{ mb: 1 }}
         />
-        {cakeImage && (
-          <Typography variant="caption" display="block" sx={{ mt: 1 }}>
-            Selected file: {cakeImage.name}
+
+        <TextField
+          fullWidth
+          label="Email"
+          type="email"
+          variant="outlined"
+          value={user.email}
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+          sx={{ mb: 2 }}
+        />
+
+        <TextField
+          fullWidth
+          label="Phone (Optional)"
+          type="tel"
+          variant="outlined"
+          value={user.phone}
+          onChange={(e) => setUser({ ...user, phone: e.target.value })}
+          sx={{ mb: 2 }}
+        />
+
+        {errorMessage && (
+          <Typography color="error" mt={1}>
+            {errorMessage}
           </Typography>
         )}
-      </Box>
 
-      <Button
-        fullWidth
-        variant="contained"
-        color="primary"
-        onClick={handleGuestSignIn}
-        sx={{ py: 1.5, fontWeight: "bold" }}
-      >
-        Continue
-      </Button>
+        <Button
+          fullWidth
+          variant="contained"
+          color="secondary"
+          onClick={handleGuestSignIn}
+          disabled={isSubmitting}
+          sx={{ py: 1.5, fontWeight: "bold" }}
+        >
+          {isSubmitting ? "Signing In..." : "Next"}
+        </Button>
+      </Box>
     </Box>
   );
 };

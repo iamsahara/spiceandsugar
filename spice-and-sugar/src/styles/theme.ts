@@ -3,16 +3,16 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#ff6b81", // Vibrant pink (Birthday vibe)
+      main: "#ff6b81", // Vibrant pink 
     },
     secondary: {
-      main: "#ffbe76", // Warm yellow (Cheerful)
+      main: "#ffbe76", // Warm yellow 
     },
-    backgRound: {
-      default: "#fffaf0", // Soft pastel backgRound
+    background: {
+      default: "#fffaf0", // Soft pastel background
     },
     text: {
-      primary: "#333", // Dark gray for readability
+      primary: "#333", // Dark gray 
       secondary: "#555",
     },
   },
@@ -25,7 +25,7 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 50, // Rounded buttons for fun look
+          borderRadius: 50, 
           padding: "10px 20px",
           transition: "0.3s",
           "&:hover": {
