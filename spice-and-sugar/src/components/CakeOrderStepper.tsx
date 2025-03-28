@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -10,13 +10,12 @@ import {
   StepConnector,
 } from "@mui/material";
 import Step1CakeSelection from "./steps/Step1CakeSelection";
-import Step2FillingsToppings from "./steps/Step2FillingsToppings";
-import Step3FlavorColorMessage from "./steps/Step3FlavorColorMessage";
+import Step2FlavorFillingToppingText from "./steps/Step2FlavorFillingToppingText";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 
-const steps: string[] = ["Type", "Flavor", "Message", "Review"];
+const steps: string[] = ["Type", "Customize", "Review"];
 
 interface OrderDetails {
   cakeType: "Butter Cake" | "Sponge Cake" | "Fondant Cake";
@@ -72,7 +71,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
     setOrderDetails((prevDetails) => ({ ...prevDetails, ...updatedData }));
   };
   const handleNext = (): void => {
-    if (activeStep === 2) {
+    if (activeStep === 1) {
       updateOrderDetails({ customText: orderDetails.customText });
     }
     setActiveStep((prevStep) => prevStep + 1);
@@ -99,7 +98,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         );
       case 1:
         return (
-          <Step2FillingsToppings
+          <Step2FlavorFillingToppingText
             onNext={handleNext}
             onBack={handleBack}
             updateOrder={updateOrderDetails}
@@ -108,16 +107,12 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         );
       case 2:
         return (
-          <Step3FlavorColorMessage
-            onNext={handleNext}
+          <Step4ReviewOrder
             onBack={handleBack}
-            updateOrder={updateOrderDetails}
+            onNext={handleNext}
             orderDetails={orderDetails}
+            updateOrder={updateOrderDetails}
           />
-        );
-      case 3:
-        return (
-          <Step4ReviewOrder onBack={handleBack} onNext={handleNext} orderDetails={orderDetails}  updateOrder={updateOrderDetails}/>
         );
       default:
         return null;
@@ -127,121 +122,140 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   return (
     <Box
       sx={{
-        maxWidth: 470,
-        minWidth: 470,
-        minHeight: 650,
-        maxHeight: 650,
-        margin: "auto",
-        padding: "20px",
-        background: "rgba(255, 255, 255, 0.2)",
-        backdropFilter: "blur(10px)",
-        borderRadius: "12px",
+        minHeight: "800px",
+        p: 3,
+        // backgroundColor: "rgba(255,255,255,0.3)",
+        // backdropFilter: "blur(12px)",
+        borderRadius: "20px",
         boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-        border: "1px solid rgba(255, 255, 255, 0.2)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-        overflow: "auto",
+        mx: "auto",
+        textAlign: "center",
       }}
     >
-      <Typography
-        variant="h6"
-        sx={{
-          mb: 2,
-          fontWeight: "bold",
-          textAlign: "center",
-          color: "#var(--primary-color)",
-          background: "linear-gradient(90deg, #A0C4FF, #BDB2FF)",
-          WebkitBackgroundClip: "text",
-          letterSpacing: "0.8px",
-          fontSize: "1.1rem",
-        }}
-      >
-        Customize Your Perfect Cake, {userName}! 🎂
-        <br />
-        <span
-          style={{ fontSize: "0.9rem", fontWeight: "normal", opacity: 0.8 }}
-        >
-          (Takes just 5 minutes) ⏳
-        </span>
-      </Typography>
       <Stepper
         activeStep={activeStep}
         alternativeLabel
         connector={<CustomConnector />}
-        sx={{ width: "100%", justifyContent: "space-between", mb: 2 }}
+        sx={{
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+          backgroundColor: "rgba(255, 245, 250, 0.85)",
+          backdropFilter: "blur(10px)",
+          padding: "16px 16px",
+          borderBottom: "1px solid #eee",
+          borderRadius:"1rem",
+          boxShadow: "0px 2px 6px rgba(0,0,0,0.05)",
+          width: "100%",
+          justifyContent: "space-between",
+          // mb: 3,
+          // mt: 2,
+          // px: 2,
+          "& .MuiStepLabel-root": {
+            fontSize: "1rem",
+            fontWeight: "600",
+            color: "var(--primary-color)",
+          },
+          "& .MuiStepLabel-active": {
+            color: "#ff69b4",
+          },
+          "& .MuiStepLabel-completed": {
+            color: "#ff69b4",
+          },
+        }}
       >
         {steps.map((label, index) => (
           <Step key={index} sx={{ flex: 1 }}>
-            <StepLabel sx={{ fontSize: "0.8rem" }}>{label}</StepLabel>
+            <StepLabel
+              sx={{
+                fontSize: "1rem",
+                fontWeight: "600",
+                textTransform: "capitalize",
+              }}
+            >
+              {label}
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
 
-      <Box sx={{ mt: 1, width: "100%" }}>{renderStepContent(activeStep)}</Box>
+      <Box
+        sx={{
 
-      {activeStep !== 3 && (
-        <Typography
-          variant="h6"
-          align="center"
-          sx={{
-            mt: 2,
-            fontWeight: "bold",
-            fontSize: "1rem",
-            color: "#388E3C",
-            backgroundColor: "rgba(56, 142, 60, 0.1)",
-            borderRadius: "8px",
-            display: "inline-block",
-            letterSpacing: "0.5px",
-            px: 2,
-            py: 1,
-          }}
-        >
-          Total: ${orderDetails.price.toFixed(2)}
-        </Typography>
-      )}
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+          overflow: "auto",
+        }}
+      >
+        <Box sx={{ mt: 1, width: "100%" }}>{renderStepContent(activeStep)}</Box>
 
-      {activeStep !== 3 && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            mt: 3,
-            gap: 3,
-          }}
-        >
-          <Button
-            variant="contained"
-            color="secondary"
-            disabled={activeStep === 0}
-            onClick={handleBack}
+        {activeStep !== 2 && (
+          <Typography
+            variant="h6"
+            align="center"
             sx={{
-              fontSize: "0.9rem",
+              mt: 2,
+              fontWeight: "bold",
+              fontSize: "1rem",
+              color: "#ff69b4",
+              textShadow: "0 0 8px rgba(255, 105, 180, 0.6)",
+              backgroundColor: "rgba(255, 105, 180, 0.1)",
+              borderRadius: "8px",
+              display: "inline-block",
+              letterSpacing: "0.5px",
               px: 2,
               py: 1,
-              bgcolor: "var(--secondary-color)",
-              "&:hover": { bgcolor: "#E91E63" },
+              fontFamily: '"Poppins", "sans-serif"',
             }}
           >
-            Back
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleNext}
+            Total: ${orderDetails.price.toFixed(2)}
+          </Typography>
+        )}
+
+        {activeStep !== 2 && (
+          <Box
             sx={{
-              fontSize: "0.9rem",
-              px: 2,
-              py: 1,
-              bgcolor: "var(--primary-color)",
-              "&:hover": { bgcolor: "var(--primary-color)" },
+              display: "flex",
+              justifyContent: "space-between",
+              mt: 3,
+              mb:3,
+              gap: 3,
             }}
           >
-            {activeStep === steps.length - 1 ? "Finish" : "Next"}
-          </Button>
-        </Box>
-      )}
+            <Button
+              variant="contained"
+              color="secondary"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{
+                fontSize: "0.9rem",
+                px: 2,
+                py: 1,
+                bgcolor: "var(--secondary-color)",
+                "&:hover": { bgcolor: "#E91E63" },
+              }}
+            >
+              Back
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              sx={{
+                fontSize: "0.9rem",
+                px: 2,
+                py: 1,
+                bgcolor: "var(--primary-color)",
+                "&:hover": { bgcolor: "var(--primary-color)" },
+              }}
+            >
+              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+            </Button>
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };

@@ -1,64 +1,117 @@
 "use client";
-import {Container, Typography } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
+import Image from "next/image";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import welcomeAnimation from "../../public/animations/2.json";
 
-export default function Header({ userName }: { userName: string }) {
+interface HeaderProps {
+  userName?: string;
+}
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: welcomeAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+export default function Header({ userName }: HeaderProps) {
   return (
     <Container
       maxWidth="lg"
       sx={{
-        textAlign: "left",
+        textAlign: "start",
+        position: "relative",
         display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        zIndex:3
+        flexDirection: { xs: "column", md: "row" },
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 0,
+        margin: 2,
       }}
     >
-      <motion.div
-        initial={{ opacity: 0, x: -15 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        style={{ position: "relative" }}
-      >
-        <Typography
-          variant="h3"
-          fontWeight="900"
-          sx={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "3.2rem",
-            display: "inline-block",
-            background: "linear-gradient(90deg, #FF3366, #FF69B4, #FF6B81)", 
-            WebkitBackgroundClip: "text", 
-            WebkitTextFillColor: "transparent",
-            textShadow: `
-              2px 2px 8px rgba(255, 51, 102, 0.4),
-              0px 0px 12px rgba(255, 105, 180, 0.4)
-            `,
+      <Box sx={{ display: { xs: "flex", md: "block" }, justifyContent: "center", alignItems: "center" }}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ 
+            opacity: 1, 
+            scale: [1, 1.05, 1], 
+            boxShadow: [
+              "0 0 0px rgba(255,255,255,0)",
+              "0 0 15px rgba(173, 216, 230, 0.6)",
+              "0 0 0px rgba(255,255,255,0)"
+            ]
+          }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            opacity: { duration: 3 },
+          }}
+          whileHover={{ scale: 1.1, rotate: 2 }}
+          style={{
+            position: "fixed",
+            top: "20px",
+            left: "20px",
+            zIndex: 999,
+            borderRadius: "50%"
           }}
         >
-          Velora Cake
-        </Typography>
-      </motion.div>
+          <Image src="/veloralogo.png" alt="Velora" width={100} height={100} />
+        </motion.div>
+      </Box>
+      <Box sx={{ mt: { xs: 2, md: 0 }, ml: { md: 4 } }}>
+        <Lottie options={defaultOptions} height={200} width={200} />
+      </Box>
       <motion.div
-        initial={{ opacity: 0, x: -10 }}
+        initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-      >
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: "'Quicksand', sans-serif",
-            fontWeight: "500",
-            letterSpacing: "1px",
-            mb:10,
-            background: "linear-gradient(90deg, #FF5E78, #FF82A9)", 
-            WebkitBackgroundClip: "text", 
-            textShadow: "0px 0px 12px rgba(255, 94, 120, 0.5)",
-          }}
-        >
-          🍰 Fresh, Healthy & Custom-Made Cakes!
-        </Typography>
-      </motion.div>
+        transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+      ></motion.div>
+      {userName && (
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.6 }}
+        ></motion.div>
+      )}
+      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, alignItems: "center" }}>
+        <Box sx={{ mt: { xs: 4, md: 8 }, ml: { xs: 0, md: 6 } }}>
+          <Typography
+            variant="h5"
+            sx={{
+              mb: 2,
+              fontWeight: "bold",
+              textAlign: "center",
+              color: "#6D6875",
+              letterSpacing: "1px",
+              fontSize: { xs: "1rem", md: "1.25rem" },
+              fontFamily: '"Poppins", "sans-serif"',
+            }}
+          >
+            call us at{" "}
+            <Box component="span" sx={{
+              color: "#ff69b4",
+              textShadow: "0 0 8px rgba(255, 105, 180, 0.6)",
+              fontWeight: 700,
+              animation: "pulse 2s infinite",
+              "@keyframes pulse": {
+                "0%": { textShadow: "0 0 8px rgba(255, 105, 180, 0.6)" },
+                "50%": { textShadow: "0 0 16px rgba(255, 105, 180, 1)" },
+                "100%": { textShadow: "0 0 8px rgba(255, 105, 180, 0.6)" },
+              }
+            }}>
+              1-647-379-8489
+            </Box>{" "}
+            or take 2 minutes to order your Cake
+          </Typography>
+        </Box>
+      </Box>
     </Container>
   );
 }
