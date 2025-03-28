@@ -98,7 +98,7 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
   return (
     <Box
       sx={{
-        width: "95%",
+    
         minHeight: "800px",
         p: 3,
         // backgroundColor: "rgba(255,255,255,0.3)",
@@ -109,9 +109,9 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
         textAlign: "center",
       }}
     >
-      <Card sx={{ mb: 2, borderRadius: 3, boxShadow: 2 }}>
+      <Card sx={{ mb: 2, boxShadow: 2 }}>
         <CardContent>
-          <Stack direction="row" alignItems="center" spacing={1} mb={2}>
+          <Stack direction="row" alignItems="center" spacing={2} flexWrap="wrap">
             <ShoppingCartIcon sx={{ color: "var(--secondary-color)" }} />
             <Typography
               variant="h6"
@@ -121,16 +121,13 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
               Confirm Your Cake Order
             </Typography>
           </Stack>
-
           <Divider sx={{ mb: 2 }} />
-
           <Typography
             variant="body2"
             sx={{ mb: 2, textAlign: "left", lineHeight: 1.7 }}
           >
             {cakeDescription}
           </Typography>
-
           <Typography variant="h6" fontWeight="bold" color="#388E3C">
             Total: ${orderDetails.price.toFixed(2)}
           </Typography>
@@ -218,7 +215,7 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
 
       <Stack spacing={1.5} alignItems="center" sx={{ mt: 2 }}>
         <Typography variant="body2" fontWeight="medium">
-          Proceed to payment:
+          Proceed to the payment:
         </Typography>
 
         <Stack direction="row" spacing={1}>

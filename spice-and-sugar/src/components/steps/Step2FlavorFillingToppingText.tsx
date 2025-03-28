@@ -103,7 +103,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orde
   return (
     <Box
       sx={{
-        width: "95%",
+       
         minHeight: "800px",
         p: 3,
         borderRadius: "20px",

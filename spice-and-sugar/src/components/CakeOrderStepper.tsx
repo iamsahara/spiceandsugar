@@ -122,10 +122,14 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   return (
     <Box
       sx={{
-        minHeight: "1000px",
-        paddingTop: "16px",
-        paddingBottom: "32px",
-        mx: 2,
+        minHeight: "800px",
+        p: 3,
+        // backgroundColor: "rgba(255,255,255,0.3)",
+        // backdropFilter: "blur(12px)",
+        borderRadius: "20px",
+        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+        mx: "auto",
+        textAlign: "center",
       }}
     >
       <Stepper
@@ -138,14 +142,15 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           zIndex: 10,
           backgroundColor: "rgba(255, 245, 250, 0.85)",
           backdropFilter: "blur(10px)",
-          padding: "12px 16px",
+          padding: "16px 16px",
           borderBottom: "1px solid #eee",
+          borderRadius:"1rem",
           boxShadow: "0px 2px 6px rgba(0,0,0,0.05)",
           width: "100%",
           justifyContent: "space-between",
-          mb: 3,
-          mt: 2,
-          px: 2,
+          // mb: 3,
+          // mt: 2,
+          // px: 2,
           "& .MuiStepLabel-root": {
             fontSize: "1rem",
             fontWeight: "600",
@@ -174,18 +179,13 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         ))}
       </Stepper>
 
-      <Box sx={{ pt: 2 }} />
-
       <Box
         sx={{
-          position: "absolute",
+
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "95%",
-          backdropFilter: "blur(11px)",
-          borderRadius: "20px",
-          boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+          width: "100%",
           overflow: "auto",
         }}
       >
@@ -220,6 +220,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
               display: "flex",
               justifyContent: "space-between",
               mt: 3,
+              mb:3,
               gap: 3,
             }}
           >
