@@ -1,9 +1,10 @@
 "use client";
 import { Container, Typography } from "@mui/material";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 interface HeaderProps {
-  userName?: string; // Optional userName to handle both logged-in and non-logged-in states
+  userName?: string;
 }
 
 export default function Header({ userName }: HeaderProps) {
@@ -11,14 +12,14 @@ export default function Header({ userName }: HeaderProps) {
     <Container
       maxWidth="lg"
       sx={{
-        textAlign: "left",
+        textAlign: "start",
+        position:"relative",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center", 
-        alignItems: "center",
-        zIndex: 3,
-        paddingTop: "2rem",  
-        paddingBottom: "2rem",  
+        justifyContent: "start",
+        alignItems: "start",
+        zIndex: 0,
+
       }}
     >
       <motion.div
@@ -27,34 +28,19 @@ export default function Header({ userName }: HeaderProps) {
         transition={{ duration: 0.8, ease: "easeOut" }}
         style={{ position: "relative" }}
       >
-        <Typography
-          variant="h3"
-          fontWeight="900"
-          sx={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "4rem",  
-            display: "inline-block",
-            background: "linear-gradient(90deg, #FF3366, #FF69B4, #FF6B81)", 
-            WebkitBackgroundClip: "text", 
-            color: "transparent"
-          }}
-        >
-          Velora
-        </Typography>
+        <Image src="/veloralogo.png" alt="Velora" width={100} height={100} />
       </motion.div>
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-      >
-      </motion.div>
+      ></motion.div>
       {userName && (
         <motion.div
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.6 }}
-        >
-        </motion.div>
+        ></motion.div>
       )}
     </Container>
   );

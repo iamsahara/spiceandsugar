@@ -71,13 +71,9 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
     <Box>
       <Box
         sx={{
-          maxWidth: 500,
-          minWidth: 500,
-          minHeight: 500,
-          maxHeight: 500,
-          margin: "auto",
+          mb: "auto",
           padding: "10px",
-          mt: "20px",
+          minHeight: "800px",
           background: "rgba(255, 255, 255, 0.2)",
           backdropFilter: "blur(10px)",
           borderRadius: "12px",
@@ -85,24 +81,30 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           border: "1px solid rgba(255, 255, 255, 0.2)",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
           alignItems: "center",
-          overflow:"hidden"
+          overflow: "hidden",
+          marginLeft:"1rem",
+          marginRight:"1rem"
         }}
       >
-          <Box sx={{ textAlign: "center", display:"flex", direction:"column", alignItems:"center"}}>
-        <Lottie options={defaultOptions} height="auto"
-  width="50%"/>
-    
-        <Typography
-          variant="h6"
-          fontWeight="bold"
-          color="pallette.text.primary"
-          sx={{ textAlign: "start" }}
-          width={"100%"}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+          }}
         >
-          Start Your Cake Journey Here!
-        </Typography>
+          <Lottie options={defaultOptions} height={200} width={200} />
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            color="pallette.text.primary"
+            flex={1}
+          >
+            Start Your Journey Here!
+          </Typography>
         </Box>
         <TextField
           fullWidth
