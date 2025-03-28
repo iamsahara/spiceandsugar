@@ -42,6 +42,25 @@ export default function Header({ userName }: HeaderProps) {
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.6 }}
         ></motion.div>
       )}
+            <Typography
+        variant="h6"
+        sx={{
+          mb: 2,
+          fontWeight: "bold",
+          textAlign: "center",
+          color: "#var(--primary-color)",
+          background: "linear-gradient(90deg, #A0C4FF, #BDB2FF)",
+          WebkitBackgroundClip: "text",
+          letterSpacing: "0.8px",
+          fontSize: "1.1rem",
+        }}
+      >
+         call us at 1-647-379-8489
+         or take 2 minutes to order your Cake
+
+        <br />
+     
+      </Typography>
     </Container>
   );
 }

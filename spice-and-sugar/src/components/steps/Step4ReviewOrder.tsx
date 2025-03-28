@@ -98,12 +98,12 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
   return (
     <Box
       sx={{
+        width: "95%",
         p: 3,
-        background: "rgba(255, 255, 255, 0.3)",
-        backdropFilter: "blur(12px)",
-        borderRadius: 4,
-        boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.12)",
-        maxWidth: 550,
+        // backgroundColor: "rgba(255,255,255,0.3)",
+        // backdropFilter: "blur(12px)",
+        borderRadius: "20px",
+        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
         mx: "auto",
         textAlign: "center",
       }}

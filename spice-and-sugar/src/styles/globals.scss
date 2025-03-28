@@ -6,6 +6,7 @@
   --backgRound-color: #fff8f1;
   --text-color: #333;
   --button-hover:  #7AB8AE;
+
 }
 
 body {
@@ -18,6 +19,9 @@ body {
   color: #333; 
   margin: 0;
   padding: 0;
+  backdrop-filter: blur(11px);
+  padding: "10px 0";
+  width: "100%";
 }
 
 button {

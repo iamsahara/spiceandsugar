@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import {
   Box,
-  Button,
   Card,
   CardContent,
   Typography,
@@ -98,7 +97,15 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
   return (
-    <Box p={2}>
+    <Box sx={{
+      width: "95%",
+      p: 3,
+      // backgroundColor: "rgba(255,255,255,0.3)",
+      // backdropFilter: "blur(12px)",
+      borderRadius: "20px",
+      boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+      mx: "auto",
+    }}>
       <Grid container spacing={2} alignItems="center" direction="column">
         <Grid item xs={4}>
           <Typography
@@ -109,7 +116,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               color: "var( --secondary-color)",
             }}
           >
-            ① Select Type
+            ① 
           </Typography>
         </Grid>
         <Grid item xs={8}>
@@ -167,7 +174,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               color: "var( --secondary-color)",
             }}
           >
-            ② Select Size
+            ② 
           </Typography>
         </Grid>
         <Grid item xs={8}>
@@ -200,7 +207,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               color: "var( --secondary-color)",
             }}
           >
-            ③ Select Shape
+            ③ 
           </Typography>
         </Grid>
         <Grid item xs={8}>
@@ -234,17 +241,33 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               color: "var( --secondary-color)",
             }}
           >
-            ④ Select Tiers
+            ④
           </Typography>
         </Grid>
         <Grid item xs={8}>
         <Stack direction="row" spacing={3}>
           {tierAnimations.map(({ tier, animation }) => (
             <Box key={tier} textAlign="center" onClick={() => setCakeTiers(tier)} sx={{ cursor: "pointer" }}>
-              <Lottie animationData={animation} style={{ width: 100, height: 100 }} />
+              <Lottie animationData={animation} style={{ width: 100, height: 100 }}  />
+              <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" }} />
+            <Box
+              key={tier}
+              textAlign="center"
+              onClick={() => setCakeTiers(tier)}
+              sx={{
+                cursor: "pointer",
+                border:
+                  cakeTiers === tier
+                    ? "2px solid var(--secondary-color)"
+                    : "2px solid #E0E0E0",
+                borderRadius: "8px",
+                padding: "8px",
+              }}
+            >
               <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" }}>
-                {tier} Tier
+                Tier {tier}
               </Typography>
+            </Box>
             </Box>
           ))}
         </Stack>

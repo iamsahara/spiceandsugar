@@ -92,9 +92,19 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
   }, [selectedFlavor, selectedFillings.length, selectedToppings.length, basePrice]);
 
   return (
-    <Box p={3}>
+    <Box
+      sx={{
+        width: "95%",
+        p: 3,
+        // backgroundColor: "rgba(255,255,255,0.3)",
+        // backdropFilter: "blur(12px)",
+        borderRadius: "20px",
+        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+        mx: "auto",
+      }}
+    >
       <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mb: 1 }}>
-        ⑤ Choose Your Flavor
+        ⑤ Flavor
       </Typography>
       <FormControl fullWidth variant="outlined">
         <Select value={selectedFlavor} onChange={(e) => setSelectedFlavor(e.target.value)}>
@@ -107,7 +117,7 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
       </FormControl>
 
       <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mt: 3, mb: 1 }}>
-        ⑥ Select Your Fillings
+        ⑥ Filling (+$7.99)
       </Typography>
       <FormControl fullWidth variant="outlined">
         <Select
@@ -131,7 +141,7 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
       </FormControl>
 
       <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mt: 3, mb: 1 }}>
-        ⑦ Choose Toppings (One-Time charge of $7.99)
+        ⑦ Topping (+$7.99)
       </Typography>
       <FormControl fullWidth variant="outlined">
         <Select
