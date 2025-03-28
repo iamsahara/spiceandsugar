@@ -1,10 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
 
-const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
-import welcomeAnimation from "../../public/animations/2.json";
 
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
@@ -58,14 +55,6 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
     }
   };
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: welcomeAnimation,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
 
   return (
     <Box>
@@ -96,7 +85,6 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
             textAlign: "center",
           }}
         >
-          <Lottie options={defaultOptions} height={200} width={200} />
           <Typography
             variant="h6"
             fontWeight="bold"

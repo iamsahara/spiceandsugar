@@ -8,6 +8,7 @@ import {
   Select,
   MenuItem,
   FormControl,
+  TextField,
 } from "@mui/material";
 
 interface Step2Props {
@@ -19,6 +20,8 @@ interface Step2Props {
       filling: string[];
       toppings: string[];
       price: number;
+      color: string;
+      customText: string;
     }>
   ) => void;
   orderDetails: {
@@ -27,6 +30,8 @@ interface Step2Props {
     filling: string[];
     toppings: string[];
     price: number;
+    color?: string;
+    customText?: string;
   };
 }
 
@@ -49,10 +54,12 @@ const availableToppings = [
   "🍇 Grape",
 ];
 
-const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails}) => {
+const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orderDetails }) => {
   const [selectedFlavor, setSelectedFlavor] = useState(orderDetails.baseFlavor || "Vanilla");
   const [selectedFillings, setSelectedFillings] = useState<string[]>(orderDetails.filling ?? []);
   const [selectedToppings, setSelectedToppings] = useState<string[]>(orderDetails.toppings ?? []);
+  const [selectedColor, setSelectedColor] = useState(orderDetails.color || "");
+  const [customText, setCustomText] = useState(orderDetails.customText || "");
   const [price, setPrice] = useState(orderDetails.price);
   const [basePrice] = useState(orderDetails.price);
 
@@ -88,16 +95,17 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
       filling: selectedFillings,
       toppings: selectedToppings,
       price: newTotalPrice,
+      color: selectedColor,
+      customText: customText,
     });
-  }, [selectedFlavor, selectedFillings.length, selectedToppings.length, basePrice]);
+  }, [selectedFlavor, selectedFillings.length, selectedToppings.length, selectedColor, customText, basePrice]);
 
   return (
     <Box
       sx={{
         width: "95%",
+        minHeight: "800px",
         p: 3,
-        // backgroundColor: "rgba(255,255,255,0.3)",
-        // backdropFilter: "blur(12px)",
         borderRadius: "20px",
         boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
         mx: "auto",
@@ -163,8 +171,34 @@ const Step2FillingsToppings: React.FC<Step2Props> = ({ updateOrder, orderDetails
           ))}
         </Select>
       </FormControl>
+
+      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mt: 3, mb: 1 }}>
+        ⑧ Color
+      </Typography>
+      <FormControl fullWidth variant="outlined">
+        <Select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}>
+          <MenuItem value="Red">Red</MenuItem>
+          <MenuItem value="Blue">Blue</MenuItem>
+          <MenuItem value="Green">Green</MenuItem>
+          <MenuItem value="Yellow">Yellow</MenuItem>
+          <MenuItem value="Pink">Pink</MenuItem>
+          <MenuItem value="Purple">Purple</MenuItem>
+          <MenuItem value="Orange">Orange</MenuItem>
+        </Select>
+      </FormControl>
+
+      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mt: 3, mb: 1 }}>
+        ⑨ Cake Text
+      </Typography>
+      <TextField
+        fullWidth
+        variant="outlined"
+        value={customText}
+        onChange={(e) => setCustomText(e.target.value)}
+        placeholder="Enter your custom text here"
+      />
     </Box>
   );
 };
 
-export default Step2FillingsToppings;
+export default Step2FlavorFillingToppingText;

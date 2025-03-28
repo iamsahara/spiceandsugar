@@ -10,13 +10,12 @@ import {
   StepConnector,
 } from "@mui/material";
 import Step1CakeSelection from "./steps/Step1CakeSelection";
-import Step2FillingsToppings from "./steps/Step2FillingsToppings";
-import Step3FlavorColorMessage from "./steps/Step3FlavorColorMessage";
+import Step2FlavorFillingToppingText from "./steps/Step2FlavorFillingToppingText";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 
-const steps: string[] = ["Type", "Flavor", "Message", "Review"];
+const steps: string[] = ["Type", "Customize", "Review"];
 
 interface OrderDetails {
   cakeType: "Butter Cake" | "Sponge Cake" | "Fondant Cake";
@@ -72,7 +71,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
     setOrderDetails((prevDetails) => ({ ...prevDetails, ...updatedData }));
   };
   const handleNext = (): void => {
-    if (activeStep === 2) {
+    if (activeStep === 1) {
       updateOrderDetails({ customText: orderDetails.customText });
     }
     setActiveStep((prevStep) => prevStep + 1);
@@ -99,7 +98,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         );
       case 1:
         return (
-          <Step2FillingsToppings
+          <Step2FlavorFillingToppingText
             onNext={handleNext}
             onBack={handleBack}
             updateOrder={updateOrderDetails}
@@ -107,15 +106,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           />
         );
       case 2:
-        return (
-          <Step3FlavorColorMessage
-            onNext={handleNext}
-            onBack={handleBack}
-            updateOrder={updateOrderDetails}
-            orderDetails={orderDetails}
-          />
-        );
-      case 3:
         return (
           <Step4ReviewOrder
             onBack={handleBack}
@@ -132,7 +122,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
+        minHeight: "1000px",
         paddingTop: "16px",
         paddingBottom: "32px",
         mx: 2,
@@ -146,23 +136,26 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           position: "sticky",
           top: 0,
           zIndex: 10,
-          backdropFilter: "blur(11px)",
-          padding: "10px 0",
+          backgroundColor: "rgba(255, 245, 250, 0.85)",
+          backdropFilter: "blur(10px)",
+          padding: "12px 16px",
           borderBottom: "1px solid #eee",
           boxShadow: "0px 2px 6px rgba(0,0,0,0.05)",
           width: "100%",
           justifyContent: "space-between",
-          mb: 2,
+          mb: 3,
+          mt: 2,
+          px: 2,
           "& .MuiStepLabel-root": {
             fontSize: "1rem",
             fontWeight: "600",
             color: "var(--primary-color)",
           },
           "& .MuiStepLabel-active": {
-            color: "#388E3C",
+            color: "#ff69b4",
           },
           "& .MuiStepLabel-completed": {
-            color: "#388E3C",
+            color: "#ff69b4",
           },
         }}
       >
@@ -198,7 +191,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
       >
         <Box sx={{ mt: 1, width: "100%" }}>{renderStepContent(activeStep)}</Box>
 
-        {activeStep !== 3 && (
+        {activeStep !== 2 && (
           <Typography
             variant="h6"
             align="center"
@@ -206,20 +199,22 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
               mt: 2,
               fontWeight: "bold",
               fontSize: "1rem",
-              color: "#388E3C",
-              backgroundColor: "rgba(56, 142, 60, 0.1)",
+              color: "#ff69b4",
+              textShadow: "0 0 8px rgba(255, 105, 180, 0.6)",
+              backgroundColor: "rgba(255, 105, 180, 0.1)",
               borderRadius: "8px",
               display: "inline-block",
               letterSpacing: "0.5px",
               px: 2,
               py: 1,
+              fontFamily: '"Poppins", "sans-serif"',
             }}
           >
             Total: ${orderDetails.price.toFixed(2)}
           </Typography>
         )}
 
-        {activeStep !== 3 && (
+        {activeStep !== 2 && (
           <Box
             sx={{
               display: "flex",

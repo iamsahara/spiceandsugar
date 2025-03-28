@@ -99,6 +99,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
   return (
     <Box sx={{
       width: "95%",
+      minHeight: "800px",
       p: 3,
       // backgroundColor: "rgba(255,255,255,0.3)",
       // backdropFilter: "blur(12px)",
