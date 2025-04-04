@@ -104,11 +104,10 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orde
   return (
     <Box
       sx={{
-width:"70%",
-       pt:2,
-        borderRadius: "20px",
         display:"flex",
         flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center"
       }}
     >
       <FormControl fullWidth variant="outlined" sx={{
@@ -116,7 +115,8 @@ width:"70%",
   backgroundColor: "rgba(255, 255, 255, 0.6)",
   backdropFilter: "blur(8px)",
   borderRadius: "12px",
-  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+  width:"60%"
 }}>
         <InputLabel id="flavor-label"> Flavor</InputLabel>
         <Select
