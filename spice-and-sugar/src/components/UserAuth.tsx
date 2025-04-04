@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
+import Header from "./Header";
 
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
@@ -22,7 +22,6 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
       setErrorMessage("Name and Email are required!");
       return;
     }
-
     setIsSubmitting(true);
     setErrorMessage("");
 
@@ -58,6 +57,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
 
   return (
     <Box>
+      <Header/>
       <Box
         sx={{
           display:"flex",

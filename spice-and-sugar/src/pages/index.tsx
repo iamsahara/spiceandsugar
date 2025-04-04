@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import UserAuth from "@/components/UserAuth";
 import Header from "@/components/Header";
+import Hero from "@/components/Hero";
 
 export default function IndexPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -20,16 +21,18 @@ export default function IndexPage() {
 
   return (
     <div>
-      {!isAuthenticated ? (
-        <UserAuth
-          onAuthSuccess={(name) => {
-            setUserName(name);
-            setIsAuthenticated(true);
-          }}
-        />
-      ) : (
-        <Header userName={userName || ""}/>
-      )}
+      <Hero/>
+      <Header userName={userName || ""}/>
+      <div>
+        {!isAuthenticated ? (
+          <UserAuth
+            onAuthSuccess={(name) => {
+              setUserName(name);
+              setIsAuthenticated(true);
+            }}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }
