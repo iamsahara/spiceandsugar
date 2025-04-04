@@ -28,7 +28,8 @@ export default function GlobalBackground() {
     <Box
       sx={{
         position: "fixed",
-        top: 0,
+        top: "3rem",
+        bottom:"8rem",
         left: 0,
         zIndex: -1,
         width: "100%",

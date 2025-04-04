@@ -111,13 +111,19 @@ width:"70%",
         flexDirection:"column",
       }}
     >
-      <FormControl fullWidth variant="outlined">
-        <InputLabel id="flavor-label">⑤ Flavor</InputLabel>
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 0,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+}}>
+        <InputLabel id="flavor-label"> Flavor</InputLabel>
         <Select
           labelId="flavor-label"
           value={selectedFlavor}
           onChange={(e) => setSelectedFlavor(e.target.value)}
-          label="⑤ Flavor"
+          label=" Flavor"
         >
           {baseFlavors.map((flavor) => (
             <MenuItem key={flavor.value} value={flavor.value}>
@@ -127,14 +133,20 @@ width:"70%",
         </Select>
       </FormControl>
 
-      <FormControl fullWidth variant="outlined" sx={{ mt: 3 }}>
-        <InputLabel id="filling-label">⑥ Filling (+$7.99)</InputLabel>
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 3,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+}}>
+        <InputLabel id="filling-label"> Filling (+$7.99)</InputLabel>
         <Select
           labelId="filling-label"
           multiple
           value={selectedFillings}
           onChange={(e) => setSelectedFillings(e.target.value as string[])}
-          label="⑥ Filling (+$7.99)"
+          label="Filling (+$7.99)"
           renderValue={(selected) => (
             <Stack direction="row" spacing={1} flexWrap="wrap">
               {selected.map((filling) => (
@@ -151,8 +163,14 @@ width:"70%",
         </Select>
       </FormControl>
 
-      <FormControl fullWidth variant="outlined" sx={{ mt: 3 }}>
-        <InputLabel id="topping-label">⑦ Topping (+$7.99)</InputLabel>
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 3,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+}}>
+        <InputLabel id="topping-label"> Topping (+$7.99)</InputLabel>
         <Select
           labelId="topping-label"
           multiple
@@ -175,8 +193,14 @@ width:"70%",
         </Select>
       </FormControl>
 
-      <FormControl fullWidth variant="outlined" sx={{ mt: 3 }}>
-        <InputLabel id="color-label">⑧ Color</InputLabel>
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 3,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+}}>
+        <InputLabel id="color-label"> Color</InputLabel>
         <Select
           labelId="color-label"
           value={selectedColor}
@@ -193,7 +217,13 @@ width:"70%",
         </Select>
       </FormControl>
 
-      <FormControl fullWidth variant="outlined" sx={{ mt: 3 }}>
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 3,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+}}>
         <InputLabel shrink htmlFor="custom-text" sx={{ color: "var(--secondary-color)" }}>
           Cake Text
         </InputLabel>
@@ -204,7 +234,10 @@ width:"70%",
           value={customText}
           onChange={(e) => setCustomText(e.target.value)}
           placeholder="Enter your custom text here"
-          sx={{ mt: 1 }}
+          sx={{  backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backdropFilter: "blur(8px)",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"}}
         />
       </FormControl>
     </Box>

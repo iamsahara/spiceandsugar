@@ -99,7 +99,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
   return (
-    <Box sx={{  overflow: "hidden" }}>
+    <Box sx={{ position: "relative", overflow: "hidden" }}>
       <Box sx={{
         minHeight: "500px",
         p: 3,
@@ -155,7 +155,14 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         </Box>
 
         <Box>
-          <FormControl sx={{ m: 1, width: 300 }}>
+          <FormControl sx={{
+            m: 1,
+            width: 300,
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backdropFilter: "blur(8px)",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+          }}>
             <InputLabel id="weight-label">Weight</InputLabel>
             <Select
               labelId="weight-label"
@@ -190,7 +197,14 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
           </FormControl>
         </Box>
         <Box>
-          <FormControl sx={{ m: 1, width: 300 }}>
+          <FormControl sx={{
+            m: 1,
+            width: 300,
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backdropFilter: "blur(8px)",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+          }}>
             <InputLabel id="shape-label">Shape</InputLabel>
             <Select
               labelId="shape-label"
@@ -251,22 +265,19 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
             ))}
           </Stack>
         </Box>
-        <Step2FlavorFillingToppingText
-          onBack={() => {}}
-          onNext={() => {}}
-          updateOrder={updateOrder}
-          orderDetails={{
-            cakeType: selectedCakeType,
-            baseFlavor: "",
-            filling: [],
-            toppings: [],
-            price,
-            color: "",
-            customText: ""
-          }}
-        />
       </Stack>
       </Box>
+      <Step2FlavorFillingToppingText
+        updateOrder={updateOrder}
+        orderDetails={{
+          ...orderDetails,
+          cakeType: selectedCakeType,
+          weight: selectedWeight,
+          shape: selectedShape,
+          levels: cakeTiers,
+          price,
+        }}
+      />
     </Box>
   );
 };

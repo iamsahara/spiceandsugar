@@ -22,34 +22,10 @@ export default function Hero() {
       sx={{
         height: "90vh",
         width: "100%",
-        overflow: "hidden",
+
       }}
     >
       <GlobalBackground />
-      
-      <Box
-        sx={{
-          position: "absolute",
-          top: 24,
-          left: 24,
-          zIndex: 3,
-          backgroundColor: "rgba(255, 255, 255, 0.85)",
-          padding: "8px",
-          borderRadius: "50%",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-        }}
-      >
-        <img
-          src="/veloralogo.png"
-          alt="Velora Logo"
-          style={{
-            width: "80px",
-            height: "80px",
-            objectFit: "contain",
-          }}
-        />
-      </Box>
-
       <Box
       sx={{
           position: "relative",

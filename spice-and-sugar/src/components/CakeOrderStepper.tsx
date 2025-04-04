@@ -120,8 +120,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
       sx={{
         minHeight: "800px",
         p: 3,
-        backgroundColor: "rgba(255, 255, 255, 0.3)",
-        backdropFilter: "blur(11px)",
         borderRadius: "20px",
         mx: "auto",
         textAlign: "center",
