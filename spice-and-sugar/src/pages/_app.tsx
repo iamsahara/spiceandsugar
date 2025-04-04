@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
     cakeType: "Butter Cake",
     shape: "Round",
     levels: 1,
-    color: "#F3E5AB",
+    color: "Brown",
     weight: 1,
     filling: null,
     toppings: [],

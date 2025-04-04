@@ -53,6 +53,7 @@ const CustomConnector = styled(StepConnector)(({ theme }) => ({
   },
 }));
 
+
 const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -84,6 +85,9 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   const handleBackToLogin = () => {
     router.push("/");
   };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [activeStep]);
 
   const renderStepContent = (step: number): React.ReactNode => {
     switch (step) {
@@ -124,10 +128,9 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
       sx={{
         minHeight: "800px",
         p: 3,
-        // backgroundColor: "rgba(255,255,255,0.3)",
-        // backdropFilter: "blur(12px)",
+        backgroundColor: "rgba(255, 255, 255, 0.3)",
+        backdropFilter: "blur(11px)",
         borderRadius: "20px",
-        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
         mx: "auto",
         textAlign: "center",
       }}
@@ -148,9 +151,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           boxShadow: "0px 2px 6px rgba(0,0,0,0.05)",
           width: "100%",
           justifyContent: "space-between",
-          // mb: 3,
-          // mt: 2,
-          // px: 2,
           "& .MuiStepLabel-root": {
             fontSize: "1rem",
             fontWeight: "600",

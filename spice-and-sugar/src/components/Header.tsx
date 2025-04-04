@@ -30,7 +30,7 @@ export default function Header({ userName }: HeaderProps) {
         flexDirection: { xs: "column", md: "row" },
         justifyContent: "center",
         alignItems: "center",
-        zIndex: 0,
+        zIndex: 2,
         margin: 2,
       }}
     >
@@ -85,6 +85,8 @@ export default function Header({ userName }: HeaderProps) {
           <Typography
             variant="h5"
             sx={{
+              backgroundColor: "rgba(255, 245, 250, 0.85)",
+              backdropFilter: "blur(1px)",
               mb: 2,
               fontWeight: "bold",
               textAlign: "center",
@@ -96,15 +98,11 @@ export default function Header({ userName }: HeaderProps) {
           >
             call us at{" "}
             <Box component="span" sx={{
+                      backgroundColor: "rgba(255, 245, 250, 0.85)",
+                      backdropFilter: "blur(10px)",
               color: "#ff69b4",
               textShadow: "0 0 8px rgba(255, 105, 180, 0.6)",
               fontWeight: 700,
-              animation: "pulse 2s infinite",
-              "@keyframes pulse": {
-                "0%": { textShadow: "0 0 8px rgba(255, 105, 180, 0.6)" },
-                "50%": { textShadow: "0 0 16px rgba(255, 105, 180, 1)" },
-                "100%": { textShadow: "0 0 8px rgba(255, 105, 180, 0.6)" },
-              }
             }}>
               1-647-379-8489
             </Box>{" "}

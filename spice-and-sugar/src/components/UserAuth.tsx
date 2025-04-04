@@ -60,20 +60,20 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
     <Box>
       <Box
         sx={{
-          mb: "auto",
-          padding: "10px",
-          minHeight: "800px",
-          // background: "rgba(255, 255, 255, 0.2)",
-          // backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
-          display: "flex",
+          display:"flex",
+          mt: "Auto",
           flexDirection: "column",
           alignItems: "center",
           overflow: "hidden",
           marginLeft:"1rem",
-          marginRight:"1rem"
+          marginRight:"1rem",
+          padding: "10px",
+          minHeight: "400px",
+          background: "rgba(255, 255, 255, 0.2)",
+          backdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
         }}
       >
         <Box

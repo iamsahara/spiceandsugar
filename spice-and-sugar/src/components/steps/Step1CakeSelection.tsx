@@ -98,7 +98,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
   return (
-    <Box sx={{ position: "relative", overflow: "hidden" }}>
+    <Box sx={{  overflow: "hidden" }}>
       <Box sx={{
         minHeight: "500px",
         p: 3,
