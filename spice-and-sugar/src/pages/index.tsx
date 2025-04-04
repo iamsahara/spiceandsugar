@@ -20,16 +20,6 @@ export default function IndexPage() {
   return (
     <div>
       <Hero/>
-      {/* <div>
-        {!isAuthenticated ? (
-          <UserAuth
-            onAuthSuccess={(name) => {
-              setUserName(name);
-              setIsAuthenticated(true);
-            }}
-          />
-        ) : null}
-      </div> */}
     </div>
   );
 }
