@@ -47,11 +47,25 @@ export default function GlobalBackground() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
+            objectPosition: "center",
             opacity: index === currentIndex ? 1 : 0,
-            transition: "opacity 1.5s ease-in-out",
+            transition: "opacity 2s ease-in-out",
+            zIndex: 0,
+            filter: "brightness(0.8) saturate(1.1)",
           }}
         />
       ))}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6))",
+          zIndex: 1,
+        }}
+      />
     </Box>
   );
 }

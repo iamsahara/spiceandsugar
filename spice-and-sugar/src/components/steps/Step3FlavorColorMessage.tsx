@@ -69,7 +69,7 @@ const Step3FlavorColorMessage: React.FC<Step3Props> = ({
               textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
             }}
           >
-            ⑧ Color
+         Color
           </Typography>
           <FormControl sx={{ minWidth: 140 }}>
             <InputLabel>Select a Color</InputLabel>
@@ -97,7 +97,7 @@ const Step3FlavorColorMessage: React.FC<Step3Props> = ({
             textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
           }}
         >
-          ⑨ Write on Your Cake ✍️
+          Write on Your Cake ✍️
         </Typography>
         <TextField
           fullWidth

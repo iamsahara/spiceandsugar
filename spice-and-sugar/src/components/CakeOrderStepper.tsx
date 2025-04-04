@@ -115,8 +115,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   };
 
   return (
-    <>
-    <Header userName={userName} />
+
     <Box
       sx={{
         minHeight: "800px",
@@ -232,7 +231,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         )}
       </Box>
     </Box>
-    </>
+
   );
 };
 

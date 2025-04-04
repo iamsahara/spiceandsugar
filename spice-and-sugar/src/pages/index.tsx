@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import UserAuth from "@/components/UserAuth";
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 
 export default function IndexPage() {

@@ -55,30 +55,32 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
   };
 
   return (
-    <>
-    <Header />
+ 
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        px: 2,
+        px: 1,
         py: 2,
-        minHeight: "90vh",
+        maxWidth: "50rem",
+        maxHeight:"50rem",
+
         backgroundColor: "transparent",
       }}
     >
       <Box
         sx={{
           width: "100%",
-          maxWidth: 400,
-          p: 1,
-          borderRadius: "16px",
-          background: "rgba(255, 255, 255, 0.25)",
+          maxWidth: "30rem",
+          maxHeight:"30rem",  
+          p: 4,
+          borderRadius: "20px",
+          backgroundColor: "rgba(255, 255, 255, 0.25)",
           backdropFilter: "blur(10px)",
           border: "1px solid rgba(255, 255, 255, 0.3)",
-          boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
           display: "flex",
           flexDirection: "column",
           gap: 2,
@@ -87,8 +89,12 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         <Typography
           variant="h5"
           fontWeight="bold"
-          color="primary"
-          mb={2}
+          sx={{
+            color: "var(--secondary-color)",
+            textAlign: "center",
+            mb: 3,
+            fontFamily: '"Poppins", sans-serif',
+          }}
         >
           Your Details!
         </Typography>
@@ -98,7 +104,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           variant="outlined"
           value={user.name}
           onChange={(e) => setUser({ ...user, name: e.target.value })}
-          sx={{ mb: 1 }}
+          sx={{ mb: 2, fontFamily: '"Poppins", sans-serif' }}
         />
 
         <TextField
@@ -108,7 +114,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           variant="outlined"
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
-          sx={{ mb: 2 }}
+          sx={{ mb: 2, fontFamily: '"Poppins", sans-serif' }}
         />
 
         <TextField
@@ -118,7 +124,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           variant="outlined"
           value={user.phone}
           onChange={(e) => setUser({ ...user, phone: e.target.value })}
-          sx={{ mb: 2 }}
+          sx={{ mb: 2, fontFamily: '"Poppins", sans-serif' }}
         />
 
         {errorMessage && (
@@ -130,16 +136,21 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         <Button
           fullWidth
           variant="contained"
-          color="secondary"
           onClick={handleGuestSignIn}
           disabled={isSubmitting}
-          sx={{ py: 1.5, fontWeight: "bold" }}
+          sx={{
+            py: 1.5,
+            fontWeight: "bold",
+            backgroundColor: "var(--secondary-color)",
+            "&:hover": {
+              backgroundColor: "var(--secondary-color-hover)",
+            },
+          }}
         >
           {isSubmitting ? "Submitting..." : "Continue"}
         </Button>
       </Box>
     </Box>
-    </>
   );
 };
 
