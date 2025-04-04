@@ -10,12 +10,12 @@ import {
   StepConnector,
 } from "@mui/material";
 import Step1CakeSelection from "./steps/Step1CakeSelection";
-import Step2FlavorFillingToppingText from "./steps/Step2FlavorFillingToppingText";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
+import Header from "./Header";
 
-const steps: string[] = ["Type", "Customize", "Review"];
+const steps: string[] = ["Select", "Review Order"];
 
 interface OrderDetails {
   cakeType: "Butter Cake" | "Sponge Cake" | "Fondant Cake";
@@ -102,15 +102,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         );
       case 1:
         return (
-          <Step2FlavorFillingToppingText
-            onNext={handleNext}
-            onBack={handleBack}
-            updateOrder={updateOrderDetails}
-            orderDetails={orderDetails}
-          />
-        );
-      case 2:
-        return (
           <Step4ReviewOrder
             onBack={handleBack}
             onNext={handleNext}
@@ -124,6 +115,8 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   };
 
   return (
+    <>
+    <Header userName={userName} />
     <Box
       sx={{
         minHeight: "800px",
@@ -147,21 +140,10 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           backdropFilter: "blur(10px)",
           padding: "16px 16px",
           borderBottom: "1px solid #eee",
-          borderRadius:"1rem",
+          borderRadius: "1rem",
           boxShadow: "0px 2px 6px rgba(0,0,0,0.05)",
           width: "100%",
           justifyContent: "space-between",
-          "& .MuiStepLabel-root": {
-            fontSize: "1rem",
-            fontWeight: "600",
-            color: "var(--primary-color)",
-          },
-          "& .MuiStepLabel-active": {
-            color: "#ff69b4",
-          },
-          "& .MuiStepLabel-completed": {
-            color: "#ff69b4",
-          },
         }}
       >
         {steps.map((label, index) => (
@@ -177,11 +159,27 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
             </StepLabel>
           </Step>
         ))}
+        
+        <Box
+          sx={{
+            display: "inline-block",
+            mt: 1,
+            fontSize: "1rem",
+            fontWeight: "bold",
+            color: "#ff69b4",
+            textShadow: "0 0 8px rgba(255, 105, 180, 0.6)",
+            backgroundColor: "rgba(255, 105, 180, 0.1)",
+            borderRadius: "8px",
+            px: 2,
+            py: 1,
+          }}
+        >
+          Total: ${orderDetails.price.toFixed(2)}
+        </Box>
       </Stepper>
 
       <Box
         sx={{
-
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -191,30 +189,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
       >
         <Box sx={{ mt: 1, width: "100%" }}>{renderStepContent(activeStep)}</Box>
 
-        {activeStep !== 2 && (
-          <Typography
-            variant="h6"
-            align="center"
-            sx={{
-              mt: 2,
-              fontWeight: "bold",
-              fontSize: "1rem",
-              color: "#ff69b4",
-              textShadow: "0 0 8px rgba(255, 105, 180, 0.6)",
-              backgroundColor: "rgba(255, 105, 180, 0.1)",
-              borderRadius: "8px",
-              display: "inline-block",
-              letterSpacing: "0.5px",
-              px: 2,
-              py: 1,
-              fontFamily: '"Poppins", "sans-serif"',
-            }}
-          >
-            Total: ${orderDetails.price.toFixed(2)}
-          </Typography>
-        )}
-
-        {activeStep !== 2 && (
+        {activeStep !== 1 && (
           <Box
             sx={{
               display: "flex",
@@ -257,6 +232,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         )}
       </Box>
     </Box>
+    </>
   );
 };
 

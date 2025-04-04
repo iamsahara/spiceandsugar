@@ -54,46 +54,44 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
     }
   };
 
-
   return (
-    <Box>
-      <Header/>
+    <>
+    <Header />
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        px: 2,
+        py: 2,
+        minHeight: "90vh",
+        backgroundColor: "transparent",
+      }}
+    >
       <Box
         sx={{
-          display:"flex",
-          mt: "Auto",
-          flexDirection: "column",
-          alignItems: "center",
-          overflow: "hidden",
-          marginLeft:"1rem",
-          marginRight:"1rem",
-          padding: "10px",
-          minHeight: "400px",
-          background: "rgba(255, 255, 255, 0.2)",
+          width: "100%",
+          maxWidth: 400,
+          p: 1,
+          borderRadius: "16px",
+          background: "rgba(255, 255, 255, 0.25)",
           backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
+          boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.1)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-          }}
+        <Typography
+          variant="h5"
+          fontWeight="bold"
+          color="primary"
+          mb={2}
         >
-          <Typography
-            variant="h6"
-            fontWeight="bold"
-            color="pallette.text.primary"
-            flex={1}
-          >
-            Start Your Journey Here!
-          </Typography>
-        </Box>
+          Your Details!
+        </Typography>
         <TextField
           fullWidth
           label="Name"
@@ -137,10 +135,11 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           disabled={isSubmitting}
           sx={{ py: 1.5, fontWeight: "bold" }}
         >
-          {isSubmitting ? "Signing In..." : "Next"}
+          {isSubmitting ? "Submitting..." : "Continue"}
         </Button>
       </Box>
     </Box>
+    </>
   );
 };
 

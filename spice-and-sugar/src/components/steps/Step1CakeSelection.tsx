@@ -16,6 +16,7 @@ import Lottie from "lottie-react";
 import animation3 from "../../../public/animations/5.json";
 import animation4 from "../../../public/animations/4.json";
 import animation5 from "../../../public/animations/3.json";
+import Step2FlavorFillingToppingText from "./Step2FlavorFillingToppingText";
 
 const tierAnimations = [
   { tier: 1, animation: animation3 },
@@ -250,6 +251,20 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
             ))}
           </Stack>
         </Box>
+        <Step2FlavorFillingToppingText
+          onBack={() => {}}
+          onNext={() => {}}
+          updateOrder={updateOrder}
+          orderDetails={{
+            cakeType: selectedCakeType,
+            baseFlavor: "",
+            filling: [],
+            toppings: [],
+            price,
+            color: "",
+            customText: ""
+          }}
+        />
       </Stack>
       </Box>
     </Box>

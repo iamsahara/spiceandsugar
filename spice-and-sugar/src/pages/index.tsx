@@ -22,8 +22,7 @@ export default function IndexPage() {
   return (
     <div>
       <Hero/>
-      <Header userName={userName || ""}/>
-      <div>
+      {/* <div>
         {!isAuthenticated ? (
           <UserAuth
             onAuthSuccess={(name) => {
@@ -32,7 +31,7 @@ export default function IndexPage() {
             }}
           />
         ) : null}
-      </div>
+      </div> */}
     </div>
   );
 }
