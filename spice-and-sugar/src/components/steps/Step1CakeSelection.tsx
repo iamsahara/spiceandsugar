@@ -9,7 +9,8 @@ import {
   FormControl,
   Select,
   MenuItem,
-  Grid,
+  InputLabel,
+  OutlinedInput,
 } from "@mui/material";
 import Lottie from "lottie-react";
 import animation3 from "../../../public/animations/5.json";
@@ -97,31 +98,17 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
   return (
-    <Box sx={{
-      minHeight: "800px",
-      p: 3,
-      // backgroundColor: "rgba(255,255,255,0.3)",
-      // backdropFilter: "blur(12px)",
-      borderRadius: "20px",
-      boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-      mx: "auto",
-      textAlign: "center",
-    }}>
-      <Grid container spacing={2} alignItems="center" direction="column">
-        <Grid item xs={4}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontSize: "1.15rem",
-              fontWeight: "bold",
-              color: "var( --secondary-color)",
-            }}
-          >
-            ① 
-          </Typography>
-        </Grid>
-        <Grid item xs={8}>
-          <Stack direction="row" spacing={3}>
+    <Box sx={{ position: "relative", overflow: "hidden" }}>
+      <Box sx={{
+        minHeight: "500px",
+        p: 3,
+        borderRadius: "20px",
+        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+        textAlign: "center",
+      }}>
+      <Stack spacing={1} alignItems="center">
+        <Box>
+          <Stack direction="row" spacing={1}>
             {["Sponge Cake", "Butter Cake", "Fondant Cake"].map((type) => (
               <Card
                 key={type}
@@ -131,7 +118,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
                   borderRadius: "8px",
                   border:
                     selectedCakeType === type
-                      ? "2px solid var( --secondary-color)"
+                      ? "2px solid var(--secondary-color)"
                       : "2px solid #E0E0E0",
                   cursor: "pointer",
                   transition: "all 0.3s",
@@ -164,31 +151,33 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               </Card>
             ))}
           </Stack>
-        </Grid>
+        </Box>
 
-        <Grid item xs={4}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontSize: "1.15rem",
-              fontWeight: "bold",
-              color: "var( --secondary-color)",
-            }}
-          >
-            ② 
-          </Typography>
-        </Grid>
-        <Grid item xs={8}>
-          <FormControl sx={{ width: "280px" }}>
+        <Box>
+          <FormControl sx={{ m: 1, width: 300 }}>
+            <InputLabel id="weight-label">Weight</InputLabel>
             <Select
+              labelId="weight-label"
               value={selectedWeight}
               onChange={(e) => setSelectedWeight(e.target.value as number)}
-              sx={{
-                fontSize: "0.8rem",
-                fontWeight: "bold",
-                borderRadius: 2,
-                bgcolor: "rgba(255,255,255,0.3)",
-                backdropFilter: "blur(1px)",
+              input={<OutlinedInput label="Weight" />}
+              MenuProps={{
+                disablePortal: true,
+                anchorOrigin: {
+                  vertical: "bottom",
+                  horizontal: "left",
+                },
+                transformOrigin: {
+                  vertical: "top",
+                  horizontal: "left",
+                },
+                PaperProps: {
+                  style: {
+                    maxHeight: 200,
+                    overflowY: "auto",
+                    zIndex: 1300,
+                  },
+                },
               }}
             >
               {weightOptions.map(({ weight, serves }) => (
@@ -198,30 +187,34 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               ))}
             </Select>
           </FormControl>
-        </Grid>
-        <Grid item xs={4}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontSize: "1.15rem",
-              fontWeight: "bold",
-              color: "var( --secondary-color)",
-            }}
-          >
-            ③ 
-          </Typography>
-        </Grid>
-        <Grid item xs={8}>
-          <FormControl sx={{ width: "280px" }}>
+        </Box>
+        <Box>
+          <FormControl sx={{ m: 1, width: 300 }}>
+            <InputLabel id="shape-label">Shape</InputLabel>
             <Select
+              labelId="shape-label"
               value={selectedShape}
-              onChange={(e) => setSelectedShape(e.target.value as "Square" | "Round" | "Heart" | "Rectangle")}
-              sx={{
-                fontSize: "0.8rem",
-                fontWeight: "bold",
-                borderRadius: 2,
-                bgcolor: "rgba(255,255,255,0.3)",
-                backdropFilter: "blur(1px)",
+              onChange={(e) =>
+                setSelectedShape(e.target.value as "Square" | "Round" | "Heart" | "Rectangle")
+              }
+              input={<OutlinedInput label="Shape" />}
+              MenuProps={{
+                disablePortal: true,
+                anchorOrigin: {
+                  vertical: "bottom",
+                  horizontal: "left",
+                },
+                transformOrigin: {
+                  vertical: "top",
+                  horizontal: "left",
+                },
+                PaperProps: {
+                  style: {
+                    maxHeight: 200,
+                    overflowY: "auto",
+                    zIndex: 1300,
+                  },
+                },
               }}
             >
               {availableShapes.map((shape) => (
@@ -231,49 +224,34 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               ))}
             </Select>
           </FormControl>
-        </Grid>
-
-        <Grid item xs={4}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontSize: "1.15rem",
-              fontWeight: "bold",
-              color: "var( --secondary-color)",
-            }}
-          >
-            ④
-          </Typography>
-        </Grid>
-        <Grid item xs={8}>
-        <Stack direction="row" spacing={3}>
-          {tierAnimations.map(({ tier, animation }) => (
-            <Box key={tier} textAlign="center" onClick={() => setCakeTiers(tier)} sx={{ cursor: "pointer" }}>
-              <Lottie animationData={animation} style={{ width: 100, height: 100 }}  />
-              <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" }} />
-            <Box
-              key={tier}
-              textAlign="center"
-              onClick={() => setCakeTiers(tier)}
-              sx={{
-                cursor: "pointer",
-                border:
-                  cakeTiers === tier
-                    ? "2px solid var(--secondary-color)"
-                    : "2px solid #E0E0E0",
-                borderRadius: "8px",
-                padding: "8px",
-              }}
-            >
-              <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" }}>
-                Tier {tier}
-              </Typography>
-            </Box>
-            </Box>
-          ))}
-        </Stack>
-        </Grid>
-      </Grid>
+        </Box>
+        <Box>
+          <Stack direction="row" spacing={1}>
+            {tierAnimations.map(({ tier, animation }) => (
+              <Box
+                key={tier}
+                textAlign="center"
+                onClick={() => setCakeTiers(tier)}
+                sx={{
+                  cursor: "pointer",
+                  border:
+                    cakeTiers === tier
+                      ? "2px solid var(--secondary-color)"
+                      : "2px solid #E0E0E0",
+                  borderRadius: "8px",
+                  padding: "2px",
+                }}
+              >
+                <Lottie animationData={animation} style={{ width: 100, height: 100 }} />
+                <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" }}>
+                  Tier {tier}
+                </Typography>
+              </Box>
+            ))}
+          </Stack>
+        </Box>
+      </Stack>
+      </Box>
     </Box>
   );
 };
