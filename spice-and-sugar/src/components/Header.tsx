@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import welcomeAnimation from "../../public/animations/2.json";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 interface HeaderProps {
   userName?: string;
@@ -71,22 +72,35 @@ export default function Header({ userName }: HeaderProps) {
         <Box>
           <Lottie options={defaultOptions} height={70} width={70} />
         </Box>
-        <Button
-          href="/"
-          variant="outlined"
-          size="small"
-          sx={{
-            fontWeight: "bold",
-            borderColor: "#6D6875",
-            color: "#6D6875",
-            whiteSpace: "nowrap",
-            "&:hover": {
-              backgroundColor: "#6D687520",
-            },
-          }}
+        <motion.div
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          transition={{ type: "spring", stiffness: 300 }}
         >
-          Home
-        </Button>
+          <Button
+            href="/"
+            variant="contained"
+            size="medium"
+            sx={{
+              minWidth: "48px",
+              background: "var(--secondary-color)",
+              color: "#fff",
+              fontWeight: "600",
+              fontFamily: '"Poppins", sans-serif',
+              textTransform: "none",
+              borderRadius: "50%",
+              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+              transition: "all 0.3s ease",
+              padding: "10px",
+              "&:hover": {
+                backgroundColor: "var(--secondary-color)",
+                transform: "scale(1.05)",
+                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.2)",
+              },
+            }}
+          >
+            <HomeRoundedIcon fontSize="medium" />
+          </Button>
+        </motion.div>
       </Stack>
     </Container>
   );

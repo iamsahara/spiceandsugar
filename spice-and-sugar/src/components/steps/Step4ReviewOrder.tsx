@@ -275,9 +275,25 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
           component={Link}
           href="tel:+14379811399"
           variant="outlined"
-          color="success"
+          sx={{
+            border: "2px solid var(--secondary-color)",
+            color: "var(--secondary-color)",
+            backgroundColor: "rgba(255, 255, 255, 0.25)",
+            fontWeight: "bold",
+            px: 3,
+            py: 1.25,
+            borderRadius: "10px",
+            backdropFilter: "blur(6px)",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              backgroundColor: "var(--secondary-color)",
+              color: "#fff",
+              boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
+            },
+          }}
         >
-          <PhoneIcon /> Call to Complete Order
+          <PhoneIcon sx={{ mr: 1 }} /> Call to Complete Order
         </Button>
 
         <Button variant="text" onClick={onBack} sx={{

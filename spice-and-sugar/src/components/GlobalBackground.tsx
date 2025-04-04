@@ -28,7 +28,7 @@ export default function GlobalBackground() {
     <Box
       sx={{
         position: "fixed",
-        top: "3rem",
+        top: "4rem",
         bottom:"8rem",
         left: 0,
         zIndex: -1,
@@ -47,10 +47,10 @@ export default function GlobalBackground() {
             position: "absolute",
             width: "100%",
             height: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
+            objectFit: "contain",
+            objectPosition: "bottom",
             opacity: index === currentIndex ? 1 : 0,
-            transition: "opacity 2s ease-in-out",
+            transition: "opacity 1s ease-in-out",
             zIndex: 0,
             filter: "brightness(0.8) saturate(1.1)",
           }}

@@ -50,8 +50,15 @@ export default function Hero() {
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2} alignItems="center">
             <Button
               variant="contained"
-              color="secondary"
-              sx={{ fontWeight: "bold", px: 4, py: 1.5 }}
+              sx={{
+                fontWeight: "bold",
+                px: 4,
+                py: 1.5,
+                backgroundColor: "var(--primary-color)",
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                },
+              }}
               href="tel:16473798489"
             >
               Call Us Now
