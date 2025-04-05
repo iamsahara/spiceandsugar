@@ -9,13 +9,12 @@ const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
 const defaultOptions = {
   loop: true,
-  // autoplay: true,
-  // animationData: require("../path/to/your/animation.json"),
+  autoplay: true,
+  animationData: require("../../public/animations/2.json"),
   rendererSettings: {
     preserveAspectRatio: "xMidYMid slice",
   },
 };
-
 
 const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
   const [user, setUser] = useState({ name: "", email: "", phone: "" });
@@ -66,48 +65,50 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        px: 1,
-        py: 1,
-        mt:6,
-        backgroundColor: "transparent",
-      }}
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center", overflow:"hidden" }}
     >
       <Box
         sx={{
-          width: "100%",
-          maxWidth: "30rem",
-          maxHeight:"30rem",  
-          p: 4,
+          position:"absolute",
+          Width: "30rem",
+          maxHeight: "30rem",
+          display: "flex",
+          flexDirection: "column",
+          alignContent:"center",
+          justifyContent:"center",
+          gap: 1,
+          p: 2,
+          mt:"7rem",
           borderRadius: "20px",
           backgroundColor: "rgba(255, 255, 255, 0.25)",
           backdropFilter: "blur(10px)",
           border: "1px solid rgba(255, 255, 255, 0.3)",
           boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
         }}
       >
-            {/* <Box>
-          <Lottie options={defaultOptions} height={70} width={70} />
-        </Box> */}
-        <Typography
-          variant="h5"
-          fontWeight="bold"
+        <Box
           sx={{
-            color: "var(--primary-color)",
-            textAlign: "center",
-            mb: 3,
-            fontFamily: '"Poppins", sans-serif',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
           }}
         >
-          Enter Your Details!
-        </Typography>
+          <Lottie options={defaultOptions} height={90} width={120} />
+
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            sx={{
+              color: "var(--primary-color)",
+              textAlign: "center",
+              mb: 3,
+              fontFamily: '"Poppins", sans-serif',
+            }}
+          >
+            Start Your Cake Journey Here!
+          </Typography>
+        </Box>
         <TextField
           fullWidth
           label="Name"
@@ -144,16 +145,21 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         )}
 
         <Button
-          fullWidth
           variant="contained"
           onClick={handleGuestSignIn}
           disabled={isSubmitting}
           sx={{
-            py: 1.5,
             fontWeight: "bold",
-            backgroundColor: "var(--secondary-color)",
+            px: 5,
+            py: 1.5,
+            borderRadius: "999px",
+            background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+            color: "#fff",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            transition: "all 0.3s ease",
             "&:hover": {
-              backgroundColor: "var(--secondary-color-hover)",
+              background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
             },
           }}
         >
@@ -161,10 +167,8 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         </Button>
       </Box>
     </Box>
- 
   );
 };
 
 export default UserAuth;
 import dynamic from "next/dynamic";
-

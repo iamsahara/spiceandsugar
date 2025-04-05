@@ -23,12 +23,12 @@ export default function Header({ userName }: HeaderProps) {
         top: 0,
         left: 0,
         right: 0,
-        zIndex: -1,
+        zIndex: 1000,
         background: "transparent",
         boxShadow: "none",
         borderRadius: 0,
         backdropFilter: "none",
-        pointerEvents: "none", // so it doesn't block interaction with hero
+        pointerEvents: "none", 
       }}
     >
       <Stack direction="row" alignItems="center" spacing={2} sx={{ pointerEvents: "auto", px: 2, py: 1 }}>
@@ -82,7 +82,7 @@ export default function Header({ userName }: HeaderProps) {
             sx={{
               minWidth: "48px",
               background: "#fff0f5",
-              color: "#d63384",
+              color: "var(--primary-color)",
               fontWeight: "600",
               fontFamily: '"Poppins", sans-serif',
               textTransform: "none",
