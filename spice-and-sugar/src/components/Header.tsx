@@ -23,7 +23,7 @@ export default function Header({ userName }: HeaderProps) {
         top: 0,
         left: 0,
         right: 0,
-        zIndex: 100,
+        zIndex: -1,
         background: "transparent",
         boxShadow: "none",
         borderRadius: 0,

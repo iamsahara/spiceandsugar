@@ -176,7 +176,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orde
           multiple
           value={selectedToppings}
           onChange={(e) => setSelectedToppings(e.target.value as string[])}
-          label="⑦ Topping (+$7.99)"
+          label=" Topping (+$7.99)"
           renderValue={(selected) => (
             <Stack direction="row" spacing={2} flexWrap="wrap">
               {selected.map((topping) => (

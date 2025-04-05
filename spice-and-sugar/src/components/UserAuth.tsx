@@ -2,7 +2,6 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
 }
@@ -10,8 +9,8 @@ const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
 const defaultOptions = {
   loop: true,
-  autoplay: true,
-  animationData: require("../path/to/your/animation.json"),
+  // autoplay: true,
+  // animationData: require("../path/to/your/animation.json"),
   rendererSettings: {
     preserveAspectRatio: "xMidYMid slice",
   },
@@ -59,7 +58,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
       router.push("/cakeOrder");
     } catch (error) {
       console.error("❌ Error saving user:", error);
-      setErrorMessage("Failed to sign in. Please try again.");
+      setErrorMessage("Failed to sign in. Pleay again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -94,9 +93,9 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           gap: 2,
         }}
       >
-            <Box>
+            {/* <Box>
           <Lottie options={defaultOptions} height={70} width={70} />
-        </Box>
+        </Box> */}
         <Typography
           variant="h5"
           fontWeight="bold"
