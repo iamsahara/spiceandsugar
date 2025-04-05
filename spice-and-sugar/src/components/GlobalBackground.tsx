@@ -27,14 +27,16 @@ export default function GlobalBackground() {
   return (
     <Box
       sx={{
+        display:"flex",
         background: 'url("/output (2).jpg")',
-        position: "fixed",
-        top: "2.8rem",
-        bottom: "1rem",
-        left: 0,
+        position: "absolute",
+    backgroundSize:"cover",
+  backgRoundposition: "center",
+  // backgroundRepeat:"repeat",
+     
         zIndex: -1,
         width: "100%",
-        height: "100vh",
+        height: "100%",
         overflow: "hidden",
       }}
     >

@@ -12,23 +12,26 @@ interface HeaderProps {
 
 export default function Header({ userName }: HeaderProps) {
   return (
-    <Container
-      maxWidth="lg"
+    <Box
       sx={{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        background: "rgba(255, 255, 255, 0.05)",
-        backdropFilter: "blur(20px)",
+        px: 0,
+        py: 0,
+        position: "absolute",
         top: 0,
+        left: 0,
+        right: 0,
         zIndex: 100,
-        borderRadius: "0 0 20px 20px",
-        boxShadow: "0 10px 25px rgba(0, 0, 0, 0.15)",
-        px: 3,
-        py: 2,
+        background: "transparent",
+        boxShadow: "none",
+        borderRadius: 0,
+        backdropFilter: "none",
+        pointerEvents: "none", // so it doesn't block interaction with hero
       }}
     >
-      <Stack direction="row" alignItems="center" spacing={2}>
+      <Stack direction="row" alignItems="center" spacing={2} sx={{ pointerEvents: "auto", px: 2, py: 1 }}>
         <motion.div
           initial={{ rotate: 0 }}
           animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.1, 1.05, 1] }}
@@ -45,7 +48,7 @@ export default function Header({ userName }: HeaderProps) {
             boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <Image src="/veloralogo.png" alt="Velora" width={80} height={80} />
+          <Image src="/veloralogo.png" alt="Velora" width={70} height={70} />
         </motion.div>
 
         {/* <Typography
@@ -66,7 +69,7 @@ export default function Header({ userName }: HeaderProps) {
         </Typography> */}
       </Stack>
 
-      <Stack direction="row" alignItems="center" spacing={2}>
+      <Stack direction="row" alignItems="center" spacing={2} sx={{ pointerEvents: "auto", px: 2, py: 1 }}>
     
         <motion.div
           whileHover={{ scale: 1.1, rotate: 5 }}
@@ -98,6 +101,6 @@ export default function Header({ userName }: HeaderProps) {
           </Button>
         </motion.div>
       </Stack>
-    </Container>
+    </Box>
   );
 }

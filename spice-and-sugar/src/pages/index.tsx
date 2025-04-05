@@ -1,10 +1,12 @@
 "use client";
 import Hero from "@/components/Hero";
+import Header from "@/components/Header";
 
 export default function IndexPage() {
   return (
     <div>
-      <Hero />
+<Header/>
+<Hero/>
     </div>
   );
 }

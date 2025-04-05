@@ -19,24 +19,24 @@ export default function Hero() {
     <Box
       id="Hero"
       sx={{
-        height: "90vh",
+        marginTop: "auto",
         width: "100%",
      
       }}
     >
-      <GlobalBackground />
       <Box
       sx={{
           position: "relative",
           zIndex: 2,
-          height: "100%",
+          // height: "100%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          justifyItems:"center",
           color: "#fff",
           textAlign: "center",
-          px: { xs: 4, sm: 6, md: 12 },
+          mx: { ms: 4, sm: 6, md: 12 },
         }}
       >
         <Box sx={{ fontSize: "3rem", fontWeight: 700 }}>
