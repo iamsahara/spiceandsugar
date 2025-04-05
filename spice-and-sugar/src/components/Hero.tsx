@@ -15,14 +15,13 @@ const photosList = [
 ];
 
 export default function Hero() {
-
   return (
     <Box
       id="Hero"
       sx={{
         height: "90vh",
         width: "100%",
-
+     
       }}
     >
       <GlobalBackground />

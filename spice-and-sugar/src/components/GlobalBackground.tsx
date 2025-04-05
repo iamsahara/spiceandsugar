@@ -11,7 +11,7 @@ const photosList = [
   "/IMG_6087.JPG",
   "/IMG_6084.JPG",
   "/IMG_6079.JPG",
-  "/IMG_6091.JPG"
+  "/IMG_6091.JPG",
 ];
 
 export default function GlobalBackground() {
@@ -27,9 +27,10 @@ export default function GlobalBackground() {
   return (
     <Box
       sx={{
+        background: 'url("/output (2).jpg")',
         position: "fixed",
-        top: "4rem",
-        bottom:"8rem",
+        top: "2.8rem",
+        bottom: "1rem",
         left: 0,
         zIndex: -1,
         width: "100%",
@@ -48,11 +49,11 @@ export default function GlobalBackground() {
             width: "100%",
             height: "100%",
             objectFit: "contain",
-            objectPosition: "bottom",
+            objectPosition: "center",
             opacity: index === currentIndex ? 1 : 0,
             transition: "opacity 1s ease-in-out",
             zIndex: 0,
-            filter: "brightness(0.8) saturate(1.1)",
+            filter: "brightness(1) saturate(1.1)",
           }}
         />
       ))}
@@ -63,7 +64,8 @@ export default function GlobalBackground() {
           left: 0,
           width: "100%",
           height: "100%",
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6))",
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6))",
           zIndex: 1,
         }}
       />

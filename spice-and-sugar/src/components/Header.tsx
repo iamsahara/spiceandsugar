@@ -10,17 +10,6 @@ interface HeaderProps {
   userName?: string;
 }
 
-const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
-
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: welcomeAnimation,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
-
 export default function Header({ userName }: HeaderProps) {
   return (
     <Container
@@ -29,25 +18,34 @@ export default function Header({ userName }: HeaderProps) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor:"rgba(255,255,255,0.8)",
-        background:"transparent",
-        backdropFilter:"blur(12px)",
-        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)",
+        background: "rgba(255, 255, 255, 0.05)",
+        backdropFilter: "blur(20px)",
         top: 0,
         zIndex: 100,
-        borderRadius: "0 0 12px 12px",
+        borderRadius: "0 0 20px 20px",
+        boxShadow: "0 10px 25px rgba(0, 0, 0, 0.15)",
+        px: 3,
+        py: 2,
       }}
     >
       <Stack direction="row" alignItems="center" spacing={2}>
         <motion.div
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.4 }}
+          initial={{ rotate: 0 }}
+          animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.1, 1.05, 1] }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "easeInOut",
+          }}
           style={{
             borderRadius: "50%",
-            padding: "0",
+            padding: "4px",
+            background: "rgba(255, 255, 255, 0.3)",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <Image src="/veloralogo.png" alt="Velora" width={50} height={50} />
+          <Image src="/veloralogo.png" alt="Velora" width={80} height={80} />
         </motion.div>
 
         {/* <Typography
@@ -69,9 +67,7 @@ export default function Header({ userName }: HeaderProps) {
       </Stack>
 
       <Stack direction="row" alignItems="center" spacing={2}>
-        <Box>
-          <Lottie options={defaultOptions} height={70} width={70} />
-        </Box>
+    
         <motion.div
           whileHover={{ scale: 1.1, rotate: 5 }}
           transition={{ type: "spring", stiffness: 300 }}
@@ -82,19 +78,19 @@ export default function Header({ userName }: HeaderProps) {
             size="medium"
             sx={{
               minWidth: "48px",
-              background: "var(--secondary-color)",
-              color: "#fff",
+              background: "#fff0f5",
+              color: "#d63384",
               fontWeight: "600",
               fontFamily: '"Poppins", sans-serif',
               textTransform: "none",
               borderRadius: "50%",
-              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.1)",
               transition: "all 0.3s ease",
               padding: "10px",
               "&:hover": {
-                backgroundColor: "var(--secondary-color)",
+                backgroundColor: "#f8d7e8",
                 transform: "scale(1.05)",
-                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.2)",
+                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
               },
             }}
           >

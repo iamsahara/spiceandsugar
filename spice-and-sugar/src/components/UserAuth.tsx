@@ -1,11 +1,22 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Header from "./Header";
+
 
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
 }
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: require("../path/to/your/animation.json"),
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
 
 const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
   const [user, setUser] = useState({ name: "", email: "", phone: "" });
@@ -55,7 +66,6 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
   };
 
   return (
- 
     <Box
       sx={{
         display: "flex",
@@ -63,10 +73,8 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         alignItems: "center",
         justifyContent: "center",
         px: 1,
-        py: 2,
-        maxWidth: "50rem",
-        maxHeight:"50rem",
-
+        py: 1,
+        mt:6,
         backgroundColor: "transparent",
       }}
     >
@@ -86,17 +94,20 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           gap: 2,
         }}
       >
+            <Box>
+          <Lottie options={defaultOptions} height={70} width={70} />
+        </Box>
         <Typography
           variant="h5"
           fontWeight="bold"
           sx={{
-            color: "var(--secondary-color)",
+            color: "var(--primary-color)",
             textAlign: "center",
             mb: 3,
             fontFamily: '"Poppins", sans-serif',
           }}
         >
-          Your Details!
+          Enter Your Details!
         </Typography>
         <TextField
           fullWidth
@@ -151,7 +162,10 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         </Button>
       </Box>
     </Box>
+ 
   );
 };
 
 export default UserAuth;
+import dynamic from "next/dynamic";
+
