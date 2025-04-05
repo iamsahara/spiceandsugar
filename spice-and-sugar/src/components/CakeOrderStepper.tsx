@@ -79,11 +79,11 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   const handleBack = (): void => {
     setActiveStep((prevStep) => {
       const nextStep = prevStep - 1;
-  
+
       if (nextStep === 0) {
-        router.push("/login"); 
+        router.push("/login");
       }
-  
+
       return nextStep;
     });
   };
@@ -122,10 +122,24 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
 
   return (
     <Box
-      sx={{
-        width: "100%",
-        textAlign: "center",
-        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+    sx={{
+      position: "absolute",
+      top: "7rem",
+      left: "50%",
+      transform: "translateX(-50%)",
+      width: "30rem",
+      maxHeight: "30rem",
+      display: "flex",
+      flexDirection: "column",
+      alignContent: "center",
+      justifyContent: "center",
+      gap: 1,
+      p: 2,
+      borderRadius: "20px",
+      backgroundColor: "rgba(255, 255, 255, 0.25)",
+      backdropFilter: "blur(10px)",
+      border: "1px solid rgba(255, 255, 255, 0.3)",
+      boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
       }}
     >
       <Stepper
@@ -134,17 +148,16 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         connector={<CustomConnector />}
         sx={{
           position: "sticky",
-          // top: 0,
           zIndex: 10,
-          // backgroundColor: "rgba(255, 255, 255, 0.4)",
           backdropFilter: "blur(5px)",
           padding: "1.5rem",
           borderRadius: "1rem",
           boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
           display: "flex",
           justifyContent: "center",
+          alignSelf: "center",
           alignItems: "center",
-          flexWrap: "wrap",
+        
           gap: 1,
         }}
       >
@@ -178,7 +191,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           Total: ${orderDetails.price.toFixed(2)}
         </Box>
       </Stepper>
-
       <Box
         sx={{
           display: "flex",
@@ -186,13 +198,14 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           alignItems: "center",
           width: "100%",
           overflow: "auto",
-          height: "30rem",
+          height: "25rem",
+          alignittems: "center",
+          justifyItems: "center",
+
+     
         }}
       >
-        <Box sx={{ mt: "auto", width: "100%" }}>
-          {renderStepContent(activeStep)}
-        </Box>
-
+        <Box sx={{ width: "100%" }}>{renderStepContent(activeStep)}</Box>
         {activeStep !== 1 && (
           <Box
             sx={{
@@ -205,8 +218,15 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           ></Box>
         )}
       </Box>
-      <Box sx={{display:"flex", flexDirection:"row", justifyContent:"center", gap:"15rem"}}>
-      <Button
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          mt: "2rem",
+        }}
+      >
+        {/* <Button
         variant="contained"
         color="secondary"
         disabled={activeStep === 0}
@@ -216,29 +236,28 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           fontSize: "0.95rem",
           fontWeight: "bold",
           px: 2,
-          py: 1,
+          my: 1,
           bgcolor: "var(--secondary-color)",
           "&:hover": { bgcolor: "#E91E63" },
         }}
       >
         Back
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleNext}
-        sx={{
-          fontFamily: '"Poppins", sans-serif',
-          fontSize: "0.95rem",
-          fontWeight: "bold",
-          px: 2,
-          py: 1,
-          bgcolor: "var(--primary-color)",
-          "&:hover": { bgcolor: "var(--primary-color)" },
-        }}
-      >
-        {activeStep === steps.length - 1 ? "Finish" : "Next"}
-      </Button> 
+      </Button> */}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleNext}
+          sx={{
+            fontFamily: '"Poppins", sans-serif',
+            fontSize: "0.95rem",
+            fontWeight: "bold",
+            width: "11rem",
+            bgcolor: "var(--primary-color)",
+            "&:hover": { bgcolor: "var(--primary-color)" },
+          }}
+        >
+          {activeStep === steps.length - 1 ? "Finish" : "Next"}
+        </Button>
       </Box>
     </Box>
   );

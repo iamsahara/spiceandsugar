@@ -99,7 +99,11 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
   return (
-    <Box sx={{ position: "relative", height:"400px", mt:"3rem" }}>
+  
+    <Box sx={{   display: "flex",
+      flexDirection: "column",
+      justifyContent: "center", position: "relative",width:"400px", height:"800px", mt:"3rem",pt:"1rem", backgroundColor: "rgba(255, 255, 255, 0.3)", 
+      backdropFilter: "blur(10px)" }}>
       <Stack spacing={1} alignItems="center">
         <Box
           sx={{
@@ -244,7 +248,9 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
           }}
         />
       </Stack>
+
     </Box>
+ 
   );
 };
 

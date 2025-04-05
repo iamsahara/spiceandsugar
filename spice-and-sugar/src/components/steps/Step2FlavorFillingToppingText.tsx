@@ -107,7 +107,8 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orde
         display:"flex",
         flexDirection:"column",
         justifyContent:"center",
-        alignItems:"center"
+        alignItems:"center",
+        
       }}
     >
       <FormControl fullWidth variant="outlined" sx={{
