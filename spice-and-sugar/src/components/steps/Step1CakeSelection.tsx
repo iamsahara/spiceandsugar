@@ -17,6 +17,7 @@ import animation3 from "../../../public/animations/5.json";
 import animation4 from "../../../public/animations/4.json";
 import animation5 from "../../../public/animations/3.json";
 import Step2FlavorFillingToppingText from "./Step2FlavorFillingToppingText";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
 const tierAnimations = [
   { tier: 1, animation: animation3 },
@@ -99,11 +100,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
   return (
-  
-    <Box sx={{   display: "flex",
-      flexDirection: "column",
-      justifyContent: "center", position: "relative",width:"400px", height:"800px", mt:"3rem",pt:"1rem", backgroundColor: "rgba(255, 255, 255, 0.3)", 
-      backdropFilter: "blur(10px)" }}>
+    <Box className="step1-wrapper" sx={{ display: "flex", width:"100%", flexDirection: "column", justifyContent: "center", position: "relative", height:"900px" }}>
       <Stack spacing={1} alignItems="center">
         <Box
           sx={{
@@ -249,6 +246,19 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         />
       </Stack>
 
+      <Box
+        sx={{
+          position: "absolute",
+          top: "6%",
+          left: "95%",
+          transform: "translateX(-90%)",
+          zIndex: 5,
+          opacity: 0.8,
+          animation: "bounce 2s infinite",
+        }}
+      >
+        <KeyboardArrowDownRoundedIcon sx={{ fontSize: 36, color: "#6D6875" }} />
+      </Box>
     </Box>
  
   );
