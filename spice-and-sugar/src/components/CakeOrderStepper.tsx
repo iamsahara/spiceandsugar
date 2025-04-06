@@ -4,8 +4,6 @@ import {
   Box,
   Button,
   Stepper,
-  Step,
-  StepLabel,
   Typography,
   StepConnector,
 } from "@mui/material";
