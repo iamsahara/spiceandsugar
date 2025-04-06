@@ -100,7 +100,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
             variant="h6"
             fontWeight="bold"
             sx={{
-              color: "var(--primary-color)",
+              color: "var(--text-color)",
               textAlign: "center",
               mb: 3,
               fontFamily: '"Poppins", sans-serif',

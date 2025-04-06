@@ -161,8 +161,8 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           gap: 1,
         }}
       >
-        <Typography sx={{ color: "var(--primary-color)", fontWeight: "800" }}>
-          Select and Checkout!{" "}
+        <Typography sx={{color: "var(--text-color)", fontWeight: "800" }}>
+        Add the Yum & Go!{" "}
         </Typography>
         {/* {steps.map((label, index) => (
           <Step key={index} sx={{ flex: 0.5 }}>
