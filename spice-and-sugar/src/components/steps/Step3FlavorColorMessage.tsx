@@ -1,122 +1,122 @@
-// "use client";
-// import { useState, useEffect } from "react";
-// import {
-//   Box,
-//   Typography,
-//   Stack,
-//   TextField,
-//   Select,
-//   MenuItem,
-//   FormControl,
-//   InputLabel,
-// } from "@mui/material";
+"use client";
+import { useState, useEffect } from "react";
+import {
+  Box,
+  Typography,
+  Stack,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 
-// interface Step3Props {
-//   onBack: () => void;
-//   onNext: () => void;
-//   updateOrder: (
-//     updatedData: Partial<{ color?: string; customText: string }>
-//   ) => void;
-//   orderDetails: { cakeType: string; color?: string; customText: string };
-// }
+interface Step3Props {
+  onBack: () => void;
+  onNext: () => void;
+  updateOrder: (
+    updatedData: Partial<{ color?: string; customText: string }>
+  ) => void;
+  orderDetails: { cakeType: string; color?: string; customText: string };
+}
 
-// const cakeColorOptions = [
-//   "White",
-//   "Red",
-//   "Blue",
-//   "Green",
-//   "Pink",
-//   "Yellow",
-//   "Orange",
-//   "Purple",
-//   "Brown",
-// ];
+const cakeColorOptions = [
+  "White",
+  "Red",
+  "Blue",
+  "Green",
+  "Pink",
+  "Yellow",
+  "Orange",
+  "Purple",
+  "Brown",
+];
 
-// const Step3FlavorColorMessage: React.FC<Step3Props> = ({
-//   updateOrder,
-//   orderDetails,
-// }) => {
-//   const [selectedColor, setSelectedColor] = useState(
-//     orderDetails.color || "White"
-//   ); 
-//   const [customText, setCustomText] = useState(orderDetails.customText || "");
+const Step3FlavorColorMessage: React.FC<Step3Props> = ({
+  updateOrder,
+  orderDetails,
+}) => {
+  const [selectedColor, setSelectedColor] = useState(
+    orderDetails.color || "White"
+  ); 
+  const [customText, setCustomText] = useState(orderDetails.customText || "");
 
-//   useEffect(() => {
-//     updateOrder({ color: selectedColor, customText });
-//   }, [selectedColor, customText]);
+  useEffect(() => {
+    updateOrder({ color: selectedColor, customText });
+  }, [selectedColor, customText]);
 
-//   return (
-//     <Box
-//       sx={{
-//         width: "95%",
-//         minHeight: "800px",
-//         p: 3,
-//         // backgroundColor: "rgba(255,255,255,0.3)",
-//         // backdropFilter: "blur(12px)",
-//         borderRadius: "20px",
-//         boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-//         mx: "auto",
-//       }}
-//     >
-//       {orderDetails.cakeType === "Butter Cake" && (
-//         <Stack direction="column" alignItems="left" spacing={1} mb={2}>
-//           <Typography
-//             variant="h6"
-//             sx={{
-//               fontSize: "1.15rem",
-//               fontWeight: "bold",
-//               color: "var( --secondary-color)",
-//               textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
-//             }}
-//           >
-//             ⑧ Color
-//           </Typography>
-//           <FormControl sx={{ minWidth: 140 }}>
-//             <InputLabel>Select a Color</InputLabel>
-//             <Select
-//               value={selectedColor}
-//               onChange={(e) => setSelectedColor(e.target.value)}
-//             >
-//               {cakeColorOptions.map((color) => (
-//                 <MenuItem key={color} value={color}>
-//                   {color}
-//                 </MenuItem>
-//               ))}
-//             </Select>
-//           </FormControl>
-//         </Stack>
-//       )}
+  return (
+    <Box
+      sx={{
+        width: "95%",
+        minHeight: "800px",
+        p: 3,
+        // backgroundColor: "rgba(255,255,255,0.3)",
+        // backdropFilter: "blur(12px)",
+        borderRadius: "20px",
+        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+        mx: "auto",
+      }}
+    >
+      {orderDetails.cakeType === "Butter Cake" && (
+        <Stack direction="column" alignItems="left" spacing={1} mb={2}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: "1.15rem",
+              fontWeight: "bold",
+              color: "var( --secondary-color)",
+              textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
+            }}
+          >
+         Color
+          </Typography>
+          <FormControl sx={{ minWidth: 140 }}>
+            <InputLabel>Select a Color</InputLabel>
+            <Select
+              value={selectedColor}
+              onChange={(e) => setSelectedColor(e.target.value)}
+            >
+              {cakeColorOptions.map((color) => (
+                <MenuItem key={color} value={color}>
+                  {color}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Stack>
+      )}
 
-//       <Stack direction="column" alignItems="left" spacing={1} mt={2}>
-//         <Typography
-//           variant="h6"
-//           sx={{
-//             fontSize: "1.15rem",
-//             fontWeight: "bold",
-//             color: "var( --secondary-color)",
-//             textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
-//           }}
-//         >
-//           ⑨ Write on Your Cake ✍️
-//         </Typography>
-//         <TextField
-//           fullWidth
-//           variant="outlined"
-//           placeholder="Happy Birthday, Sarah!"
-//           value={customText}
-//           onChange={(e) => setCustomText(e.target.value)}
-//           sx={{
-//             borderRadius: 2,
-//             "& .MuiOutlinedInput-root": {
-//               "& fieldset": { borderColor: "var( --primary-color)" },
-//               "&:hover fieldset": { borderColor: "var( --primary-color)" },
-//               "&.Mui-focused fieldset": { borderColor: "var( --primary-color)" },
-//             },
-//           }}
-//         />
-//       </Stack>
-//     </Box>
-//   );
-// };
+      <Stack direction="column" alignItems="left" spacing={1} mt={2}>
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: "1.15rem",
+            fontWeight: "bold",
+            color: "var( --secondary-color)",
+            textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
+          }}
+        >
+          Write on Your Cake ✍️
+        </Typography>
+        <TextField
+          fullWidth
+          variant="outlined"
+          placeholder="Happy Birthday, Sarah!"
+          value={customText}
+          onChange={(e) => setCustomText(e.target.value)}
+          sx={{
+            borderRadius: 2,
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": { borderColor: "var( --primary-color)" },
+              "&:hover fieldset": { borderColor: "var( --primary-color)" },
+              "&.Mui-focused fieldset": { borderColor: "var( --primary-color)" },
+            },
+          }}
+        />
+      </Stack>
+    </Box>
+  );
+};
 
-// export default Step3FlavorColorMessage;
+export default Step3FlavorColorMessage;

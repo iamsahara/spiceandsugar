@@ -1,117 +1,106 @@
 "use client";
-import { Container, Typography, Box } from "@mui/material";
+import { Container, Typography, Box, Stack, Button } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import welcomeAnimation from "../../public/animations/2.json";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 interface HeaderProps {
   userName?: string;
 }
-const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
-
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: welcomeAnimation,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
 
 export default function Header({ userName }: HeaderProps) {
   return (
-    <Container
-      maxWidth="lg"
+    <Box
       sx={{
-        textAlign: "start",
-        position: "relative",
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignItems: "center",
-        zIndex: 0,
-        margin: 2,
+        px: 0,
+        py: 0,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        background: "transparent",
+        boxShadow: "none",
+        borderRadius: 0,
+        backdropFilter: "none",
+        pointerEvents: "none", 
       }}
     >
-      <Box sx={{ display: { xs: "flex", md: "block" }, justifyContent: "center", alignItems: "center" }}>
+      <Stack direction="row" alignItems="center" spacing={2} sx={{ pointerEvents: "auto", px: 2, py: 1 }}>
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ 
-            opacity: 1, 
-            scale: [1, 1.05, 1], 
-            boxShadow: [
-              "0 0 0px rgba(255,255,255,0)",
-              "0 0 15px rgba(173, 216, 230, 0.6)",
-              "0 0 0px rgba(255,255,255,0)"
-            ]
-          }}
-          exit={{ opacity: 0 }}
+          initial={{ rotate: 0 }}
+          animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.1, 1.05, 1] }}
           transition={{
-            duration: 2,
+            duration: 4,
             repeat: Infinity,
+            repeatType: "loop",
             ease: "easeInOut",
-            opacity: { duration: 3 },
           }}
-          whileHover={{ scale: 1.1, rotate: 2 }}
           style={{
-            position: "fixed",
-            top: "20px",
-            left: "20px",
-            zIndex: 999,
-            borderRadius: "50%"
+            borderRadius: "50%",
+            padding: "4px",
+            background: "rgba(255, 255, 255, 0.3)",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <Image src="/veloralogo.png" alt="Velora" width={100} height={100} />
+          <Image src="/veloralogo.png" alt="Velora" width={70} height={70} />
         </motion.div>
-      </Box>
-      <Box sx={{ mt: { xs: 2, md: 0 }, ml: { md: 4 } }}>
-        <Lottie options={defaultOptions} height={200} width={200} />
-      </Box>
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-      ></motion.div>
-      {userName && (
+
+        {/* <Typography
+          variant="h6"
+          sx={{
+            backgroundColor: "rgba(255, 255, 255, 0.4)",
+            backdropFilter: "blur(4px)",
+            px: 2,
+            py: 0.5,
+            borderRadius: "12px",
+            fontWeight: "bold",
+            color: "#6D6875",
+            fontSize: { xs: "0.85rem", md: "1rem" },
+            fontFamily: '"Poppins", "sans-serif"',
+          }}
+        >
+         5 Minutes to Submit!
+        </Typography> */}
+      </Stack>
+
+      <Stack direction="row" alignItems="center" spacing={2} sx={{ pointerEvents: "auto", px: 2, py: 1 }}>
+    
         <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.6 }}
-        ></motion.div>
-      )}
-      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, alignItems: "center" }}>
-        <Box sx={{ mt: { xs: 4, md: 8 }, ml: { xs: 0, md: 6 } }}>
-          <Typography
-            variant="h5"
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <Button
+            href="/"
+            variant="contained"
+            size="medium"
             sx={{
-              mb: 2,
-              fontWeight: "bold",
-              textAlign: "center",
-              color: "#6D6875",
-              letterSpacing: "1px",
-              fontSize: { xs: "1rem", md: "1.25rem" },
-              fontFamily: '"Poppins", "sans-serif"',
+              minWidth: "48px",
+              background: "#fff0f5",
+              color: "var(--primary-color)",
+              fontWeight: "600",
+              fontFamily: '"Poppins", sans-serif',
+              textTransform: "none",
+              borderRadius: "50%",
+              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease",
+              padding: "10px",
+              "&:hover": {
+                backgroundColor: "#f8d7e8",
+                transform: "scale(1.05)",
+                boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
+              },
             }}
           >
-            call us at{" "}
-            <Box component="span" sx={{
-              color: "#ff69b4",
-              textShadow: "0 0 8px rgba(255, 105, 180, 0.6)",
-              fontWeight: 700,
-              animation: "pulse 2s infinite",
-              "@keyframes pulse": {
-                "0%": { textShadow: "0 0 8px rgba(255, 105, 180, 0.6)" },
-                "50%": { textShadow: "0 0 16px rgba(255, 105, 180, 1)" },
-                "100%": { textShadow: "0 0 8px rgba(255, 105, 180, 0.6)" },
-              }
-            }}>
-              1-647-379-8489
-            </Box>{" "}
-            or take 2 minutes to order your Cake
-          </Typography>
-        </Box>
-      </Box>
-    </Container>
+            <HomeRoundedIcon fontSize="medium" />
+          </Button>
+        </motion.div>
+      </Stack>
+    </Box>
   );
 }

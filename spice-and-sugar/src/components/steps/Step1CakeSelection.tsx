@@ -16,6 +16,8 @@ import Lottie from "lottie-react";
 import animation3 from "../../../public/animations/5.json";
 import animation4 from "../../../public/animations/4.json";
 import animation5 from "../../../public/animations/3.json";
+import Step2FlavorFillingToppingText from "./Step2FlavorFillingToppingText";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
 const tierAnimations = [
   { tier: 1, animation: animation3 },
@@ -26,7 +28,7 @@ const tierAnimations = [
 interface OrderDetails {
   cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
   weight: number;
-  shape: "Square" | "Round"| "Heart"|"Rectangle";
+  shape: "Square" | "Round" | "Heart" | "Rectangle";
   levels: number;
   price: number;
 }
@@ -37,7 +39,7 @@ interface Step1Props {
   orderDetails: {
     cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
     weight: number;
-    shape: "Square" | "Round"| "Heart"|"Rectangle";
+    shape: "Square" | "Round" | "Heart" | "Rectangle";
     levels: number;
     price: number;
   };
@@ -98,16 +100,16 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
   return (
-    <Box sx={{ position: "relative", overflow: "hidden" }}>
-      <Box sx={{
-        minHeight: "500px",
-        p: 3,
-        borderRadius: "20px",
-        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-        textAlign: "center",
-      }}>
+    <Box className="step1-wrapper" sx={{ display: "flex", width:"100%", flexDirection: "column", justifyContent: "center", position: "relative", height:"900px" }}>
       <Stack spacing={1} alignItems="center">
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Stack direction="row" spacing={1}>
             {["Sponge Cake", "Butter Cake", "Fondant Cake"].map((type) => (
               <Card
@@ -153,106 +155,112 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
           </Stack>
         </Box>
 
-        <Box>
-          <FormControl sx={{ m: 1, width: 300 }}>
-            <InputLabel id="weight-label">Weight</InputLabel>
-            <Select
-              labelId="weight-label"
-              value={selectedWeight}
-              onChange={(e) => setSelectedWeight(e.target.value as number)}
-              input={<OutlinedInput label="Weight" />}
-              MenuProps={{
-                disablePortal: true,
-                anchorOrigin: {
-                  vertical: "bottom",
-                  horizontal: "left",
-                },
-                transformOrigin: {
-                  vertical: "top",
-                  horizontal: "left",
-                },
-                PaperProps: {
-                  style: {
-                    maxHeight: 200,
-                    overflowY: "auto",
-                    zIndex: 1300,
-                  },
-                },
-              }}
-            >
-              {weightOptions.map(({ weight, serves }) => (
-                <MenuItem key={weight} value={weight}>
-                  {weight} kg - {serves}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl sx={{ m: 1, width: 300 }}>
-            <InputLabel id="shape-label">Shape</InputLabel>
-            <Select
-              labelId="shape-label"
-              value={selectedShape}
-              onChange={(e) =>
-                setSelectedShape(e.target.value as "Square" | "Round" | "Heart" | "Rectangle")
-              }
-              input={<OutlinedInput label="Shape" />}
-              MenuProps={{
-                disablePortal: true,
-                anchorOrigin: {
-                  vertical: "bottom",
-                  horizontal: "left",
-                },
-                transformOrigin: {
-                  vertical: "top",
-                  horizontal: "left",
-                },
-                PaperProps: {
-                  style: {
-                    maxHeight: 200,
-                    overflowY: "auto",
-                    zIndex: 1300,
-                  },
-                },
-              }}
-            >
-              {availableShapes.map((shape) => (
-                <MenuItem key={shape} value={shape}>
-                  {shape}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box>
-          <Stack direction="row" spacing={1}>
-            {tierAnimations.map(({ tier, animation }) => (
-              <Box
-                key={tier}
-                textAlign="center"
-                onClick={() => setCakeTiers(tier)}
-                sx={{
-                  cursor: "pointer",
-                  border:
-                    cakeTiers === tier
-                      ? "2px solid var(--secondary-color)"
-                      : "2px solid #E0E0E0",
-                  borderRadius: "8px",
-                  padding: "2px",
-                }}
-              >
-                <Lottie animationData={animation} style={{ width: 100, height: 100 }} />
-                <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" }}>
-                  Tier {tier}
-                </Typography>
-              </Box>
+        <FormControl
+          sx={{
+            mt:0,
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backdropFilter: "blur(8px)",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+          }}
+        >
+          <InputLabel id="weight-label">Weight</InputLabel>
+          <Select
+            labelId="weight-label"
+            value={selectedWeight}
+            onChange={(e) => setSelectedWeight(e.target.value as number)}
+            input={<OutlinedInput label="Weight" />}
+          >
+            {weightOptions.map(({ weight, serves }) => (
+              <MenuItem key={weight} value={weight}>
+                {weight} kg - {serves}
+              </MenuItem>
             ))}
-          </Stack>
-        </Box>
+          </Select>
+        </FormControl>
+        <FormControl
+          sx={{
+            m: 1,
+            width: 300,
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backdropFilter: "blur(8px)",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+          }}
+        >
+          <InputLabel id="shape-label">Shape</InputLabel>
+          <Select
+            labelId="shape-label"
+            value={selectedShape}
+            onChange={(e) =>
+              setSelectedShape(
+                e.target.value as "Square" | "Round" | "Heart" | "Rectangle"
+              )
+            }
+            input={<OutlinedInput label="Shape" />}
+          >
+            {availableShapes.map((shape) => (
+              <MenuItem key={shape} value={shape}>
+                {shape}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Stack direction="row" spacing={1}>
+          {tierAnimations.map(({ tier, animation }) => (
+            <Box
+              key={tier}
+              textAlign="center"
+              onClick={() => setCakeTiers(tier)}
+              sx={{
+                cursor: "pointer",
+                border:
+                  cakeTiers === tier
+                    ? "2px solid var(--secondary-color)"
+                    : "2px solid #E0E0E0",
+                borderRadius: "8px",
+                padding: "2px",
+              }}
+            >
+              <Lottie
+                animationData={animation}
+                style={{ width: 100, height: 100 }}
+              />
+              <Typography sx={{ fontSize: "0.8rem", fontWeight: "bold" }}>
+                Tier {tier}
+              </Typography>
+            </Box>
+          ))}
+        </Stack>
+
+        <Step2FlavorFillingToppingText
+          updateOrder={updateOrder}
+          orderDetails={{
+            ...orderDetails,
+            cakeType: selectedCakeType,
+            weight: selectedWeight,
+            shape: selectedShape,
+            levels: cakeTiers,
+            price,
+          }}
+        />
       </Stack>
+
+      <Box
+        sx={{
+          position: "absolute",
+          top: "6%",
+          left: "95%",
+          transform: "translateX(-90%)",
+          zIndex: 5,
+          opacity: 0.8,
+          animation: "bounce 2s infinite",
+        }}
+      >
+        <KeyboardArrowDownRoundedIcon sx={{ fontSize: 36, color: "#6D6875" }} />
       </Box>
     </Box>
+ 
   );
 };
 

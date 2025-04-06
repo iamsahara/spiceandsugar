@@ -2,10 +2,19 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
 }
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: require("../../public/animations/2.json"),
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
   const [user, setUser] = useState({ name: "", email: "", phone: "" });
@@ -22,7 +31,6 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
       setErrorMessage("Name and Email are required!");
       return;
     }
-
     setIsSubmitting(true);
     setErrorMessage("");
 
@@ -49,49 +57,56 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
       router.push("/cakeOrder");
     } catch (error) {
       console.error("❌ Error saving user:", error);
-      setErrorMessage("Failed to sign in. Please try again.");
+      setErrorMessage("Failed to sign in. Pleay again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-
   return (
-    <Box>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center", overflow:"hidden" }}
+    >
       <Box
         sx={{
-          mb: "auto",
-          padding: "10px",
-          minHeight: "800px",
-          // background: "rgba(255, 255, 255, 0.2)",
-          // backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
+          position:"absolute",
+          Width: "30rem",
+          maxHeight: "30rem",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          overflow: "hidden",
-          marginLeft:"1rem",
-          marginRight:"1rem"
+          alignContent:"center",
+          justifyContent:"center",
+          gap: 1,
+          p: 2,
+          mt:"7rem",
+          borderRadius: "20px",
+          backgroundColor: "rgba(255, 255, 255, 0.25)",
+          backdropFilter: "blur(10px)",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
+          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            textAlign: "center",
+            flexDirection: "row",
           }}
         >
+          <Lottie options={defaultOptions} height={90} width={120} />
+
           <Typography
             variant="h6"
             fontWeight="bold"
-            color="pallette.text.primary"
-            flex={1}
+            sx={{
+              color: "var(--text-color)",
+              textAlign: "center",
+              mb: 3,
+              fontFamily: '"Poppins", sans-serif',
+            }}
           >
-            Start Your Journey Here!
+            Start Your Cake Journey Here!
           </Typography>
         </Box>
         <TextField
@@ -100,7 +115,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           variant="outlined"
           value={user.name}
           onChange={(e) => setUser({ ...user, name: e.target.value })}
-          sx={{ mb: 1 }}
+          sx={{ mb: 2, fontFamily: '"Poppins", sans-serif' }}
         />
 
         <TextField
@@ -110,7 +125,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           variant="outlined"
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
-          sx={{ mb: 2 }}
+          sx={{ mb: 2, fontFamily: '"Poppins", sans-serif' }}
         />
 
         <TextField
@@ -120,7 +135,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
           variant="outlined"
           value={user.phone}
           onChange={(e) => setUser({ ...user, phone: e.target.value })}
-          sx={{ mb: 2 }}
+          sx={{ mb: 2, fontFamily: '"Poppins", sans-serif' }}
         />
 
         {errorMessage && (
@@ -130,14 +145,25 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
         )}
 
         <Button
-          fullWidth
           variant="contained"
-          color="secondary"
           onClick={handleGuestSignIn}
           disabled={isSubmitting}
-          sx={{ py: 1.5, fontWeight: "bold" }}
+          sx={{
+            fontWeight: "bold",
+            px: 5,
+            py: 1.5,
+            borderRadius: "999px",
+            background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+            color: "#fff",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+            },
+          }}
         >
-          {isSubmitting ? "Signing In..." : "Next"}
+          {isSubmitting ? "Submitting..." : "Continue"}
         </Button>
       </Box>
     </Box>
@@ -145,3 +171,4 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
 };
 
 export default UserAuth;
+import dynamic from "next/dynamic";

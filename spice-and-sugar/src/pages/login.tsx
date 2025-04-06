@@ -6,11 +6,7 @@ const LoginPage = () => {
     console.log(`User authenticated: ${name}`);
   };
 
-  return (
-    <Box sx={{ textAlign: "center", mt: 4 }}>
-       <UserAuth onAuthSuccess={handleAuthSuccess} />
-    </Box>
-  );
+  return <UserAuth onAuthSuccess={handleAuthSuccess} />;
 };
 
 export default LoginPage;

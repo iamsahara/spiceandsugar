@@ -9,6 +9,7 @@ import {
   MenuItem,
   FormControl,
   TextField,
+  InputLabel,
 } from "@mui/material";
 
 interface Step2Props {
@@ -103,19 +104,28 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orde
   return (
     <Box
       sx={{
-       
-        minHeight: "800px",
-        p: 3,
-        borderRadius: "20px",
-        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
-        mx: "auto",
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+        
       }}
     >
-      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mb: 1 }}>
-        ⑤ Flavor
-      </Typography>
-      <FormControl fullWidth variant="outlined">
-        <Select value={selectedFlavor} onChange={(e) => setSelectedFlavor(e.target.value)}>
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 0,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+  width:"60%"
+}}>
+        <InputLabel id="flavor-label"> Flavor</InputLabel>
+        <Select
+          labelId="flavor-label"
+          value={selectedFlavor}
+          onChange={(e) => setSelectedFlavor(e.target.value)}
+          label=" Flavor"
+        >
           {baseFlavors.map((flavor) => (
             <MenuItem key={flavor.value} value={flavor.value}>
               {flavor.name}
@@ -124,14 +134,20 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orde
         </Select>
       </FormControl>
 
-      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mt: 3, mb: 1 }}>
-        ⑥ Filling (+$7.99)
-      </Typography>
-      <FormControl fullWidth variant="outlined">
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 3,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+}}>
+        <InputLabel id="filling-label"> Filling (+$7.99)</InputLabel>
         <Select
+          labelId="filling-label"
           multiple
           value={selectedFillings}
           onChange={(e) => setSelectedFillings(e.target.value as string[])}
+          label="Filling (+$7.99)"
           renderValue={(selected) => (
             <Stack direction="row" spacing={1} flexWrap="wrap">
               {selected.map((filling) => (
@@ -148,14 +164,20 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orde
         </Select>
       </FormControl>
 
-      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mt: 3, mb: 1 }}>
-        ⑦ Topping (+$7.99)
-      </Typography>
-      <FormControl fullWidth variant="outlined">
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 3,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+}}>
+        <InputLabel id="topping-label"> Topping (+$7.99)</InputLabel>
         <Select
+          labelId="topping-label"
           multiple
           value={selectedToppings}
           onChange={(e) => setSelectedToppings(e.target.value as string[])}
+          label=" Topping (+$7.99)"
           renderValue={(selected) => (
             <Stack direction="row" spacing={2} flexWrap="wrap">
               {selected.map((topping) => (
@@ -172,11 +194,20 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orde
         </Select>
       </FormControl>
 
-      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mt: 3, mb: 1 }}>
-        ⑧ Color
-      </Typography>
-      <FormControl fullWidth variant="outlined">
-        <Select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}>
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 3,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+}}>
+        <InputLabel id="color-label"> Color</InputLabel>
+        <Select
+          labelId="color-label"
+          value={selectedColor}
+          onChange={(e) => setSelectedColor(e.target.value)}
+          label="⑧ Color"
+        >
           <MenuItem value="Red">Red</MenuItem>
           <MenuItem value="Blue">Blue</MenuItem>
           <MenuItem value="Green">Green</MenuItem>
@@ -187,16 +218,29 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({ updateOrder, orde
         </Select>
       </FormControl>
 
-      <Typography variant="h6" sx={{ fontSize: "1.15rem", fontWeight: "bold", color: "var(--secondary-color)", mt: 3, mb: 1 }}>
-        ⑨ Cake Text
-      </Typography>
-      <TextField
-        fullWidth
-        variant="outlined"
-        value={customText}
-        onChange={(e) => setCustomText(e.target.value)}
-        placeholder="Enter your custom text here"
-      />
+      <FormControl fullWidth variant="outlined" sx={{
+  mt: 3,
+  backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(8px)",
+  borderRadius: "12px",
+  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"
+}}>
+        <InputLabel shrink htmlFor="custom-text" sx={{ color: "var(--secondary-color)" }}>
+          Cake Text
+        </InputLabel>
+        <TextField
+          id="custom-text"
+          fullWidth
+          variant="outlined"
+          value={customText}
+          onChange={(e) => setCustomText(e.target.value)}
+          placeholder="Enter your custom text here"
+          sx={{  backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backdropFilter: "blur(8px)",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)"}}
+        />
+      </FormControl>
     </Box>
   );
 };

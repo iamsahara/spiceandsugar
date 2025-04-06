@@ -98,18 +98,24 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
   return (
     <Box
       sx={{
-    
         minHeight: "800px",
-        p: 3,
-        // backgroundColor: "rgba(255,255,255,0.3)",
-        // backdropFilter: "blur(12px)",
-        borderRadius: "20px",
-        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.15)",
+        p: { xs: 3, md: 5 },
+        borderRadius: "28px",
         mx: "auto",
         textAlign: "center",
+        backgroundColor: "rgba(255, 255, 255, 0.2)",
+        backdropFilter: "blur(16px)",
+        boxShadow: "0 12px 36px rgba(0, 0, 0, 0.2)",
+        transition: "all 0.3s ease-in-out",
+        maxWidth: 700,
       }}
     >
-      <Card sx={{ mb: 2, boxShadow: 2 }}>
+      <Card sx={{
+        mb: 3,
+        boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+        borderRadius: "16px",
+        backgroundColor: "rgba(255,255,255,0.85)",
+      }}>
         <CardContent>
           <Stack direction="row" alignItems="center" spacing={2} flexWrap="wrap">
             <ShoppingCartIcon sx={{ color: "var(--secondary-color)" }} />
@@ -140,7 +146,7 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
           width={250}
           height={250}
           alt="Cake reference"
-          style={{ borderRadius: "10px", marginBottom: "15px" }}
+          style={{ borderRadius: "16px", marginBottom: "20px", boxShadow: "0 4px 14px rgba(0,0,0,0.1)" }}
         />
       )}
       <CldUploadWidget
@@ -163,9 +169,18 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
             onClick={() => open()}
             sx={{
               borderRadius: 3,
-              bgcolor: "var(--primary-color)",
-              my: 1,
+              bgcolor: "var(--secondary-color)",
+              color: "#fff",
+              my: 2,
               textTransform: "none",
+              px: 4,
+              py: 1.5,
+              fontWeight: "bold",
+              fontSize: "1rem",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              "&:hover": {
+                backgroundColor: "rgba(255, 105, 180, 0.8)",
+              },
             }}
           >
             Upload Image of Cake Idea 📸
@@ -190,7 +205,12 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
           placeholder="Add special instructions or notes here."
           value={extraDescription}
           onChange={(e) => setExtraDescription(e.target.value)}
-          sx={{ background: "#fff", borderRadius: 2 }}
+          sx={{
+            backgroundColor: "rgba(255,255,255,0.95)",
+            borderRadius: 3,
+            mt: 1,
+            boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+          }}
         />
       </Box>
       <Button
@@ -200,8 +220,17 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
         sx={{
           borderRadius: 3,
           bgcolor: "var(--secondary-color)",
-          my: 1,
+          color: "#fff",
+          my: 2,
           textTransform: "none",
+          px: 4,
+          py: 1.5,
+          fontWeight: "bold",
+          fontSize: "1rem",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+          "&:hover": {
+            backgroundColor: "rgba(255, 105, 180, 0.8)",
+          },
         }}
       >
         {isSubmitting ? "Submitting..." : "Submit Order"}
@@ -219,11 +248,23 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
         </Typography>
 
         <Stack direction="row" spacing={1}>
-          <Button variant="contained" size="small" disabled={!orderConfirmed}>
+          <Button variant="contained" size="small" disabled={!orderConfirmed} sx={{
+            borderRadius: 2,
+            px: 2.5,
+            py: 1,
+            fontSize: "0.875rem",
+            textTransform: "none",
+          }}>
             <PaymentIcon fontSize="small" sx={{ mr: 0.5 }} /> Credit Card
           </Button>
 
-          <Button variant="contained" size="small" disabled={!orderConfirmed}>
+          <Button variant="contained" size="small" disabled={!orderConfirmed} sx={{
+            borderRadius: 2,
+            px: 2.5,
+            py: 1,
+            fontSize: "0.875rem",
+            textTransform: "none",
+          }}>
             <AppleIcon fontSize="small" sx={{ mr: 0.5 }} /> Apple Pay
           </Button>
         </Stack>
@@ -234,12 +275,34 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
           component={Link}
           href="tel:+14379811399"
           variant="outlined"
-          color="success"
+          sx={{
+            border: "2px solid var(--secondary-color)",
+            color: "var(--secondary-color)",
+            backgroundColor: "rgba(255, 255, 255, 0.25)",
+            fontWeight: "bold",
+            px: 3,
+            py: 1.25,
+            borderRadius: "10px",
+            backdropFilter: "blur(6px)",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              backgroundColor: "var(--secondary-color)",
+              color: "#fff",
+              boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
+            },
+          }}
         >
-          <PhoneIcon /> Call to Complete Order
+          <PhoneIcon sx={{ mr: 1 }} /> Call to Complete Order
         </Button>
 
-        <Button variant="text" onClick={onBack}>
+        <Button variant="text" onClick={onBack} sx={{
+          borderRadius: 2,
+          px: 2.5,
+          py: 1,
+          fontSize: "0.875rem",
+          textTransform: "none",
+        }}>
           ⬅ Modify Order
         </Button>
       </Stack>
