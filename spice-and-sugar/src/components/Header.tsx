@@ -1,9 +1,7 @@
 "use client";
-import { Container, Typography, Box, Stack, Button } from "@mui/material";
+import { Box, Stack, Button } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
-import welcomeAnimation from "../../public/animations/2.json";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
 interface HeaderProps {
