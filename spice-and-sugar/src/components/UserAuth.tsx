@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
@@ -57,7 +58,7 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
       router.push("/cakeOrder");
     } catch (error) {
       console.error("❌ Error saving user:", error);
-      setErrorMessage("Failed to sign in. Pleay again.");
+      setErrorMessage("Failed to sign in. try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -171,4 +172,4 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
 };
 
 export default UserAuth;
-import dynamic from "next/dynamic";
+

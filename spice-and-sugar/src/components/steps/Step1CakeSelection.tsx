@@ -88,8 +88,10 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
       default:
         basePrice = 18.65;
     }
+ 
     const calculatedPrice = basePrice * selectedWeight * cakeTiers;
     setPrice(calculatedPrice);
+ 
     updateOrder({
       cakeType: selectedCakeType,
       weight: selectedWeight,

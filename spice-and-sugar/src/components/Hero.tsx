@@ -67,8 +67,11 @@ export default function Hero() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          backgroundColor:"rgba(0,0,0,0.5)",
+          borderRadius:2,
+          width:"100%",
           gap: 2,
-          px: 2,
+          padding:{xs:2, sm:4}
         }}
       >
         <Box

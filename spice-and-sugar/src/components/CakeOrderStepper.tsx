@@ -57,7 +57,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
     cakeType: "Butter Cake",
     shape: "Round",
     levels: 1,
-    color: "#F3E5AB",
+    color: "White",
     weight: 1,
     filling: [],
     toppings: [],
@@ -73,22 +73,14 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
     }
     setActiveStep((prevStep) => prevStep + 1);
   };
-
   const handleBack = (): void => {
-    setActiveStep((prevStep) => {
-      const nextStep = prevStep - 1;
-
-      if (nextStep === 0) {
-        router.push("/login");
-      }
-
-      return nextStep;
-    });
+    setActiveStep((prevStep) => prevStep - 1);
   };
 
   const handleBackToLogin = () => {
     router.push("/");
   };
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [activeStep]);
@@ -254,7 +246,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
             "&:hover": { bgcolor: "var(--primary-color)" },
           }}
         >
-          {activeStep === steps.length - 1 ? "Finish" : "Next"}
+          {activeStep === steps.length - 1 ? "Finish" : " Review My Order"}
         </Button>
       </Box>
     </Box>
