@@ -152,7 +152,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         }}
       >
         <Typography sx={{color: "var(--text-color)", fontWeight: "800" }}>
-        Add the Yum & Go!{" "}
+        Bake It Your Way!{" "}
         </Typography>
         {/* {steps.map((label, index) => (
           <Step key={index} sx={{ flex: 0.5 }}>
@@ -168,15 +168,19 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           </Step>
         ))} */}
         <Box
-          sx={{
-            fontSize: "1rem",
-            fontWeight: "bold",
-            color: "#fff",
-            backgroundColor: "var(--primary-color)",
-            borderRadius: "10px",
-            px: 2,
-            py: 1,
-          }}
+       sx={{
+        fontWeight: "bold",
+        px: 5,
+        py: 1.5,
+        borderRadius: "999px",
+        background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+        color: "#fff",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        transition: "all 0.3s ease",
+        "&:hover": {
+          background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+          boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+        },}}
         >
           Total: ${orderDetails.price.toFixed(2)}
         </Box>
@@ -238,13 +242,18 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           color="primary"
           onClick={handleNext}
           sx={{
-            fontFamily: '"Poppins", sans-serif',
-            fontSize: "0.95rem",
             fontWeight: "bold",
-            width: "11rem",
-            bgcolor: "var(--primary-color)",
-            "&:hover": { bgcolor: "var(--primary-color)" },
-          }}
+            px: 5,
+            py: 1.5,
+            borderRadius: "999px",
+            background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+            color: "#fff",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+            },}}
         >
           {activeStep === steps.length - 1 ? "Finish" : " Review My Order"}
         </Button>
