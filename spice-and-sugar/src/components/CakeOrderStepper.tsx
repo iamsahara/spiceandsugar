@@ -5,11 +5,9 @@ import {
   Button,
   Stepper,
   Typography,
-  StepConnector,
 } from "@mui/material";
 import Step1CakeSelection from "./steps/Step1CakeSelection";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
-import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 
 const steps: string[] = ["Select", "Review Order"];
@@ -32,23 +30,6 @@ interface StepProps {
   orderDetails: OrderDetails;
 }
 
-const CustomConnector = styled(StepConnector)(({ theme }) => ({
-  "&.MuiStepConnector-root": {
-    display: "flex",
-    flex: 1,
-    justifyContent: "center",
-  },
-  "& .MuiStepConnector-line": {
-    borderWidth: 3,
-    flexGrow: 1,
-    minWidth: "80px",
-    maxWidth: "80px",
-    alignitems: "center",
-    width: "100%",
-    borderColor: "var(--primary-color)",
-    borderRadius: "50px",
-  },
-}));
 
 const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   const router = useRouter();
@@ -135,7 +116,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
       <Stepper
         activeStep={activeStep}
         alternativeLabel
-        connector={<CustomConnector />}
         sx={{
           position: "sticky",
           zIndex: 10,
@@ -220,23 +200,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           mt: "2rem",
         }}
       >
-        {/* <Button
-        variant="contained"
-        color="secondary"
-        disabled={activeStep === 0}
-        onClick={handleBack}
-        sx={{
-          fontFamily: '"Poppins", sans-serif',
-          fontSize: "0.95rem",
-          fontWeight: "bold",
-          px: 2,
-          my: 1,
-          bgcolor: "var(--secondary-color)",
-          "&:hover": { bgcolor: "#E91E63" },
-        }}
-      >
-        Back
-      </Button> */}
         <Button
           variant="contained"
           color="primary"

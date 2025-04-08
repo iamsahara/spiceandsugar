@@ -178,6 +178,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           multiple
           value={selectedFillings}
           onChange={(e) => setSelectedFillings(e.target.value as string[])}
+          sx={{ width: 300 }} 
           label="Filling (+$7.99)"
           renderValue={(selected) => (
             <Stack direction="row" spacing={1} flexWrap="wrap">
@@ -298,7 +299,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           variant="outlined"
           value={customText}
           onChange={(e) => setCustomText(e.target.value)}
-          placeholder="Enter your custom text here"
+          placeholder="Happy Birthday Sarah"
           sx={{
             backgroundColor: "rgba(255, 255, 255, 0.6)",
             backdropFilter: "blur(8px)",
