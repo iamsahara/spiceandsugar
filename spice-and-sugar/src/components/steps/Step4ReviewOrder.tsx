@@ -124,7 +124,7 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
               fontWeight="bold"
               color="var(--secondary-color)"
             >
-              Confirm Your Cake Order
+             
             </Typography>
           </Stack>
           <Divider sx={{ mb: 2 }} />
@@ -133,9 +133,6 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
             sx={{ mb: 2, textAlign: "left", lineHeight: 1.7 }}
           >
             {cakeDescription}
-          </Typography>
-          <Typography variant="h6" fontWeight="bold" color="#388E3C">
-            Total: ${orderDetails.price.toFixed(2)}
           </Typography>
         </CardContent>
       </Card>
@@ -168,22 +165,21 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
             variant="contained"
             onClick={() => open()}
             sx={{
-              borderRadius: 3,
-              bgcolor: "var(--secondary-color)",
-              color: "#fff",
-              my: 2,
-              textTransform: "none",
-              px: 4,
-              py: 1.5,
               fontWeight: "bold",
-              fontSize: "1rem",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              px: 5,
+              py: 1.5,
+              borderRadius: "999px",
+              background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+              color: "#fff",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease",
               "&:hover": {
-                backgroundColor: "rgba(255, 105, 180, 0.8)",
+                background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+                boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
               },
             }}
           >
-            Upload Image of Cake Idea 📸
+            Upload Image 📸 
           </Button>
         )}
       </CldUploadWidget>
@@ -218,20 +214,18 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
         onClick={handleSubmitOrder}
         disabled={isSubmitting || orderConfirmed}
         sx={{
-          borderRadius: 3,
-          bgcolor: "var(--secondary-color)",
-          color: "#fff",
-          my: 2,
-          textTransform: "none",
-          px: 4,
-          py: 1.5,
-          fontWeight: "bold",
-          fontSize: "1rem",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-          "&:hover": {
-            backgroundColor: "rgba(255, 105, 180, 0.8)",
-          },
-        }}
+              fontWeight: "bold",
+              px: 5,
+              py: 1.5,
+              borderRadius: "999px",
+              background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+              color: "#fff",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+                boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+              },}}
       >
         {isSubmitting ? "Submitting..." : "Submit Order"}
       </Button>
@@ -276,8 +270,8 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
           href="tel:+14379811399"
           variant="outlined"
           sx={{
-            border: "2px solid var(--secondary-color)",
-            color: "var(--secondary-color)",
+            border: "2px solid var(--primary-color)",
+            color: "var(--sprimary-color)",
             backgroundColor: "rgba(255, 255, 255, 0.25)",
             fontWeight: "bold",
             px: 3,
@@ -287,13 +281,13 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
             boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
             transition: "all 0.3s ease",
             "&:hover": {
-              backgroundColor: "var(--secondary-color)",
+              backgroundColor: "var(--primary-color)",
               color: "#fff",
               boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
             },
           }}
         >
-          <PhoneIcon sx={{ mr: 1 }} /> Call to Complete Order
+          <PhoneIcon sx={{ mr: 1 }} /> Once you submit your order, please give us a call to proceed with payment. Online payment is not available yet! 
         </Button>
 
         <Button variant="text" onClick={onBack} sx={{
@@ -302,6 +296,8 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
           py: 1,
           fontSize: "0.875rem",
           textTransform: "none",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+          transition: "all 0.3s ease",
         }}>
           ⬅ Modify Order
         </Button>

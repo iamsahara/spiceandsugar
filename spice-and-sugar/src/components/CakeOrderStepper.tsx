@@ -5,11 +5,9 @@ import {
   Button,
   Stepper,
   Typography,
-  StepConnector,
 } from "@mui/material";
 import Step1CakeSelection from "./steps/Step1CakeSelection";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
-import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 
 const steps: string[] = ["Select", "Review Order"];
@@ -32,23 +30,6 @@ interface StepProps {
   orderDetails: OrderDetails;
 }
 
-const CustomConnector = styled(StepConnector)(({ theme }) => ({
-  "&.MuiStepConnector-root": {
-    display: "flex",
-    flex: 1,
-    justifyContent: "center",
-  },
-  "& .MuiStepConnector-line": {
-    borderWidth: 3,
-    flexGrow: 1,
-    minWidth: "80px",
-    maxWidth: "80px",
-    alignitems: "center",
-    width: "100%",
-    borderColor: "var(--primary-color)",
-    borderRadius: "50px",
-  },
-}));
 
 const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
   const router = useRouter();
@@ -57,7 +38,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
     cakeType: "Butter Cake",
     shape: "Round",
     levels: 1,
-    color: "#F3E5AB",
+    color: "White",
     weight: 1,
     filling: [],
     toppings: [],
@@ -73,22 +54,14 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
     }
     setActiveStep((prevStep) => prevStep + 1);
   };
-
   const handleBack = (): void => {
-    setActiveStep((prevStep) => {
-      const nextStep = prevStep - 1;
-
-      if (nextStep === 0) {
-        router.push("/login");
-      }
-
-      return nextStep;
-    });
+    setActiveStep((prevStep) => prevStep - 1);
   };
 
   const handleBackToLogin = () => {
     router.push("/");
   };
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [activeStep]);
@@ -143,7 +116,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
       <Stepper
         activeStep={activeStep}
         alternativeLabel
-        connector={<CustomConnector />}
         sx={{
           position: "sticky",
           zIndex: 10,
@@ -160,7 +132,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
         }}
       >
         <Typography sx={{color: "var(--text-color)", fontWeight: "800" }}>
-        Add the Yum & Go!{" "}
+        Bake It Your Way!{" "}
         </Typography>
         {/* {steps.map((label, index) => (
           <Step key={index} sx={{ flex: 0.5 }}>
@@ -176,15 +148,19 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           </Step>
         ))} */}
         <Box
-          sx={{
-            fontSize: "1rem",
-            fontWeight: "bold",
-            color: "#fff",
-            backgroundColor: "var(--primary-color)",
-            borderRadius: "10px",
-            px: 2,
-            py: 1,
-          }}
+       sx={{
+        fontWeight: "bold",
+        px: 5,
+        py: 1.5,
+        borderRadius: "999px",
+        background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+        color: "#fff",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        transition: "all 0.3s ease",
+        "&:hover": {
+          background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+          boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+        },}}
         >
           Total: ${orderDetails.price.toFixed(2)}
         </Box>
@@ -224,37 +200,25 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
           mt: "2rem",
         }}
       >
-        {/* <Button
-        variant="contained"
-        color="secondary"
-        disabled={activeStep === 0}
-        onClick={handleBack}
-        sx={{
-          fontFamily: '"Poppins", sans-serif',
-          fontSize: "0.95rem",
-          fontWeight: "bold",
-          px: 2,
-          my: 1,
-          bgcolor: "var(--secondary-color)",
-          "&:hover": { bgcolor: "#E91E63" },
-        }}
-      >
-        Back
-      </Button> */}
         <Button
           variant="contained"
           color="primary"
           onClick={handleNext}
           sx={{
-            fontFamily: '"Poppins", sans-serif',
-            fontSize: "0.95rem",
             fontWeight: "bold",
-            width: "11rem",
-            bgcolor: "var(--primary-color)",
-            "&:hover": { bgcolor: "var(--primary-color)" },
-          }}
+            px: 5,
+            py: 1.5,
+            borderRadius: "999px",
+            background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+            color: "#fff",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+            },}}
         >
-          {activeStep === steps.length - 1 ? "Finish" : "Next"}
+          {activeStep === steps.length - 1 ? "Finish" : " Review My Order"}
         </Button>
       </Box>
     </Box>

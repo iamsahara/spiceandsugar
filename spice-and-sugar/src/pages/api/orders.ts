@@ -23,20 +23,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       extraDescription,
     } = req.body;
 
-    console.log("📝 Order Details:");
-    console.log("🍰 Cake Type:", cakeType);
-    console.log("📐 Shape:", shape);
-    console.log("🎂 Levels:", levels);
-    console.log("🎨 Color:", color);
-    console.log("⚖️ Weight:", weight);
-    console.log("💰 Price:", price);
-    console.log("📝 Message:", customText);
-    console.log("🍫 Fillings:", filling);
-    console.log("🍒 Toppings:", toppings);
-    console.log("📸 Image URL:", imageUrl);
-    console.log("📌 Extra Notes:", extraDescription);
-
-   
     if (!cakeType || !shape || !levels || !color || !weight || !price) {
       console.error("❌ Missing required fields:", { cakeType, shape, levels, color, weight, price });
       return res.status(400).json({ message: "Missing required fields" });

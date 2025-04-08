@@ -95,7 +95,7 @@ export default function Header({ userName }: HeaderProps) {
               },
             }}
           >
-            <HomeRoundedIcon fontSize="medium" />
+            <HomeRoundedIcon fontSize="large" />
           </Button>
         </motion.div>
       </Stack>
