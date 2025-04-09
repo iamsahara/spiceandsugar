@@ -16,22 +16,8 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import AppleIcon from "@mui/icons-material/Apple";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { OrderDetails } from "@/types";
 
-
-interface OrderDetails {
-  cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
-  baseFlavor?: string;
-  shape: "Round" | "Square" | "Heart" | "Rectangle";
-  levels: number;
-  color: string;
-  weight: number;
-  filling: string[];
-  toppings: string[];
-  customText?: string; 
-  price: number;
-  imageUrl?: string;
-  extraDescription?: string; 
-}
 
 interface Step4Props {
   onBack: () => void;

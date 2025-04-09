@@ -10,8 +10,9 @@ import {
   TextField,
   InputLabel,
 } from "@mui/material";
+import { OrderDetails } from "@/types";
 
-interface Step2Props {
+export interface Step2Props {
   onBack: () => void;
   onNext: () => void;
   updateOrder: (
@@ -24,15 +25,7 @@ interface Step2Props {
       customText: string;
     }>
   ) => void;
-  orderDetails: {
-    cakeType: string;
-    baseFlavor?: string;
-    filling: string[];
-    toppings: string[];
-    price: number;
-    color?: string;
-    customText?: string;
-  };
+  orderDetails: OrderDetails;
 }
 
 const baseFlavors = [

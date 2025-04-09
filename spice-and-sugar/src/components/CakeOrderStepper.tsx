@@ -9,26 +9,11 @@ import {
 import Step1CakeSelection from "./steps/Step1CakeSelection";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { useRouter } from "next/navigation";
+import { OrderDetails, StepProps } from "@/types";
 
-const steps: string[] = ["Select", "Review Order"];
-
-interface OrderDetails {
-  cakeType: "Butter Cake" | "Sponge Cake" | "Fondant Cake";
-  shape: "Round" | "Square" | "Heart" | "Rectangle";
-  levels: number;
-  color: string;
-  weight: number;
-  filling: string[];
-  toppings: string[];
-  customText: string;
-  price: number;
-}
-
-// interface StepProps {
-//   onNext: () => void;
-//   updateOrder: (updatedData: Partial<OrderDetails>) => void;
-//   orderDetails: OrderDetails;
-// }
+const steps: string[] = [];
+type Step1Props = StepProps & { onBack: () => void };
+type Step4Props = StepProps;
 
 const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
   const router = useRouter();
@@ -72,8 +57,8 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
           <Step1CakeSelection
             onNext={handleNext}
             updateOrder={updateOrderDetails}
-            orderDetails={orderDetails}
             onBack={handleBackToLogin}
+            orderDetails={orderDetails}
           />
         );
       case 1:
@@ -81,8 +66,8 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
           <Step4ReviewOrder
             onBack={handleBack}
             onNext={handleNext}
-            orderDetails={orderDetails}
             updateOrder={updateOrderDetails}
+            orderDetails={orderDetails}
           />
         );
       default:
@@ -133,19 +118,6 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
         <Typography sx={{color: "var(--text-color)", fontWeight: "800" }}>
         Bake It Your Way!{" "}
         </Typography>
-        {/* {steps.map((label, index) => (
-          <Step key={index} sx={{ flex: 0.5 }}>
-            <StepLabel
-              sx={{
-                fontSize: "1rem",
-                fontWeight: "600",
-                textTransform: "capitalize",
-              }}
-            >
-              {label}
-            </StepLabel>
-          </Step>
-        ))} */}
         <Box
        sx={{
         fontWeight: "bold",

@@ -92,7 +92,7 @@ export default function Hero() {
             mb: 3,
           }}
         >
-          Curated cakes. Handcrafted flavors. Local sweetness.
+          Freshly Curated Cakes Made with Love
         </Box>
 
         <Stack direction="row" spacing={2}>

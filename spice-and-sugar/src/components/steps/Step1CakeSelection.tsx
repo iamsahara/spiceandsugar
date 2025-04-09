@@ -16,8 +16,9 @@ import Lottie from "lottie-react";
 import animation3 from "../../../public/animations/5.json";
 import animation4 from "../../../public/animations/4.json";
 import animation5 from "../../../public/animations/3.json";
-import Step2FlavorFillingToppingText from "./Step2FlavorFillingToppingText";
+import Step2FlavorFillingToppingText from "@/components/steps/Step2FlavorFillingToppingText";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import { OrderDetails } from "@/types";
 
 const tierAnimations = [
   { tier: 1, animation: animation3 },
@@ -25,26 +26,20 @@ const tierAnimations = [
   { tier: 3, animation: animation5 },
 ];
 
-interface OrderDetails {
-  cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
-  weight: number;
-  shape: "Square" | "Round" | "Heart" | "Rectangle";
-  levels: number;
-  price: number;
-}
+// interface OrderDetails {
+//   cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
+//   weight: number;
+//   shape: "Square" | "Round" | "Heart" | "Rectangle";
+//   levels: number;
+//   price: number;
+// }
 
-interface Step1Props {
-  onBack: () => void;
+type Step1Props = {
   onNext: () => void;
-  orderDetails: {
-    cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
-    weight: number;
-    shape: "Square" | "Round" | "Heart" | "Rectangle";
-    levels: number;
-    price: number;
-  };
+  onBack: () => void;
   updateOrder: (updatedData: Partial<OrderDetails>) => void;
-}
+  orderDetails: OrderDetails;
+};
 
 const availableShapes = ["Square", "Round", "Heart", "Rectangle"];
 const weightOptions = [
@@ -63,13 +58,13 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
 }) => {
   const [selectedCakeType, setSelectedCakeType] = useState<
     "Sponge Cake" | "Butter Cake" | "Fondant Cake"
-  >(orderDetails.cakeType || "Sponge Cake");
+  >(orderDetails.cakeType as "Sponge Cake" | "Butter Cake" | "Fondant Cake" || "Sponge Cake");
   const [selectedWeight, setSelectedWeight] = useState<number>(
     orderDetails.weight || 1
   );
   const [selectedShape, setSelectedShape] = useState<
     "Square" | "Round" | "Heart" | "Rectangle"
-  >(orderDetails.shape || "Square");
+  >(orderDetails.shape as "Square" | "Round" | "Heart" | "Rectangle" || "Square");
   const [cakeTiers, setCakeTiers] = useState<number>(orderDetails.levels || 1);
   const [price, setPrice] = useState(orderDetails.price || 18.65);
 
@@ -88,10 +83,10 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
       default:
         basePrice = 18.65;
     }
- 
+
     const calculatedPrice = basePrice * selectedWeight * cakeTiers;
     setPrice(calculatedPrice);
- 
+
     updateOrder({
       cakeType: selectedCakeType,
       weight: selectedWeight,
@@ -101,8 +96,26 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
     });
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
+  function handleBack(): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function handleNext(): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
-    <Box className="step1-wrapper" sx={{ display: "flex", width:"100%", flexDirection: "column", justifyContent: "center", position: "relative", height:"900px" }}>
+    <Box
+      className="step1-wrapper"
+      sx={{
+        display: "flex",
+        width: "100%",
+        flexDirection: "column",
+        justifyContent: "center",
+        position: "relative",
+        height: "900px",
+      }}
+    >
       <Stack spacing={1} alignItems="center">
         <Box
           sx={{
@@ -159,7 +172,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
 
         <FormControl
           sx={{
-            mt:0,
+            mt: 0,
             backgroundColor: "rgba(255, 255, 255, 0.6)",
             backdropFilter: "blur(8px)",
             borderRadius: "12px",
@@ -236,6 +249,8 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         </Stack>
 
         <Step2FlavorFillingToppingText
+          onBack={handleBack}
+          onNext={handleNext}
           updateOrder={updateOrder}
           orderDetails={{
             ...orderDetails,
@@ -244,6 +259,8 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
             shape: selectedShape,
             levels: cakeTiers,
             price,
+            filling: orderDetails.filling || "", 
+            toppings: orderDetails.toppings || [],
           }}
         />
       </Stack>
@@ -262,7 +279,6 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         <KeyboardArrowDownRoundedIcon sx={{ fontSize: 36, color: "#6D6875" }} />
       </Box>
     </Box>
- 
   );
 };
 
