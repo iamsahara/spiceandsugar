@@ -27,7 +27,7 @@ export default function IndexPage() {
           }}
         />
       ) : (
-        <Header userName={userName || ""}/>
+        <Header/>
       )}
 <Hero/>
     </div>
