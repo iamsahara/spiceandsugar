@@ -9,7 +9,7 @@ import {
 import Step1CakeSelection from "./steps/Step1CakeSelection";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { useRouter } from "next/navigation";
-import { OrderDetails, StepProps } from "@/types";
+import { OrderDetails } from "@/types";
 
 const steps: string[] = [];
 
