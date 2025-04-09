@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import Header from "@/components/Header";
 import UserAuth from "@/components/UserAuth"; 
 
+
 export default function IndexPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState<string | null>(null);
@@ -27,7 +28,7 @@ export default function IndexPage() {
           }}
         />
       ) : (
-        <Header/>
+        <Header userName={userName || ""}/>
       )}
 <Hero/>
     </div>

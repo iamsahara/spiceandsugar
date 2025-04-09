@@ -1,14 +1,14 @@
 "use client";
-import { Box, Stack, Button } from "@mui/material";
+import { Box, Stack, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
-// interface HeaderProps {
-//   userName?: string;
-// }
+interface HeaderProps {
+  userName?: string;
+}
 
-export default function Header({ }) {
+export default function Header({ userName }: HeaderProps) {
   return (
     <Box
       sx={{
@@ -49,22 +49,24 @@ export default function Header({ }) {
           <Image src="/veloralogo.png" alt="Velora" width={70} height={70} />
         </motion.div>
 
-        {/* <Typography
-          variant="h6"
-          sx={{
-            backgroundColor: "rgba(255, 255, 255, 0.4)",
-            backdropFilter: "blur(4px)",
-            px: 2,
-            py: 0.5,
-            borderRadius: "12px",
-            fontWeight: "bold",
-            color: "#6D6875",
-            fontSize: { xs: "0.85rem", md: "1rem" },
-            fontFamily: '"Poppins", "sans-serif"',
-          }}
-        >
-         5 Minutes to Submit!
-        </Typography> */}
+        {userName && (
+          <Typography
+            variant="h6"
+            sx={{
+              backgroundColor: "rgba(255, 255, 255, 0.4)",
+              backdropFilter: "blur(4px)",
+              px: 2,
+              py: 0.5,
+              borderRadius: "12px",
+              fontWeight: "bold",
+              color: "#6D6875",
+              fontSize: { xs: "0.85rem", md: "1rem" },
+              fontFamily: '"Poppins", "sans-serif"',
+            }}
+          >
+            Welcome to Velora, {userName}!
+          </Typography>
+        )}
       </Stack>
 
       <Stack direction="row" alignItems="center" spacing={2} sx={{ pointerEvents: "auto", px: 2, py: 1 }}>

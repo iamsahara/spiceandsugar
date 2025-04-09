@@ -4,7 +4,7 @@ import {
   Box,
   Button,
   Stepper,
-  Typography,
+  Typography,ç
 } from "@mui/material";
 import Step1CakeSelection from "./steps/Step1CakeSelection";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
@@ -12,8 +12,6 @@ import { useRouter } from "next/navigation";
 import { OrderDetails, StepProps } from "@/types";
 
 const steps: string[] = [];
-type Step1Props = StepProps & { onBack: () => void };
-type Step4Props = StepProps;
 
 const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
   const router = useRouter();
