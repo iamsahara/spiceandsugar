@@ -22,8 +22,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
 
       return res.status(200).json({ imageUrl: uploadResponse.secure_url });
-    } catch (error: any) {
-      return res.status(500).json({ error: error.message });
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(500).json({ error: error.message });
+      }
+      return res.status(500).json({ error: "Unknown error occurred" });
     }
   } else {
     res.setHeader("Allow", ["POST"]);

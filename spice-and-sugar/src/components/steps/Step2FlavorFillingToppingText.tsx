@@ -85,8 +85,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
     orderDetails.color || "white"
   );
   const [customText, setCustomText] = useState(orderDetails.customText || "");
-  const [price, setPrice] = useState(orderDetails.price);
-  const [basePrice] = useState(orderDetails.price);
+  const basePrice = orderDetails.price;
 
   const availableFillings = (() => {
     switch (orderDetails.cakeType) {
@@ -114,7 +113,6 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
 
     const newTotalPrice = basePrice + extraCharge;
 
-    setPrice(newTotalPrice);
     updateOrder({
       baseFlavor: selectedFlavor,
       filling: selectedFillings,

@@ -23,8 +23,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     console.log("✅ Inserted user:", data);
     return res.status(201).json({ message: "User saved successfully", user: data });
-  } catch (error: any) {
-    console.error("💥 API catch block error:", error.message || error);
-    return res.status(500).json({ message: "Unexpected error", error: error.message });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("💥 API catch block error:", error.message);
+      return res.status(500).json({ message: "Unexpected error", error: error.message });
+    }
+
+    console.error("💥 API catch block error:", error);
+    return res.status(500).json({ message: "Unexpected error", error: "Unknown error" });
   }
 }

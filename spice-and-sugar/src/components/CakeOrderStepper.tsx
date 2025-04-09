@@ -24,14 +24,14 @@ interface OrderDetails {
   price: number;
 }
 
-interface StepProps {
-  onNext: () => void;
-  updateOrder: (updatedData: Partial<OrderDetails>) => void;
-  orderDetails: OrderDetails;
-}
+// interface StepProps {
+//   onNext: () => void;
+//   updateOrder: (updatedData: Partial<OrderDetails>) => void;
+//   orderDetails: OrderDetails;
+// }
 
 
-const CakeOrderStepper: React.FC<{ userName: string }> = ({ userName }) => {
+const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState<number>(0);
   const [orderDetails, setOrderDetails] = useState<OrderDetails>({

@@ -2,6 +2,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import animationData from "../../public/animations/2.json";
 
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;
@@ -11,7 +12,7 @@ const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 const defaultOptions = {
   loop: true,
   autoplay: true,
-  animationData: require("../../public/animations/2.json"),
+  animationData,
   rendererSettings: {
     preserveAspectRatio: "xMidYMid slice",
   },
@@ -172,4 +173,3 @@ const UserAuth: React.FC<UserAuthProps> = ({ onAuthSuccess }) => {
 };
 
 export default UserAuth;
-

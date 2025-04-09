@@ -4,11 +4,11 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 
-interface HeaderProps {
-  userName?: string;
-}
+// interface HeaderProps {
+//   userName?: string;
+// }
 
-export default function Header({ userName }: HeaderProps) {
+export default function Header({ }) {
   return (
     <Box
       sx={{
