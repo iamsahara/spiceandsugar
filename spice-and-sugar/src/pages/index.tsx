@@ -9,12 +9,18 @@ export default function IndexPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState<string | null>(null);
   useEffect(() => {
-    const savedUser = localStorage.getItem("guestUser");
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      if (user?.name) {
-        setUserName(user.name);
-        setIsAuthenticated(true);
+    if (typeof window !== "undefined") {
+      const savedUser = localStorage.getItem("guestUser");
+      if (savedUser) {
+        try {
+          const user = JSON.parse(savedUser);
+          if (user?.name) {
+            setUserName(user.name);
+            setIsAuthenticated(true);
+          }
+        } catch (error) {
+          console.error("Failed to parse savedUser:", error);
+        }
       }
     }
   }, []);
