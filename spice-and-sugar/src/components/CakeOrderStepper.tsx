@@ -30,7 +30,6 @@ interface OrderDetails {
 //   orderDetails: OrderDetails;
 // }
 
-
 const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState<number>(0);

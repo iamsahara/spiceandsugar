@@ -6,7 +6,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState, useEffect } from "react";
 import GlobalBackground from "@/components/GlobalBackground";
-import Header from "@/components/Header";
 
 
 interface OrderDetails {
