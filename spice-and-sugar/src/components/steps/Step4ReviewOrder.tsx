@@ -132,43 +132,45 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
           style={{ borderRadius: "16px", marginBottom: "20px", boxShadow: "0 4px 14px rgba(0,0,0,0.1)" }}
         />
       )}
-      <CldUploadWidget
-        uploadPreset={"My_preset"}
-        onSuccess={(result) => {
-          setUploadError("");
-          if (result.info && typeof result.info === "object") {
-            const uploadedImage = result.info.secure_url;
-            if (typeof updateOrder === "function") {
-              updateOrder({ imageUrl: uploadedImage }); 
-            } else {
-              console.error("❌ updateOrder is not a function. Check if it's passed correctly.");
+      {typeof window !== "undefined" && (
+        <CldUploadWidget
+          uploadPreset={"My_preset"}
+          onSuccess={(result) => {
+            setUploadError("");
+            if (result.info && typeof result.info === "object") {
+              const uploadedImage = result.info.secure_url;
+              if (typeof updateOrder === "function") {
+                updateOrder({ imageUrl: uploadedImage }); 
+              } else {
+                console.error("❌ updateOrder is not a function. Check if it's passed correctly.");
+              }
             }
-          }
-        }}
-      >
-        {({ open }) => (
-          <Button
-            variant="contained"
-            onClick={() => open()}
-            sx={{
-              fontWeight: "bold",
-              px: 5,
-              py: 1.5,
-              borderRadius: "999px",
-              background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
-              color: "#fff",
-              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-              transition: "all 0.3s ease",
-              "&:hover": {
-                background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-                boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
-              },
-            }}
-          >
-            Upload Image 📸 
-          </Button>
-        )}
-      </CldUploadWidget>
+          }}
+        >
+          {({ open }) => (
+            <Button
+              variant="contained"
+              onClick={() => open()}
+              sx={{
+                fontWeight: "bold",
+                px: 5,
+                py: 1.5,
+                borderRadius: "999px",
+                background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+                color: "#fff",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+                  boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+                },
+              }}
+            >
+              Upload Image 📸 
+            </Button>
+          )}
+        </CldUploadWidget>
+      )}
 
       {uploadError && (
         <Typography color="error" sx={{ mt: 1, fontSize: "0.85rem" }}>
