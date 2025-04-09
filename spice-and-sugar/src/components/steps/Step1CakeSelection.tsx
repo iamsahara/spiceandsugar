@@ -19,6 +19,7 @@ import animation5 from "../../../public/animations/3.json";
 import Step2FlavorFillingToppingText from "@/components/steps/Step2FlavorFillingToppingText";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import { OrderDetails } from "@/types";
+import Image from "next/image";
 
 const tierAnimations = [
   { tier: 1, animation: animation3 },
@@ -148,11 +149,13 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
                 }
               >
                 <CardContent sx={{ textAlign: "center", p: 1 }}>
-                  <img
-                    src={`/cake-${type}.png`}
-                    alt={`${type} cake`}
-                    width="100%"
-                  />
+                <Image
+  src={`/cake-${type}.png`}
+  alt={`${type} cake`}
+  width={80}
+  height={80}
+  style={{ width: "100%", height: "auto" }}
+/>
                   <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
                     {type}
                   </Typography>
