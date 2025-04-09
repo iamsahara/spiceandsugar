@@ -4,7 +4,7 @@ import {
   Box,
   Button,
   Stepper,
-  Typography,ç
+  Typography,
 } from "@mui/material";
 import Step1CakeSelection from "./steps/Step1CakeSelection";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
