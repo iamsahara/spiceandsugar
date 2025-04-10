@@ -29,7 +29,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-      
     const { data, error } = await supabase
       .from("orders")
       .insert([
@@ -54,7 +53,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.error("❌ Database Insert Error:", error);
       return res.status(500).json({ message: "Failed to insert order into database", error });
     }
-
     console.log("✅ Order saved successfully:", data);
     return res.status(201).json({ message: "Order submitted successfully", order: data });
 
