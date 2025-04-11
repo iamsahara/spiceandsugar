@@ -38,7 +38,7 @@ export default function Hero() {
         textAlign: "center",
       }}
     >
-      {photosList.map((photo, index) => (
+      {/* {photosList.map((photo, index) => (
         <Box
           key={index}
           component="img"
@@ -56,7 +56,7 @@ export default function Hero() {
             zIndex: 0,
           }}
         />
-      ))}
+      ))} */}
 
       <Box
         sx={{

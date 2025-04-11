@@ -53,8 +53,6 @@ export default function Header({ userName }: HeaderProps) {
           <Typography
             variant="h6"
             sx={{
-              backgroundColor: "rgba(255, 255, 255, 0.4)",
-              backdropFilter: "blur(4px)",
               px: 2,
               py: 0.5,
               borderRadius: "12px",
