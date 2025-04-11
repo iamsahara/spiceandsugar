@@ -2,7 +2,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import animationData from "../../public/animations/2.json";
+import animationData from "../animations/2.json";
 
 interface UserAuthProps {
   onAuthSuccess: (name: string) => void;

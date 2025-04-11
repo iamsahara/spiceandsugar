@@ -32,7 +32,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.error("💥 API catch block error:", error);
       return res.status(500).json({ message: "Unexpected error", error: "Unknown error" });
     }
-    res.status(200).json({ message: 'User created' })
   } else {
     res.setHeader('Allow', ['POST'])
     res.status(405).end(`Method ${req.method} Not Allowed`)
