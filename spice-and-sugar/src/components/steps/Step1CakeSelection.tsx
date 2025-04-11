@@ -13,18 +13,18 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import Lottie from "lottie-react";
-import animation3 from "../../animations/2.json";
-import animation4 from "../../animations/4.json";
-import animation5 from "../../animations/3.json";
+import animation1 from "../../animations/5.json";
+import animation2 from "../../animations/4.json";
+import animation3 from "../../animations/3.json";
 import Step2FlavorFillingToppingText from "@/components/steps/Step2FlavorFillingToppingText";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import { OrderDetails } from "@/types";
 import Image from "next/image";
 
 const tierAnimations = [
-  { tier: 1, animation: animation3 },
-  { tier: 2, animation: animation4 },
-  { tier: 3, animation: animation5 },
+  { tier: 1, animation: animation1 },
+  { tier: 2, animation: animation2 },
+  { tier: 3, animation: animation3 },
 ];
 
 type Step1Props = {

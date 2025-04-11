@@ -126,15 +126,20 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
       }}
     >
       <FormControl
-        fullWidth
         variant="outlined"
         sx={{
-          mt: 0,
+          mt: 3,
           backgroundColor: "rgba(255, 255, 255, 0.6)",
           backdropFilter: "blur(8px)",
           borderRadius: "12px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-          width: "60%",
+          width: {
+            xs: "10rem",
+            sm: "95%",
+            md: "90%",
+            lg: "85%",
+            xl: "80%",
+          },
         }}
       >
         <InputLabel id="flavor-label"> Flavor</InputLabel>
@@ -153,7 +158,6 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
       </FormControl>
 
       <FormControl
-        fullWidth
         variant="outlined"
         sx={{
           mt: 3,
@@ -161,6 +165,13 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           backdropFilter: "blur(8px)",
           borderRadius: "12px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+          width: {
+            xs: "25rem",
+            sm: "95%",
+            md: "90%",
+            lg: "85%",
+            xl: "80%",
+          },
         }}
       >
         <InputLabel id="filling-label"> Filling (+$7.99)</InputLabel>
@@ -169,22 +180,35 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           multiple
           value={selectedFillings}
           onChange={(e) => setSelectedFillings(e.target.value as string[])}
-          sx={{ width: 300 }} 
           label="Filling (+$7.99)"
           renderValue={(selected) => (
-            <Stack direction="row" spacing={1} flexWrap="wrap">
-              {selected.map((filling) => (
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'nowrap',
+                overflowX: 'auto',
+                gap: 1,
+                py: 0.5,
+                minHeight: '40px',
+              }}
+            >
+              {selected.map((item) => (
                 <Chip
-                  key={filling}
-                  label={filling}
+                  key={item}
+                  label={item}
                   sx={{
-                    bgcolor: "var(--secondary-color)",
+                    bgcolor: "var(--primary-color)",
                     color: "white",
                     fontWeight: "bold",
+                    px: 1,
+                    py: 0.5,
+                    fontSize: "0.75rem",
+                    borderRadius: "8px",
+                    whiteSpace: 'nowrap',
                   }}
                 />
               ))}
-            </Stack>
+            </Box>
           )}
         >
           {availableFillings.map((filling) => (
@@ -196,7 +220,6 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
       </FormControl>
 
       <FormControl
-        fullWidth
         variant="outlined"
         sx={{
           mt: 3,
@@ -204,6 +227,14 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           backdropFilter: "blur(8px)",
           borderRadius: "12px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+          width: {
+            xs: "25rem",
+            sm: "95%",
+            md: "90%",
+            lg: "85%",
+            xl: "80%",
+          },
+
         }}
       >
         <InputLabel id="topping-label"> Topping (+$7.99)</InputLabel>
@@ -214,19 +245,33 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           onChange={(e) => setSelectedToppings(e.target.value as string[])}
           label=" Topping (+$7.99)"
           renderValue={(selected) => (
-            <Stack direction="row" spacing={2} flexWrap="wrap">
-              {selected.map((topping) => (
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'nowrap',
+                overflowX: 'auto',
+                gap: 1,
+                py: 0.5,
+                minHeight: '40px',
+              }}
+            >
+              {selected.map((item) => (
                 <Chip
-                  key={topping}
-                  label={topping}
+                  key={item}
+                  label={item}
                   sx={{
-                    bgcolor: "var(--secondary-color)",
+                    bgcolor: "var(--primary-color)",
                     color: "white",
                     fontWeight: "bold",
+                    px: 1,
+                    py: 0.5,
+                    fontSize: "0.75rem",
+                    borderRadius: "8px",
+                    whiteSpace: 'nowrap',
                   }}
                 />
               ))}
-            </Stack>
+            </Box>
           )}
         >
           {availableToppings.map((topping) => (
@@ -236,9 +281,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           ))}
         </Select>
       </FormControl>
-
       <FormControl
-        fullWidth
         variant="outlined"
         sx={{
           mt: 3,
@@ -246,6 +289,14 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           backdropFilter: "blur(8px)",
           borderRadius: "12px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+          width: {
+            xs: "10rem",
+            sm: "95%",
+            md: "90%",
+            lg: "85%",
+            xl: "80%",
+          },
+         
         }}
       >
         <InputLabel id="color-label"> Color</InputLabel>
@@ -266,39 +317,36 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
         </Select>
       </FormControl>
 
-      <FormControl
-        fullWidth
+      <TextField
+        id="custom-text"
+        label="Cake Text"
         variant="outlined"
+        value={customText}
+        onChange={(e) => setCustomText(e.target.value)}
+        placeholder="Happy Birthday Sarah"
+        fullWidth
+        InputLabelProps={{
+          sx: {
+            color: "var(--primary-color)",
+            fontSize: "0.85rem",
+          },
+        }}
         sx={{
-          mt: 3,
           backgroundColor: "rgba(255, 255, 255, 0.6)",
           backdropFilter: "blur(8px)",
           borderRadius: "12px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+          mt: 1,
+          maxWidth: "800px",
+          width: {
+            xs: "100%",
+            sm: "95%",
+            md: "90%",
+            lg: "85%",
+            xl: "80%",
+          },
         }}
-      >
-        <InputLabel
-          shrink
-          htmlFor="custom-text"
-          sx={{ color: "var(--secondary-color)" }}
-        >
-          Cake Text
-        </InputLabel>
-        <TextField
-          id="custom-text"
-          fullWidth
-          variant="outlined"
-          value={customText}
-          onChange={(e) => setCustomText(e.target.value)}
-          placeholder="Happy Birthday Sarah"
-          sx={{
-            backgroundColor: "rgba(255, 255, 255, 0.6)",
-            backdropFilter: "blur(8px)",
-            borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-          }}
-        />
-      </FormControl>
+      />
     </Box>
   );
 };
