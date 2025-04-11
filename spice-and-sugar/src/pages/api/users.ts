@@ -3,8 +3,9 @@ import supabase from "../../lib/supabase";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  console.log(req)
   if (req.method !== "POST") {
-    console.log(req)
+   
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
