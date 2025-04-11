@@ -15,15 +15,6 @@ const photosList = [
 ];
 
 export default function Hero() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % photosList.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <Box
       id="Hero"
@@ -38,25 +29,6 @@ export default function Hero() {
         textAlign: "center",
       }}
     >
-      {/* {photosList.map((photo, index) => (
-        <Box
-          key={index}
-          component="img"
-          src={photo}
-          alt={`Slide ${index}`}
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: index === currentIndex ? 1 : 0,
-            transition: "opacity 1s ease-in-out",
-            zIndex: 0,
-          }}
-        />
-      ))} */}
 
       <Box
         sx={{

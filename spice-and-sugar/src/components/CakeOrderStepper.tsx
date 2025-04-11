@@ -6,8 +6,6 @@ import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { useRouter } from "next/navigation";
 import { OrderDetails } from "@/types";
 
-const steps: string[] = [];
-
 const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState<number>(0);
