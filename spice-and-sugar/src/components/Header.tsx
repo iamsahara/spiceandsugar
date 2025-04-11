@@ -26,6 +26,7 @@ export default function Header({ userName }: HeaderProps) {
         boxShadow: "none",
         backdropFilter: "none",
         pointerEvents: "none", 
+  
       }}
     >
       <Stack direction="row" alignItems="center" spacing={2} sx={{ pointerEvents: "auto", px: 2, py: 1 }}>
