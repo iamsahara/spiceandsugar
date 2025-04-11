@@ -165,7 +165,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           borderRadius: "12px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
           width: {
-            xs: "20rem",
+            xs: "17rem",
             sm: "95%",
             md: "90%",
             lg: "85%",
@@ -227,7 +227,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           borderRadius: "12px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
           width: {
-            xs: "20rem",
+            xs: "17rem",
             sm: "95%",
             md: "90%",
             lg: "85%",
@@ -289,7 +289,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           borderRadius: "12px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
           width: {
-            xs: "10rem",
+            xs: "17rem",
             sm: "95%",
             md: "90%",
             lg: "85%",
@@ -338,7 +338,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           mt: 1,
           maxWidth: "800px",
           width: {
-            xs: "20rem",
+            xs: "17rem",
             sm: "95%",
             md: "90%",
             lg: "85%",
