@@ -77,7 +77,7 @@ const LoginPage = () => {
           justifyContent: "center",
           gap: 1,
           p: 2,
-          mt: "7rem",
+          mt: "6rem",
           borderRadius: "20px",
           backgroundColor: "rgba(255, 255, 255, 0.25)",
           backdropFilter: "blur(10px)",

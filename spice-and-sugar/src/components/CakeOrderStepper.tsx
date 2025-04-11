@@ -112,12 +112,12 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
         }}
       >
         <Typography sx={{ color: "var(--text-color)", fontWeight: "800" }}>
-          Bake It Your Way!{" "}
+          Bake It Your Way{" "}
         </Typography>
         <Box
           sx={{
             fontWeight: "bold",
-            px: 5,
+            px: 1.5,
             py: 1.5,
             borderRadius: "999px",
             background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
