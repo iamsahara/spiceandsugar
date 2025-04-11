@@ -69,8 +69,8 @@ const LoginPage = () => {
       <Box
         sx={{
           position: "absolute",
-          width: "30rem",
-          maxHeight: "30rem",
+          width: "20rem",
+          maxHeight: "35rem",
           display: "flex",
           flexDirection: "column",
           alignContent: "center",

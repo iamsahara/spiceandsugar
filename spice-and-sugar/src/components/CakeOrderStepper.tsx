@@ -38,7 +38,9 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
   };
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (activeStep === 0 || activeStep === 1) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }, [activeStep]);
 
   const renderStepContent = (step: number): React.ReactNode => {
