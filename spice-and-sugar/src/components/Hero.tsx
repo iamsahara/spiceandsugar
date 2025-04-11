@@ -1,18 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
 import { Box, Button, Stack } from "@mui/material";
-
-const photosList = [
-  "/IMG_6080.jpg",
-  "/IMG_6091.jpg",
-  "/IMG_6092.jpg",
-  "/IMG_6082.jpg",
-  "/IMG_6086.jpg",
-  "/IMG_6087.jpg",
-  "/IMG_6084.jpg",
-  "/IMG_6079.jpg",
-  "/IMG_6091.jpg"
-];
 
 export default function Hero() {
   return (
