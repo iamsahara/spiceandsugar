@@ -80,8 +80,9 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
       top: "7rem",
       left: "50%",
       transform: "translateX(-50%)",
-      width: "30rem",
-      maxHeight: "30rem",
+      width: "90%",
+      maxWidth: "800px",
+      minHeight: "60vh",
       display: "flex",
       flexDirection: "column",
       alignContent: "center",
@@ -93,6 +94,8 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
       backdropFilter: "blur(10px)",
       border: "1px solid rgba(255, 255, 255, 0.3)",
       boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+      mx: "auto",
+      my: { xs: 3, md: 6 },
       }}
     >
       <Stepper
@@ -102,14 +105,14 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
           position: "sticky",
           zIndex: 10,
           backdropFilter: "blur(5px)",
-          padding: "1.5rem",
+          px: { xs: 2, sm: 4 },
+          py: { xs: 1, sm: 2 },
           borderRadius: "1rem",
           boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
           display: "flex",
           justifyContent: "center",
           alignSelf: "center",
           alignItems: "center",
-        
           gap: 1,
         }}
       >
@@ -140,12 +143,10 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
           flexDirection: "column",
           alignItems: "center",
           width: "100%",
-          overflow: "auto",
-          height: "25rem",
-          alignittems: "center",
-          justifyItems: "center",
-
-     
+          overflowY: "auto",
+          maxHeight: "35vh",
+          padding: { xs: 2, sm: 3, md: 4 },
+          gap: { xs: 2, sm: 3 },
         }}
       >
         <Box sx={{ width: "100%" }}>{renderStepContent(activeStep)}</Box>
@@ -169,26 +170,29 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
           mt: "2rem",
         }}
       >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleNext}
-          sx={{
-            fontWeight: "bold",
-            px: 5,
-            py: 1.5,
-            borderRadius: "999px",
-            background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
-            color: "#fff",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-            transition: "all 0.3s ease",
-            "&:hover": {
-              background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
-            },}}
-        >
-          {activeStep === steps.length - 1 ? "Finish" : " Review My Order"}
-        </Button>
+        {activeStep === 0 && (
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={handleNext}
+    sx={{
+      fontWeight: "bold",
+      px: 5,
+      py: 1.5,
+      borderRadius: "999px",
+      background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+      color: "#fff",
+      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+      transition: "all 0.3s ease",
+      "&:hover": {
+        background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+        boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+      },
+    }}
+  >
+    Review Order
+  </Button>
+)}
       </Box>
     </Box>
   );
