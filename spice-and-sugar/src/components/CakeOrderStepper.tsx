@@ -1,11 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Button,
-  Stepper,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Stepper, Typography } from "@mui/material";
 import Step1CakeSelection from "./steps/Step1CakeSelection";
 import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { useRouter } from "next/navigation";
@@ -75,27 +70,27 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
 
   return (
     <Box
-    sx={{
-      position: "absolute",
-      top: "7rem",
-      left: "50%",
-      transform: "translateX(-50%)",
-      width: "90%",
-      maxWidth: "800px",
-      minHeight: "60vh",
-      display: "flex",
-      flexDirection: "column",
-      alignContent: "center",
-      justifyContent: "center",
-      gap: 1,
-      p: 2,
-      borderRadius: "20px",
-      backgroundColor: "rgba(255, 255, 255, 0.25)",
-      backdropFilter: "blur(10px)",
-      border: "1px solid rgba(255, 255, 255, 0.3)",
-      boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
-      mx: "auto",
-      my: { xs: 3, md: 6 },
+      sx={{
+        position: "absolute",
+        top: "7rem",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "90%",
+        maxWidth: "800px",
+        height: "70%", 
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center",
+        justifyContent: "center",
+        gap: 1,
+        p: 2,
+        borderRadius: "20px",
+        backgroundColor: "rgba(255, 255, 255, 0.25)",
+        backdropFilter: "blur(10px)",
+        border: "1px solid rgba(255, 255, 255, 0.3)",
+        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+        mx: "auto",
+        my: { xs: 3, md: 6 },
       }}
     >
       <Stepper
@@ -116,23 +111,24 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
           gap: 1,
         }}
       >
-        <Typography sx={{color: "var(--text-color)", fontWeight: "800" }}>
-        Bake It Your Way!{" "}
+        <Typography sx={{ color: "var(--text-color)", fontWeight: "800" }}>
+          Bake It Your Way!{" "}
         </Typography>
         <Box
-       sx={{
-        fontWeight: "bold",
-        px: 5,
-        py: 1.5,
-        borderRadius: "999px",
-        background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
-        color: "#fff",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-        transition: "all 0.3s ease",
-        "&:hover": {
-          background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-          boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
-        },}}
+          sx={{
+            fontWeight: "bold",
+            px: 5,
+            py: 1.5,
+            borderRadius: "999px",
+            background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+            color: "#fff",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+            },
+          }}
         >
           Total: ${orderDetails.price.toFixed(2)}
         </Box>
@@ -171,28 +167,28 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
         }}
       >
         {activeStep === 0 && (
-  <Button
-    variant="contained"
-    color="primary"
-    onClick={handleNext}
-    sx={{
-      fontWeight: "bold",
-      px: 5,
-      py: 1.5,
-      borderRadius: "999px",
-      background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
-      color: "#fff",
-      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-      transition: "all 0.3s ease",
-      "&:hover": {
-        background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-        boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
-      },
-    }}
-  >
-    Review Order
-  </Button>
-)}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleNext}
+            sx={{
+              fontWeight: "bold",
+              px: 5,
+              py: 1.5,
+              borderRadius: "999px",
+              background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+              color: "#fff",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease",
+              "&:hover": {
+                background: "linear-gradient(135deg, #d87d98, #f1aebb)",
+                boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+              },
+            }}
+          >
+            Review Order
+          </Button>
+        )}
       </Box>
     </Box>
   );

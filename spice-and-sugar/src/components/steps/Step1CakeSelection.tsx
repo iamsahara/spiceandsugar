@@ -27,14 +27,6 @@ const tierAnimations = [
   { tier: 3, animation: animation5 },
 ];
 
-// interface OrderDetails {
-//   cakeType: "Sponge Cake" | "Butter Cake" | "Fondant Cake";
-//   weight: number;
-//   shape: "Square" | "Round" | "Heart" | "Rectangle";
-//   levels: number;
-//   price: number;
-// }
-
 type Step1Props = {
   onNext: () => void;
   onBack: () => void;
@@ -59,13 +51,19 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
 }) => {
   const [selectedCakeType, setSelectedCakeType] = useState<
     "Sponge Cake" | "Butter Cake" | "Fondant Cake"
-  >(orderDetails.cakeType as "Sponge Cake" | "Butter Cake" | "Fondant Cake" || "Sponge Cake");
+  >(
+    (orderDetails.cakeType as "Sponge Cake" | "Butter Cake" | "Fondant Cake") ||
+      "Sponge Cake"
+  );
   const [selectedWeight, setSelectedWeight] = useState<number>(
     orderDetails.weight || 1
   );
   const [selectedShape, setSelectedShape] = useState<
     "Square" | "Round" | "Heart" | "Rectangle"
-  >(orderDetails.shape as "Square" | "Round" | "Heart" | "Rectangle" || "Square");
+  >(
+    (orderDetails.shape as "Square" | "Round" | "Heart" | "Rectangle") ||
+      "Square"
+  );
   const [cakeTiers, setCakeTiers] = useState<number>(orderDetails.levels || 1);
   const [price, setPrice] = useState(orderDetails.price || 18.65);
 
@@ -117,7 +115,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         height: "900px",
       }}
     >
-      <Stack spacing={1} alignItems="center">
+      <Stack spacing={2} alignItems="center">
         <Box
           sx={{
             display: "flex",
@@ -131,8 +129,8 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               <Card
                 key={type}
                 sx={{
-                  width: 80,
-                  height: 130,
+                  width: "7rem",
+                  height: "9rem",
                   borderRadius: "8px",
                   border:
                     selectedCakeType === type
@@ -149,13 +147,13 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
                 }
               >
                 <CardContent sx={{ textAlign: "center", p: 1 }}>
-                <Image
-  src={`/cake-${type}.png`}
-  alt={`${type} cake`}
-  width={80}
-  height={80}
-  style={{ width: "100%", height: "auto" }}
-/>
+                  <Image
+                    src={`/cake-${type}.png`}
+                    alt={`${type} cake`}
+                    width={80}
+                    height={80}
+                    style={{ width: "100%", height: "auto" }}
+                  />
                   <Typography sx={{ fontSize: "0.6rem", fontWeight: "bold" }}>
                     {type}
                   </Typography>
@@ -262,7 +260,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
             shape: selectedShape,
             levels: cakeTiers,
             price,
-            filling: orderDetails.filling || "", 
+            filling: orderDetails.filling || "",
             toppings: orderDetails.toppings || [],
           }}
         />
@@ -272,7 +270,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         sx={{
           position: "absolute",
           top: "6%",
-          left: "95%",
+          right: "auto",
           transform: "translateX(-90%)",
           zIndex: 5,
           opacity: 0.8,

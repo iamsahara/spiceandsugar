@@ -24,7 +24,6 @@ export default function Header({ userName }: HeaderProps) {
         zIndex: 1000,
         background: "transparent",
         boxShadow: "none",
-        borderRadius: 0,
         backdropFilter: "none",
         pointerEvents: "none", 
       }}
@@ -32,7 +31,7 @@ export default function Header({ userName }: HeaderProps) {
       <Stack direction="row" alignItems="center" spacing={2} sx={{ pointerEvents: "auto", px: 2, py: 1 }}>
         <motion.div
           initial={{ rotate: 0 }}
-          animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.1, 1.05, 1] }}
+          animate={{ rotate: [0, 5, -3, 0], scale: [1, 1, 1, 1] }}
           transition={{
             duration: 4,
             repeat: Infinity,
@@ -46,7 +45,7 @@ export default function Header({ userName }: HeaderProps) {
             boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <Image src="/veloralogo.png" alt="Velora" width={70} height={70} />
+          <Image src="/veloralogo.png" alt="Velora" width={80} height={70} />
         </motion.div>
 
         {userName && (
@@ -54,8 +53,8 @@ export default function Header({ userName }: HeaderProps) {
             variant="h6"
             sx={{
               px: 2,
-              py: 0.5,
-              borderRadius: "12px",
+              py: 2,
+              borderRadius: "50%",
               fontWeight: "bold",
               color: "#6D6875",
               fontSize: { xs: "0.85rem", md: "1rem" },
@@ -79,17 +78,17 @@ export default function Header({ userName }: HeaderProps) {
             size="medium"
             sx={{
               minWidth: "48px",
-              background: "#fff0f5",
+              // background: "#fff0f5",
               color: "var(--primary-color)",
               fontWeight: "600",
               fontFamily: '"Poppins", sans-serif',
               textTransform: "none",
               borderRadius: "50%",
-              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.1)",
+              // boxShadow: "0 6px 18px rgba(0, 0, 0, 0.1)",
               transition: "all 0.3s ease",
               padding: "10px",
               "&:hover": {
-                backgroundColor: "#f8d7e8",
+                // backgroundColor: "#f8d7e8",
                 transform: "scale(1.05)",
                 boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
               },
