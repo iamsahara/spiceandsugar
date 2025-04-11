@@ -13,9 +13,9 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import Lottie from "lottie-react";
-import animation3 from "../../../public/animations/5.json";
-import animation4 from "../../../public/animations/4.json";
-import animation5 from "../../../public/animations/3.json";
+import animation3 from "../../animations/2.json";
+import animation4 from "../../animations/4.json";
+import animation5 from "../../animations/3.json";
 import Step2FlavorFillingToppingText from "@/components/steps/Step2FlavorFillingToppingText";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import { OrderDetails } from "@/types";
