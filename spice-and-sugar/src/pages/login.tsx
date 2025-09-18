@@ -28,33 +28,33 @@ const LoginPage = () => {
   }, []);
 
   const handleGuestSignIn = async () => {
-    if (!user.name.trim() || !user.email.trim()) {
-      setErrorMessage("Name and Email are required!");
-      return;
-    }
-    setIsSubmitting(true);
-    setErrorMessage("");
+    // if (!user.name.trim() || !user.email.trim()) {
+    //   setErrorMessage("Name and Email are required!");
+    //   return;
+    // }
+    // // setIsSubmitting(true);
+    // setErrorMessage("");
 
     try {
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
-        }),
-      });
+      // const response = await fetch("/api/users", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({
+      //     name: user.name,
+      //     email: user.email,
+      //     phone: user.phone,
+      //   }),
+      // });
 
-      if (!response.ok) {
-        throw new Error("Failed to create user.");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to create user.");
+      // }
 
-      const data = await response.json();
-      console.log("✅ User saved:", data);
-
+      // const data = await response.json();
+      // console.log("✅ User saved:", data);
+     const data = { user: { id: 1, ...user } }; // Mocked response
       localStorage.setItem("guestUser", JSON.stringify(data.user));
-      console.log(`User authenticated: ${user.name}`);
+      // console.log(`User authenticated: ${user.name}`);
       router.push("/cakeOrder");
     } catch (error) {
       console.error("❌ Error saving user:", error);
