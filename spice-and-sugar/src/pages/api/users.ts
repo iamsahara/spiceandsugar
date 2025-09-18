@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 // import supabase from "../../lib/supabase";
 
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, _res: NextApiResponse) {
   console.log("request/users", req)
   // if (req.method === 'POST') {
   //   // Handle the POST logic here
