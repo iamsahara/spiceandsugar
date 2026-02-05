@@ -1,20 +1,29 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap");
 
 :root {
-  --primary-color:  #8EC5C0;
-  --secondary-color: #FF4081;
-  --backgRound-color: #fff8f1;
-  --text-color: #333;
-  --button-hover:  #7AB8AE;
+  --primary-color: #f06f5f;
+  --secondary-color: #7fb7a4;
+  --accent-color: #f2b39b;
+  --background-color: #fff6ef;
+  --surface-color: rgba(255, 255, 255, 0.86);
+  --text-color: #2d2523;
+  --muted-text: #6c5f5b;
+  --button-hover: #e45c4f;
+  --shadow-soft: 0 12px 30px rgba(32, 24, 22, 0.12);
+  --shadow-medium: 0 16px 36px rgba(32, 24, 22, 0.18);
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
 
 }
 
 body {
-  font-family: "Poppins", sans-serif; 
-  color: #333; 
+  font-family: "Manrope", sans-serif; 
+  color: var(--text-color); 
   margin: 0;
   padding: 0;
-  width: "100%";
+  width: 100%;
+  background: var(--background-color);
 }
 
 button {
@@ -23,17 +32,18 @@ button {
   padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   transition: all 0.3s ease-in-out;
 }
 
 button:hover {
-  backgRound-color: var(--button-hover);
-  color: black;
+  background-color: var(--button-hover);
+  color: #fff;
 }
 
 h1, h2, h3, h4 {
   font-weight: 600;
+  font-family: "Fraunces", serif;
 }
 
 h1 {

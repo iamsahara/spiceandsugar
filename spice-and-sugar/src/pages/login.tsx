@@ -28,61 +28,58 @@ const LoginPage = () => {
   }, []);
 
   const handleGuestSignIn = async () => {
-    if (!user.name.trim() || !user.email.trim()) {
-      setErrorMessage("Name and Email are required!");
+    if (!user.name.trim()) {
+      setErrorMessage("Name is required!");
       return;
     }
     setIsSubmitting(true);
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to create user.");
-      }
-
-      const data = await response.json();
-      console.log("✅ User saved:", data);
-
-      localStorage.setItem("guestUser", JSON.stringify(data.user));
+      const guestUser = {
+        name: user.name.trim(),
+        email: user.email.trim() || null,
+        phone: user.phone.trim() || null,
+      };
+      localStorage.setItem("guestUser", JSON.stringify(guestUser));
       console.log(`User authenticated: ${user.name}`);
-      router.push("/cakeOrder");
+      router.push("/");
     } catch (error) {
       console.error("❌ Error saving user:", error);
-      setErrorMessage("Failed to sign in. Try again.");
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("Failed to sign in. Try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", overflow: "hidden" }}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        px: 2,
+        pt: { xs: 10, md: 12 },
+        pb: 6,
+      }}
+    >
       <Box
         sx={{
-          position: "absolute",
-          width: "30rem",
-          maxHeight: "30rem",
+          width: "min(92vw, 420px)",
           display: "flex",
           flexDirection: "column",
-          alignContent: "center",
-          justifyContent: "center",
-          gap: 1,
-          p: 2,
-          mt: "7rem",
-          borderRadius: "20px",
-          backgroundColor: "rgba(255, 255, 255, 0.25)",
-          backdropFilter: "blur(10px)",
-          border: "1px solid rgba(255, 255, 255, 0.3)",
-          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+          gap: 1.5,
+          p: { xs: 3, sm: 4 },
+          borderRadius: "var(--radius-lg)",
+          backgroundColor: "var(--surface-color)",
+          backdropFilter: "blur(12px)",
+          border: "1px solid rgba(255, 255, 255, 0.6)",
+          boxShadow: "var(--shadow-soft)",
         }}
       >
         <Box
@@ -91,6 +88,7 @@ const LoginPage = () => {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "row",
+            gap: 1,
           }}
         >
           <Lottie options={defaultOptions} height={90} width={120} />
@@ -102,7 +100,7 @@ const LoginPage = () => {
               color: "var(--text-color)",
               textAlign: "center",
               mb: 3,
-              fontFamily: '"Poppins", sans-serif',
+              fontFamily: '"Fraunces", serif',
             }}
           >
             Start Your Cake Journey Here!
@@ -120,7 +118,7 @@ const LoginPage = () => {
 
         <TextField
           fullWidth
-          label="Email"
+          label="Email (Optional)"
           type="email"
           variant="outlined"
           value={user.email}
@@ -153,13 +151,13 @@ const LoginPage = () => {
             px: 5,
             py: 1.5,
             borderRadius: "999px",
-            background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+            background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
             color: "#fff",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
             transition: "all 0.3s ease",
             "&:hover": {
-              background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+              background: "linear-gradient(135deg, #e45c4f, #f0a88f)",
+              boxShadow: "0 10px 22px rgba(240, 111, 95, 0.34)",
             },
           }}
         >

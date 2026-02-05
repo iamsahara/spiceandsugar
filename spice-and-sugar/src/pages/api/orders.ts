@@ -1,16 +1,34 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import supabase from "../../lib/supabase";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { createClient } from "@supabase/supabase-js";
 
+const supabaseUrl =
+  process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+if (!supabaseUrl || !serviceRoleKey) {
+  // eslint-disable-next-line no-console
+  console.error(
+    "Missing Supabase env vars. Set NEXT_PUBLIC_SUPABASE_URL (or SUPABASE_URL) and SUPABASE_SERVICE_ROLE_KEY."
+  );
+}
+
+const supabase = createClient(supabaseUrl ?? "", serviceRoleKey ?? "");
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
+    res.setHeader("Allow", ["POST"]);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
   try {
-    console.log("📥 Received order request:", req.body);
-
+    const body = req.body as Record<string, unknown>;
     const {
+      user_name,
+      phone,
+      email,
       cakeType,
       shape,
       levels,
@@ -20,44 +38,37 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       toppings,
       customText,
       price,
-      imageUrl,
+      image_url,
       extraDescription,
-    } = req.body;
+    } = body;
 
-    if (!cakeType || !shape || !levels || !color || !weight || !price) {
-      console.error("❌ Missing required fields:", { cakeType, shape, levels, color, weight, price });
-      return res.status(400).json({ message: "Missing required fields" });
-    }
-
-    const { data, error } = await supabase
-      .from("orders")
-      .insert([
-        {
-          cake_type: cakeType,
-          shape,
-          levels,
-          color,
-          weight,
-          filling,
-          toppings,
-          custom_text: customText,
-          total_price: price,
-          image_url: imageUrl,
-          extra_notes: extraDescription,
-        },
-      ])
-      .select()
-      .single();
+    const { data, error } = await supabase.from("orders").insert([
+      {
+        user_name,
+        phone,
+        email,
+        cake_type: cakeType,
+        shape,
+        levels,
+        color,
+        weight,
+        filling,
+        toppings,
+        custom_text: customText,
+        price,
+        image_url,
+        extra_description: extraDescription,
+      },
+    ]);
 
     if (error) {
-      console.error("❌ Database Insert Error:", error);
-      return res.status(500).json({ message: "Failed to insert order into database", error });
+      return res.status(500).json({ message: "Error saving order", error });
     }
-    console.log("✅ Order saved successfully:", data);
-    return res.status(201).json({ message: "Order submitted successfully", order: data });
 
+    return res
+      .status(201)
+      .json({ message: "Order saved successfully!", data });
   } catch (error) {
-    console.error("❌ Server Error:", error);
-    return res.status(500).json({ message: "Internal Server Error", error });
+    return res.status(500).json({ message: "Internal server error", error });
   }
 }

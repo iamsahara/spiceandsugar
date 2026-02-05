@@ -95,14 +95,6 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
     });
   }, [selectedCakeType, selectedWeight, selectedShape, cakeTiers]);
 
-  function handleBack(): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function handleNext(): void {
-    throw new Error("Function not implemented.");
-  }
-
   return (
     <Box
       className="step1-wrapper"
@@ -112,7 +104,8 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         flexDirection: "column",
         justifyContent: "center",
         position: "relative",
-        height: "900px",
+        minHeight: "100%",
+        pb: 4,
       }}
     >
       <Stack spacing={2} alignItems="center">
@@ -129,16 +122,16 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
               <Card
                 key={type}
                 sx={{
-                  width: "7rem",
-                  height: "9rem",
-                  borderRadius: "8px",
+                  width: { xs: "6.5rem", sm: "7.5rem" },
+                  height: { xs: "8.5rem", sm: "9.5rem" },
+                  borderRadius: "14px",
                   border:
                     selectedCakeType === type
                       ? "2px solid var(--secondary-color)"
-                      : "2px solid #E0E0E0",
+                      : "1px solid rgba(45, 37, 35, 0.15)",
                   cursor: "pointer",
                   transition: "all 0.3s",
-                  "&:hover": { transform: "scale(1.05)" },
+                  "&:hover": { transform: "translateY(-4px)" },
                 }}
                 onClick={() =>
                   setSelectedCakeType(
@@ -174,10 +167,10 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         <FormControl
           sx={{
             mt: 0,
-            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backgroundColor: "rgba(255, 255, 255, 0.85)",
             backdropFilter: "blur(8px)",
             borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+            boxShadow: "0 6px 16px rgba(32, 24, 22, 0.08)",
           }}
         >
           <InputLabel id="weight-label">Weight</InputLabel>
@@ -198,10 +191,10 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
           sx={{
             m: 1,
             width: 300,
-            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            backgroundColor: "rgba(255, 255, 255, 0.85)",
             backdropFilter: "blur(8px)",
             borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+            boxShadow: "0 6px 16px rgba(32, 24, 22, 0.08)",
           }}
         >
           <InputLabel id="shape-label">Shape</InputLabel>
@@ -233,9 +226,11 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
                 border:
                   cakeTiers === tier
                     ? "2px solid var(--secondary-color)"
-                    : "2px solid #E0E0E0",
-                borderRadius: "8px",
-                padding: "2px",
+                    : "1px solid rgba(45, 37, 35, 0.15)",
+                borderRadius: "12px",
+                padding: "6px",
+                transition: "all 0.2s ease",
+                "&:hover": { transform: "translateY(-2px)" },
               }}
             >
               <Lottie
@@ -250,8 +245,8 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         </Stack>
 
         <Step2FlavorFillingToppingText
-          onBack={handleBack}
-          onNext={handleNext}
+          onBack={() => undefined}
+          onNext={() => undefined}
           updateOrder={updateOrder}
           orderDetails={{
             ...orderDetails,
@@ -260,7 +255,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
             shape: selectedShape,
             levels: cakeTiers,
             price,
-            filling: orderDetails.filling || "",
+            filling: orderDetails.filling || [],
             toppings: orderDetails.toppings || [],
           }}
         />

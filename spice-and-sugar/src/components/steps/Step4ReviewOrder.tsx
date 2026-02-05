@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -10,13 +10,13 @@ import {
   Divider,
   TextField,
   Link,
+  Snackbar,
 } from "@mui/material";
-import { CldUploadWidget, CldImage } from "next-cloudinary";
-import PaymentIcon from "@mui/icons-material/Payment";
-import AppleIcon from "@mui/icons-material/Apple";
+import { CldImage } from "next-cloudinary";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { OrderDetails } from "@/types";
+import { addToCart } from "@/lib/cart";
 
 
 interface Step4Props {
@@ -34,7 +34,15 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
   const [extraDescription, setExtraDescription] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
-  const [uploadError, setUploadError] = useState("");
+  const [isPaying, setIsPaying] = useState(false);
+  const [paymentError, setPaymentError] = useState("");
+  const [addedOpen, setAddedOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, []);
 
   const cakeDescription = `
   A ${orderDetails.levels}-tier ${orderDetails.shape.toLowerCase()} ${
@@ -81,26 +89,73 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
     }
   };
 
+  const handleCheckout = async () => {
+    setIsPaying(true);
+    setPaymentError("");
+    try {
+      const response = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: orderDetails.price,
+          description: cakeDescription.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data?.error || "Failed to start checkout.");
+      }
+
+      const data = await response.json();
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error("Missing checkout URL.");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        setPaymentError(error.message);
+      } else {
+        setPaymentError("Payment failed. Please try again.");
+      }
+    } finally {
+      setIsPaying(false);
+    }
+  };
+
+  const handleAddCustomToCart = () => {
+    addToCart({
+      id: `custom-${Date.now()}`,
+      name: "Custom Cake Order",
+      price: orderDetails.price,
+      quantity: orderDetails.weight || 1,
+      type: "custom",
+      details: cakeDescription.trim(),
+    });
+    setAddedOpen(true);
+  };
+
   return (
     <Box
       sx={{
         minHeight: "800px",
         p: { xs: 3, md: 5 },
-        borderRadius: "28px",
+        borderRadius: "var(--radius-lg)",
         mx: "auto",
         textAlign: "center",
-        backgroundColor: "rgba(255, 255, 255, 0.2)",
-        backdropFilter: "blur(16px)",
-        boxShadow: "0 12px 36px rgba(0, 0, 0, 0.2)",
+        backgroundColor: "rgba(255, 255, 255, 0.88)",
+        backdropFilter: "blur(14px)",
+        boxShadow: "var(--shadow-soft)",
         transition: "all 0.3s ease-in-out",
         maxWidth: 700,
       }}
     >
       <Card sx={{
         mb: 3,
-        boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+        boxShadow: "0 8px 18px rgba(32, 24, 22, 0.1)",
         borderRadius: "16px",
-        backgroundColor: "rgba(255,255,255,0.85)",
+        backgroundColor: "rgba(255,255,255,0.95)",
       }}>
         <CardContent>
           <Stack direction="row" alignItems="center" spacing={2} flexWrap="wrap">
@@ -110,7 +165,7 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
               fontWeight="bold"
               color="var(--secondary-color)"
             >
-             
+              Review Your Order
             </Typography>
           </Stack>
           <Divider sx={{ mb: 2 }} />
@@ -129,53 +184,12 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
           width={250}
           height={250}
           alt="Cake reference"
-          style={{ borderRadius: "16px", marginBottom: "20px", boxShadow: "0 4px 14px rgba(0,0,0,0.1)" }}
-        />
-      )}
-      {typeof window !== "undefined" && (
-        <CldUploadWidget
-          uploadPreset={"My_preset"}
-          onSuccess={(result) => {
-            setUploadError("");
-            if (result.info && typeof result.info === "object") {
-              const uploadedImage = result.info.secure_url;
-              if (typeof updateOrder === "function") {
-                updateOrder({ imageUrl: uploadedImage }); 
-              } else {
-                console.error("❌ updateOrder is not a function. Check if it's passed correctly.");
-              }
-            }
+          style={{
+            borderRadius: "16px",
+            marginBottom: "20px",
+            boxShadow: "0 4px 14px rgba(0,0,0,0.1)",
           }}
-        >
-          {({ open }) => (
-            <Button
-              variant="contained"
-              onClick={() => open()}
-              sx={{
-                fontWeight: "bold",
-                px: 5,
-                py: 1.5,
-                borderRadius: "999px",
-                background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
-                color: "#fff",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-                  boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
-                },
-              }}
-            >
-              Upload Image 📸 
-            </Button>
-          )}
-        </CldUploadWidget>
-      )}
-
-      {uploadError && (
-        <Typography color="error" sx={{ mt: 1, fontSize: "0.85rem" }}>
-          {uploadError}
-        </Typography>
+        />
       )}
 
       <Box sx={{ mb: 2 }}>
@@ -206,13 +220,13 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
               px: 5,
               py: 1.5,
               borderRadius: "999px",
-              background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+              background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
               color: "#fff",
-              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+              boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
               transition: "all 0.3s ease",
               "&:hover": {
-                background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-                boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+                background: "linear-gradient(135deg, #e45c4f, #f0a88f)",
+                boxShadow: "0 10px 22px rgba(240, 111, 95, 0.34)",
               },}}
       >
         {isSubmitting ? "Submitting..." : "Submit Order"}
@@ -224,32 +238,77 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
         </Typography>
       )}
 
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5} sx={{ mt: 2 }}>
+        <Button
+          variant="outlined"
+          onClick={handleAddCustomToCart}
+          sx={{
+            borderRadius: "999px",
+            px: 3,
+            py: 1.1,
+            borderColor: "rgba(45, 37, 35, 0.3)",
+            color: "var(--text-color)",
+            "&:hover": {
+              borderColor: "rgba(240, 111, 95, 0.6)",
+              backgroundColor: "rgba(240, 111, 95, 0.08)",
+            },
+          }}
+        >
+          Add Custom Cake to Cart
+        </Button>
+        <Button
+          variant="text"
+          href="/cart"
+          sx={{
+            borderRadius: "999px",
+            px: 2.5,
+            py: 1.1,
+            textTransform: "none",
+          }}
+        >
+          Go to Cart
+        </Button>
+      </Stack>
+      <Snackbar
+        open={addedOpen}
+        autoHideDuration={2000}
+        onClose={() => setAddedOpen(false)}
+        message="Custom cake added to basket"
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      />
+
       <Stack spacing={1.5} alignItems="center" sx={{ mt: 2 }}>
         <Typography variant="body2" fontWeight="medium">
           Proceed to the payment:
         </Typography>
 
-        <Stack direction="row" spacing={1}>
-          <Button variant="contained" size="small" disabled={!orderConfirmed} sx={{
-            borderRadius: 2,
-            px: 2.5,
-            py: 1,
-            fontSize: "0.875rem",
+        <Button
+          variant="contained"
+          size="small"
+          onClick={handleCheckout}
+          disabled={isPaying}
+          sx={{
+            borderRadius: "999px",
+            px: 3,
+            py: 1.25,
+            fontSize: "0.95rem",
             textTransform: "none",
-          }}>
-            <PaymentIcon fontSize="small" sx={{ mr: 0.5 }} /> Credit Card
-          </Button>
+            background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
+            boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
+            "&:hover": {
+              background: "linear-gradient(135deg, #e45c4f, #f0a88f)",
+              boxShadow: "0 10px 22px rgba(240, 111, 95, 0.34)",
+            },
+          }}
+        >
+          {isPaying ? "Redirecting..." : "Pay with Card"}
+        </Button>
 
-          <Button variant="contained" size="small" disabled={!orderConfirmed} sx={{
-            borderRadius: 2,
-            px: 2.5,
-            py: 1,
-            fontSize: "0.875rem",
-            textTransform: "none",
-          }}>
-            <AppleIcon fontSize="small" sx={{ mr: 0.5 }} /> Apple Pay
-          </Button>
-        </Stack>
+        {paymentError && (
+          <Typography color="error" sx={{ mt: 1, fontSize: "0.85rem" }}>
+            {paymentError}
+          </Typography>
+        )}
 
         <Divider sx={{ width: "80%", my: 2 }} />
 
@@ -259,8 +318,8 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
           variant="outlined"
           sx={{
             border: "2px solid var(--primary-color)",
-            color: "var(--sprimary-color)",
-            backgroundColor: "rgba(255, 255, 255, 0.25)",
+            color: "var(--primary-color)",
+            backgroundColor: "rgba(255, 255, 255, 0.65)",
             fontWeight: "bold",
             px: 3,
             py: 1.25,
@@ -275,7 +334,7 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
             },
           }}
         >
-          <PhoneIcon sx={{ mr: 1 }} /> Once you submit your order, please give us a call to proceed with payment. Online payment is not available yet! 
+          <PhoneIcon sx={{ mr: 1 }} /> Prefer to pay by phone? Call us to finalize your order.
         </Button>
 
         <Button variant="text" onClick={onBack} sx={{
