@@ -4,7 +4,6 @@ import { createClient } from "@supabase/supabase-js";
 const supabaseUrl =
   process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const passcode = process.env.OWNER_DASHBOARD_PASSCODE;
 
 if (!supabaseUrl || !serviceRoleKey) {
   // eslint-disable-next-line no-console
@@ -22,14 +21,6 @@ export default async function handler(
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
-
-  const { passcode: providedPasscode } = req.body as {
-    passcode?: string;
-  };
-
-  if (!passcode || providedPasscode !== passcode) {
-    return res.status(401).json({ error: "Invalid passcode." });
   }
 
   try {

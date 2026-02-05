@@ -167,6 +167,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         <FormControl
           sx={{
             mt: 0,
+            width: { xs: "100%", sm: "auto" },
             backgroundColor: "rgba(255, 255, 255, 0.85)",
             backdropFilter: "blur(8px)",
             borderRadius: "12px",
@@ -190,7 +191,7 @@ const Step1CakeSelection: React.FC<Step1Props> = ({
         <FormControl
           sx={{
             m: 1,
-            width: 300,
+            width: { xs: "100%", sm: 300 },
             backgroundColor: "rgba(255, 255, 255, 0.85)",
             backdropFilter: "blur(8px)",
             borderRadius: "12px",

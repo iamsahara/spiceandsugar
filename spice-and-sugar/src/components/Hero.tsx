@@ -215,7 +215,7 @@ export default function Hero() {
             alt="Velora cake showcase"
             sx={{
               width: "100%",
-              height: { xs: 280, sm: 360, md: 420 },
+              height: { xs: 220, sm: 320, md: 420 },
               objectFit: "cover",
             }}
           />
@@ -266,9 +266,9 @@ export default function Hero() {
           }}
         >
           {featuredCakes.map((cake) => (
-              <Box
-                key={cake.name}
-                sx={{
+            <Box
+              key={cake.name}
+              sx={{
                   borderRadius: "var(--radius-md)",
                   overflow: "hidden",
                   backgroundColor: "var(--surface-color)",
@@ -285,7 +285,7 @@ export default function Hero() {
                   alt={cake.name}
                   sx={{
                     width: "100%",
-                    height: 180,
+                    height: { xs: 160, sm: 180 },
                     objectFit: "cover",
                   }}
                 />

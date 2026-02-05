@@ -31,7 +31,6 @@ type OrderRecord = {
 };
 
 export default function OwnerDashboard() {
-  const [passcode, setPasscode] = useState("");
   const [orders, setOrders] = useState<OrderRecord[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -41,14 +40,14 @@ export default function OwnerDashboard() {
     return { count: orders.length, total };
   }, [orders]);
 
-  const fetchOrders = async (code: string) => {
+  const fetchOrders = async () => {
     setIsLoading(true);
     setError("");
     try {
       const response = await fetch("/api/admin/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ passcode: code }),
+        body: JSON.stringify({}),
       });
 
       if (!response.ok) {
@@ -58,7 +57,6 @@ export default function OwnerDashboard() {
 
       const data = await response.json();
       setOrders(data.orders ?? []);
-      sessionStorage.setItem("ownerPasscode", code);
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -71,11 +69,7 @@ export default function OwnerDashboard() {
   };
 
   useEffect(() => {
-    const saved = sessionStorage.getItem("ownerPasscode");
-    if (saved) {
-      setPasscode(saved);
-      fetchOrders(saved);
-    }
+    fetchOrders();
   }, []);
 
   return (
@@ -134,23 +128,17 @@ export default function OwnerDashboard() {
           alignItems={{ xs: "stretch", sm: "center" }}
           sx={{ mb: 3 }}
         >
-          <TextField
-            label="Owner Passcode"
-            type="password"
-            value={passcode}
-            onChange={(e) => setPasscode(e.target.value)}
-            sx={{ flex: 1 }}
-          />
           <Button
             variant="contained"
-            onClick={() => fetchOrders(passcode)}
-            disabled={!passcode || isLoading}
+            onClick={() => fetchOrders()}
+            disabled={isLoading}
             sx={{
               background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
               boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
+              width: { xs: "100%", sm: "auto" },
             }}
           >
-            {isLoading ? "Loading..." : "Load Orders"}
+            {isLoading ? "Loading..." : "Refresh Orders"}
           </Button>
         </Stack>
 

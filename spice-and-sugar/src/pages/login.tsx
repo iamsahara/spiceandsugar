@@ -64,7 +64,7 @@ const LoginPage = () => {
         alignItems: "center",
         justifyContent: "center",
         px: 2,
-        pt: { xs: 10, md: 12 },
+        pt: { xs: 8, md: 12 },
         pb: 6,
       }}
     >
