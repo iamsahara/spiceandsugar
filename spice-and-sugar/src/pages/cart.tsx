@@ -167,6 +167,55 @@ export default function CartPage() {
     }
   };
 
+  const isSuccess =
+    orderMessage && !orderMessage.toLowerCase().includes("failed");
+
+  if (isSuccess) {
+    return (
+      <Box
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          px: 2,
+          textAlign: "center",
+        }}
+      >
+        <Box
+          sx={{
+            maxWidth: 560,
+            p: { xs: 3, md: 4 },
+            borderRadius: "var(--radius-lg)",
+            backgroundColor: "var(--surface-color)",
+            boxShadow: "var(--shadow-soft)",
+          }}
+        >
+          <Typography variant="h4" sx={{ mb: 1 }}>
+            Thank you for your order!
+          </Typography>
+          <Typography sx={{ color: "var(--muted-text)", mb: 3 }}>
+            We will contact you shortly to confirm details. You can close this
+            window now.
+          </Typography>
+          <Button
+            href="/"
+            variant="contained"
+            sx={{
+              borderRadius: "999px",
+              px: 4,
+              py: 1.2,
+              background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
+              boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
+            }}
+          >
+            Back to Home
+          </Button>
+        </Box>
+      </Box>
+    );
+  }
+
   return (
     <Box
       sx={{
@@ -333,48 +382,50 @@ export default function CartPage() {
           </Stack>
         )}
 
-        <Divider sx={{ my: 3 }} />
+        {!orderMessage && <Divider sx={{ my: 3 }} />}
 
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          spacing={2}
-          alignItems={{ xs: "flex-start", md: "center" }}
-          justifyContent="space-between"
-        >
-          <Typography variant="h5">Total: ${total.toFixed(2)}</Typography>
-          <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
-            <Button
-              variant="contained"
-              onClick={handleCheckout}
-              disabled={items.length === 0 || isPaying}
-              sx={{
-                borderRadius: "999px",
-                px: 4,
-                py: 1.2,
-                background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
-                boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
-                width: { xs: "100%", md: "auto" },
-              }}
-            >
-              {isPaying ? "Redirecting..." : "Checkout Now"}
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={handleSubmitPayLater}
-              disabled={items.length === 0 || isSubmittingOrder}
-              sx={{
-                borderRadius: "999px",
-                px: 3.5,
-                py: 1.2,
-                borderColor: "rgba(45, 37, 35, 0.3)",
-                color: "var(--text-color)",
-                width: { xs: "100%", md: "auto" },
-              }}
-            >
-              {isSubmittingOrder ? "Submitting..." : "Submit Order - Pay Later"}
-            </Button>
+        {!orderMessage && (
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            spacing={2}
+            alignItems={{ xs: "flex-start", md: "center" }}
+            justifyContent="space-between"
+          >
+            <Typography variant="h5">Total: ${total.toFixed(2)}</Typography>
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
+              <Button
+                variant="contained"
+                onClick={handleCheckout}
+                disabled={items.length === 0 || isPaying}
+                sx={{
+                  borderRadius: "999px",
+                  px: 4,
+                  py: 1.2,
+                  background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
+                  boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
+                  width: { xs: "100%", md: "auto" },
+                }}
+              >
+                {isPaying ? "Redirecting..." : "Checkout Now"}
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={handleSubmitPayLater}
+                disabled={items.length === 0 || isSubmittingOrder}
+                sx={{
+                  borderRadius: "999px",
+                  px: 3.5,
+                  py: 1.2,
+                  borderColor: "rgba(45, 37, 35, 0.3)",
+                  color: "var(--text-color)",
+                  width: { xs: "100%", md: "auto" },
+                }}
+              >
+                {isSubmittingOrder ? "Submitting..." : "Submit Order - Pay Later"}
+              </Button>
+            </Stack>
           </Stack>
-        </Stack>
+        )}
 
         {paymentError && (
           <Typography color="error" sx={{ mt: 2 }}>
