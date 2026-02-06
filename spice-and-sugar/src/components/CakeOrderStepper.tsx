@@ -71,26 +71,22 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
   return (
     <Box
       sx={{
-        position: "absolute",
-        top: "7rem",
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "90%",
-        maxWidth: "800px",
-        height: "70%", 
+        position: "relative",
+        width: "min(92vw, 960px)",
         display: "flex",
         flexDirection: "column",
         alignContent: "center",
         justifyContent: "center",
         gap: 1,
-        p: 2,
-        borderRadius: "20px",
-        backgroundColor: "rgba(255, 255, 255, 0.25)",
-        backdropFilter: "blur(10px)",
-        border: "1px solid rgba(255, 255, 255, 0.3)",
-        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+        p: { xs: 2.5, md: 4 },
+        borderRadius: "var(--radius-lg)",
+        backgroundColor: "var(--surface-color)",
+        backdropFilter: "blur(12px)",
+        border: "1px solid rgba(255, 255, 255, 0.6)",
+        boxShadow: "var(--shadow-soft)",
         mx: "auto",
-        my: { xs: 3, md: 6 },
+        mt: { xs: 12, md: 14 },
+        mb: { xs: 4, md: 6 },
       }}
     >
       <Stepper
@@ -101,9 +97,9 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
           zIndex: 10,
           backdropFilter: "blur(5px)",
           px: { xs: 2, sm: 4 },
-          py: { xs: 1, sm: 2 },
+          py: { xs: 1, sm: 1.5 },
           borderRadius: "1rem",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
+          boxShadow: "0 6px 16px rgba(32, 24, 22, 0.08)",
           display: "flex",
           justifyContent: "center",
           alignSelf: "center",
@@ -120,13 +116,13 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
             px: 1.5,
             py: 1.5,
             borderRadius: "999px",
-            background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+            background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
             color: "#fff",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
             transition: "all 0.3s ease",
             "&:hover": {
-              background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+              background: "linear-gradient(135deg, #e45c4f, #f0a88f)",
+              boxShadow: "0 10px 22px rgba(240, 111, 95, 0.34)",
             },
           }}
         >
@@ -140,7 +136,7 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
           alignItems: "center",
           width: "100%",
           overflowY: "auto",
-          maxHeight: "35vh",
+          maxHeight: { xs: "55vh", md: "58vh" },
           padding: { xs: 2, sm: 3, md: 4 },
           gap: { xs: 2, sm: 3 },
         }}
@@ -171,23 +167,23 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
             variant="contained"
             color="primary"
             onClick={handleNext}
-            sx={{
-              fontWeight: "bold",
-              px: 5,
-              py: 1.5,
-              borderRadius: "999px",
-              background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
-              color: "#fff",
-              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-              transition: "all 0.3s ease",
-              "&:hover": {
-                background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-                boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
-              },
-            }}
-          >
-            Review Order
-          </Button>
+          sx={{
+            fontWeight: "bold",
+            px: 5,
+            py: 1.5,
+            borderRadius: "999px",
+            background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
+            color: "#fff",
+            boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              background: "linear-gradient(135deg, #e45c4f, #f0a88f)",
+              boxShadow: "0 10px 22px rgba(240, 111, 95, 0.34)",
+            },
+          }}
+        >
+          Review Order
+        </Button>
         )}
       </Box>
     </Box>

@@ -74,7 +74,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
     orderDetails.toppings ?? []
   );
   const [selectedColor, setSelectedColor] = useState(
-    orderDetails.color || "white"
+    orderDetails.color || "White"
   );
   const [customText, setCustomText] = useState(orderDetails.customText || "");
   const basePrice = orderDetails.price;
@@ -113,7 +113,15 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
       color: selectedColor,
       customText: customText,
     });
-  }, [selectedFillings.length, selectedToppings.length, customText, basePrice]);
+  }, [
+    selectedFlavor,
+    selectedFillings,
+    selectedToppings,
+    selectedColor,
+    customText,
+    basePrice,
+    updateOrder,
+  ]);
 
   return (
     <Box
@@ -183,12 +191,12 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           renderValue={(selected) => (
             <Box
               sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                overflowX: 'auto',
+                display: "flex",
+                flexWrap: "nowrap",
+                overflowX: "auto",
                 gap: 1,
                 py: 0.5,
-                minHeight: '40px',
+                minHeight: "40px",
               }}
             >
               {selected.map((item) => (
@@ -203,7 +211,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
                     py: 0.5,
                     fontSize: "0.75rem",
                     borderRadius: "8px",
-                    whiteSpace: 'nowrap',
+                    whiteSpace: "nowrap",
                   }}
                 />
               ))}
@@ -246,12 +254,12 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           renderValue={(selected) => (
             <Box
               sx={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                overflowX: 'auto',
+                display: "flex",
+                flexWrap: "nowrap",
+                overflowX: "auto",
                 gap: 1,
                 py: 0.5,
-                minHeight: '40px',
+                minHeight: "40px",
               }}
             >
               {selected.map((item) => (
@@ -266,7 +274,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
                     py: 0.5,
                     fontSize: "0.75rem",
                     borderRadius: "8px",
-                    whiteSpace: 'nowrap',
+                    whiteSpace: "nowrap",
                   }}
                 />
               ))}
@@ -303,7 +311,7 @@ const Step2FlavorFillingToppingText: React.FC<Step2Props> = ({
           labelId="color-label"
           value={selectedColor}
           onChange={(e) => setSelectedColor(e.target.value)}
-          label="⑧ Color"
+          label="Color"
         >
           <MenuItem value="White">White</MenuItem>
           <MenuItem value="Red">Red</MenuItem>

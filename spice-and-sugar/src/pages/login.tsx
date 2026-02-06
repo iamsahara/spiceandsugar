@@ -58,14 +58,28 @@ const LoginPage = () => {
       router.push("/cakeOrder");
     } catch (error) {
       console.error("❌ Error saving user:", error);
-      setErrorMessage("Failed to sign in. Try again.");
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("Failed to sign in. Try again.");
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", overflow: "hidden" }}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        px: 2,
+        pt: { xs: 8, md: 12 },
+        pb: 6,
+      }}
+    >
       <Box
         sx={{
           position: "absolute",
@@ -91,6 +105,7 @@ const LoginPage = () => {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "row",
+            gap: 1,
           }}
         >
           <Lottie options={defaultOptions} height={90} width={120} />
@@ -102,7 +117,7 @@ const LoginPage = () => {
               color: "var(--text-color)",
               textAlign: "center",
               mb: 3,
-              fontFamily: '"Poppins", sans-serif',
+              fontFamily: '"Fraunces", serif',
             }}
           >
             Start Your Cake Journey Here!
@@ -120,7 +135,7 @@ const LoginPage = () => {
 
         <TextField
           fullWidth
-          label="Email"
+          label="Email (Optional)"
           type="email"
           variant="outlined"
           value={user.email}
@@ -153,13 +168,13 @@ const LoginPage = () => {
             px: 5,
             py: 1.5,
             borderRadius: "999px",
-            background: "linear-gradient(135deg, #e48ca4, #f7c2cc)",
+            background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
             color: "#fff",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
             transition: "all 0.3s ease",
             "&:hover": {
-              background: "linear-gradient(135deg, #d87d98, #f1aebb)",
-              boxShadow: "0 6px 18px rgba(0, 0, 0, 0.15)",
+              background: "linear-gradient(135deg, #e45c4f, #f0a88f)",
+              boxShadow: "0 10px 22px rgba(240, 111, 95, 0.34)",
             },
           }}
         >

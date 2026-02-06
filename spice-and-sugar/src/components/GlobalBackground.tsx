@@ -30,12 +30,14 @@ export default function GlobalBackground() {
       sx={{
         minHeight: "100vh",
         width: "100vw",
-        position: "absolute",
+        position: "fixed",
+        inset: 0,
         overflow: "hidden",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
+        zIndex: -2,
       }}
     >
       {photosList.map((photo, index) => (
@@ -52,11 +54,21 @@ export default function GlobalBackground() {
             height: "100%",
             objectFit: "cover",
             opacity: index === currentIndex ? 1 : 0,
-            transition: "opacity 1s ease-in-out",
+            transition: "opacity 1.2s ease-in-out",
+            filter: "saturate(1.05)",
             zIndex: 0,
           }}
         />
       ))}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(180deg, rgba(255,246,239,0.92) 0%, rgba(255,246,239,0.76) 35%, rgba(255,246,239,0.92) 100%)",
+          zIndex: 1,
+        }}
+      />
     </Box>
   );
 }

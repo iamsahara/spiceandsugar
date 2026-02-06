@@ -27,7 +27,7 @@ const CakeOrder = () => {
   }, []);
 
   if (!userName) {
-    return <p>Loading...</p>; 
+    return <CakeOrderStepper userName="Guest" />;
   }
 
   return <CakeOrderStepper userName={userName} />;

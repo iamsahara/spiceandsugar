@@ -7,20 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useState, useEffect } from "react";
 import GlobalBackground from "@/components/GlobalBackground";
 import Header from "@/components/Header";
-
-
-
-interface OrderDetails {
-  cakeType: string;
-  shape: string;
-  levels: number;
-  color: string;
-  weight: number;
-  filling: string | null;
-  toppings: string[];
-  customText: string;
-  price: number;
-}
+import { OrderDetails } from "@/types";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [orderDetails, setOrderDetails] = useState<OrderDetails>({
@@ -29,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
     levels: 1,
     color: "Brown",
     weight: 1,
-    filling: null,
+    filling: [],
     toppings: [],
     customText: "",
     price: 0,
@@ -55,7 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalBackground />
-      <Header/>
+      <Header userName={userName} />
       <Component
         {...pageProps}
         orderDetails={orderDetails}

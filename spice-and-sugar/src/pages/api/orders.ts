@@ -1,6 +1,9 @@
 // import { NextApiRequest, NextApiResponse } from "next";
 // import supabase from "../../lib/supabase";
 
+const supabaseUrl =
+  process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 // export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 //   if (req.method !== "POST") {
@@ -72,11 +75,15 @@ const esc = (v: unknown) =>
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
+    res.setHeader("Allow", ["POST"]);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
   try {
     const {
+      user_name,
+      phone,
+      email,
       cakeType,
       shape,
       levels,
@@ -86,7 +93,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       toppings,
       customText,
       price,
-      imageUrl,
+      image_url,
       extraDescription,
       // optionally include customer info if you have it:
       customerName,
