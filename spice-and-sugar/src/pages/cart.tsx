@@ -28,7 +28,7 @@ export default function CartPage() {
   const [paymentError, setPaymentError] = useState("");
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
   const [orderMessage, setOrderMessage] = useState("");
-  const [guestUser, setGuestUser] = useState<{
+  const [, setGuestUser] = useState<{
     name?: string;
     email?: string | null;
     phone?: string | null;
