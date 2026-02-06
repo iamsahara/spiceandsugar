@@ -35,7 +35,7 @@ export const updateQuantity = (id: string, quantity: number) => {
   const next = items
     .map((entry) =>
       entry.id === id
-        ? { ...entry, quantity: Math.max(1, Number(quantity.toFixed(2))) }
+        ? { ...entry, quantity: Math.max(0.5, Number(quantity.toFixed(2))) }
         : entry
     )
     .filter(Boolean);

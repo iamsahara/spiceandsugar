@@ -79,22 +79,22 @@ const Step4ReviewOrder: React.FC<Step4Props> = ({
         throw new Error("Order submission failed");
       }
 
+      addToCart({
+        id: `custom-${Date.now()}`,
+        name: "Custom Cake Order",
+        price: orderDetails.price,
+        quantity: orderDetails.weight || 1,
+        type: "custom",
+        details: cakeDescription.trim(),
+      });
+      setAddedOpen(true);
       setOrderConfirmed(true);
+      router.push("/cart");
     } catch (error) {
       console.error("Error submitting order:", error);
     } finally {
       setIsSubmitting(false);
     }
-    addToCart({
-      id: `custom-${Date.now()}`,
-      name: "Custom Cake Order",
-      price: orderDetails.price,
-      quantity: orderDetails.weight || 1,
-      type: "custom",
-      details: cakeDescription.trim(),
-    });
-    setAddedOpen(true);
-    router.push("/cart");
   };
 
 

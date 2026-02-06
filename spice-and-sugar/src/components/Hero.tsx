@@ -453,7 +453,6 @@ export default function Hero() {
           </Box>
         </Stack>
       </Box>
-      </Box>
       <Snackbar
         open={addedOpen}
         autoHideDuration={2000}
