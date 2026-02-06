@@ -6,8 +6,6 @@ import Step4ReviewOrder from "./steps/Step4ReviewOrder";
 import { useRouter } from "next/navigation";
 import { OrderDetails } from "@/types";
 
-const steps: string[] = [];
-
 const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -40,7 +38,9 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
   };
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (activeStep === 0 || activeStep === 1) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }, [activeStep]);
 
   const renderStepContent = (step: number): React.ReactNode => {
@@ -108,12 +108,12 @@ const CakeOrderStepper: React.FC<{ userName: string }> = ({}) => {
         }}
       >
         <Typography sx={{ color: "var(--text-color)", fontWeight: "800" }}>
-          Bake It Your Way!{" "}
+          Bake It Your Way{" "}
         </Typography>
         <Box
           sx={{
             fontWeight: "bold",
-            px: 5,
+            px: 1.5,
             py: 1.5,
             borderRadius: "999px",
             background: "linear-gradient(135deg, #f06f5f, #f2b39b)",

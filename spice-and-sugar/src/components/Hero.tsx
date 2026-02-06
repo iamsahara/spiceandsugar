@@ -1,69 +1,21 @@
 "use client";
-import { Box, Button, Snackbar, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { addToCart } from "@/lib/cart";
+import { Box, Button, Stack } from "@mui/material";
 
-const featuredCakes = [
-  {
-    name: "Velora Signature",
-    price: 38,
-    image: "/output.jpg",
-  },
-  {
-    name: "Floral Buttercream",
-    price: 32,
-    image: "/output (1).jpg",
-  },
-  {
-    name: "Golden Berry",
-    price: 36,
-    image: "/output (2).jpg",
-  },
-  {
-    name: "Modern Romance",
-    price: 40,
-    image: "/output (4).jpg",
-  },
-];
-
-const galleryShots = [
-  { name: "Classic White", price: 28, image: "/IMG_6080.jpg" },
-  { name: "Blush Rose", price: 30, image: "/IMG_6082.jpg" },
-  { name: "Citrus Bloom", price: 34, image: "/IMG_6086.jpg" },
-  { name: "Velvet Ribbon", price: 33, image: "/IMG_6087.jpg" },
-  { name: "Luxe Garden", price: 36, image: "/IMG_6091.jpg" },
-  { name: "Pearl Drip", price: 32, image: "/IMG_6092.jpg" },
-];
-
-const formatPrice = (value: number) => `$${value.toFixed(2)} / kg`;
-
-const highlightItems = [
-  "Custom design",
-  "Flexible pickup",
-  "Fresh ingredients",
-];
 export default function Hero() {
-  const [addedOpen, setAddedOpen] = useState(false);
-  const [addedMessage, setAddedMessage] = useState("Added to basket");
-  const [isSignedIn, setIsSignedIn] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const savedUser = localStorage.getItem("guestUser");
-    if (savedUser) {
-      try {
-        const user = JSON.parse(savedUser);
-        if (user?.name) setIsSignedIn(true);
-      } catch {
-        setIsSignedIn(false);
-      }
-    }
-  }, []);
-
-  const notifyAdded = (message: string) => {
-    setAddedMessage(message);
-    setAddedOpen(true);
-  };
+  return (
+    <Box
+      id="Hero"
+      sx={{
+        minHeight: "100vh",
+        width: "100vw",
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
 
   const orderHref = isSignedIn ? "/cakeOrder" : "/login";
 

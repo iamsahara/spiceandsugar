@@ -33,7 +33,8 @@ export default function Header({ userName }: HeaderProps) {
         background: "transparent",
         boxShadow: "none",
         backdropFilter: "none",
-        gap: { xs: 1.5, md: 1 },
+        pointerEvents: "none", 
+  
       }}
     >
       <Stack

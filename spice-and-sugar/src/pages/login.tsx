@@ -28,22 +28,34 @@ const LoginPage = () => {
   }, []);
 
   const handleGuestSignIn = async () => {
-    if (!user.name.trim()) {
-      setErrorMessage("Name is required!");
-      return;
-    }
-    setIsSubmitting(true);
-    setErrorMessage("");
+    // if (!user.name.trim() || !user.email.trim()) {
+    //   setErrorMessage("Name and Email are required!");
+    //   return;
+    // }
+    // // setIsSubmitting(true);
+    // setErrorMessage("");
 
     try {
-      const guestUser = {
-        name: user.name.trim(),
-        email: user.email.trim() || null,
-        phone: user.phone.trim() || null,
-      };
-      localStorage.setItem("guestUser", JSON.stringify(guestUser));
-      console.log(`User authenticated: ${user.name}`);
-      router.push("/");
+      // const response = await fetch("/api/users", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({
+      //     name: user.name,
+      //     email: user.email,
+      //     phone: user.phone,
+      //   }),
+      // });
+
+      // if (!response.ok) {
+      //   throw new Error("Failed to create user.");
+      // }
+
+      // const data = await response.json();
+      // console.log("✅ User saved:", data);
+     const data = { user: { id: 1, ...user } }; // Mocked response
+      localStorage.setItem("guestUser", JSON.stringify(data.user));
+      // console.log(`User authenticated: ${user.name}`);
+      router.push("/cakeOrder");
     } catch (error) {
       console.error("❌ Error saving user:", error);
       if (error instanceof Error) {
@@ -70,16 +82,21 @@ const LoginPage = () => {
     >
       <Box
         sx={{
-          width: "min(92vw, 420px)",
+          position: "absolute",
+          width: "20rem",
+          maxHeight: "35rem",
           display: "flex",
           flexDirection: "column",
-          gap: 1.5,
-          p: { xs: 3, sm: 4 },
-          borderRadius: "var(--radius-lg)",
-          backgroundColor: "var(--surface-color)",
-          backdropFilter: "blur(12px)",
-          border: "1px solid rgba(255, 255, 255, 0.6)",
-          boxShadow: "var(--shadow-soft)",
+          alignContent: "center",
+          justifyContent: "center",
+          gap: 1,
+          p: 2,
+          mt: "8rem",
+          borderRadius: "20px",
+          backgroundColor: "rgba(255, 255, 255, 0.25)",
+          backdropFilter: "blur(10px)",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
+          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Box
