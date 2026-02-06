@@ -68,7 +68,6 @@ export default function Hero() {
   const orderHref = isSignedIn ? "/cakeOrder" : "/login";
 
   return (
-    <>
       <Box
         id="Hero"
         sx={{
@@ -460,6 +459,6 @@ export default function Hero() {
         message={addedMessage}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       />
-    </>
+    </Box>
   );
 }
