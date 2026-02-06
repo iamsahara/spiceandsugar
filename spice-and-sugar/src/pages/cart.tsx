@@ -24,8 +24,6 @@ import {
 
 export default function CartPage() {
   const [items, setItems] = useState<CartItem[]>([]);
-  const [isPaying, setIsPaying] = useState(false);
-  const [paymentError, setPaymentError] = useState("");
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
   const [orderMessage, setOrderMessage] = useState("");
   const [, setGuestUser] = useState<{
@@ -75,44 +73,6 @@ export default function CartPage() {
   const handleRemove = (id: string) => {
     removeFromCart(id);
     setItems(getCart());
-  };
-
-  const handleCheckout = async () => {
-    setIsPaying(true);
-    setPaymentError("");
-    try {
-      const description = items
-        .map((item) => `${item.name} x${item.quantity}`)
-        .join(", ");
-      const response = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: total,
-          description,
-        }),
-      });
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data?.error || "Failed to start checkout.");
-      }
-
-      const data = await response.json();
-      if (data?.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error("Missing checkout URL.");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        setPaymentError(error.message);
-      } else {
-        setPaymentError("Payment failed. Please try again.");
-      }
-    } finally {
-      setIsPaying(false);
-    }
   };
 
   const handleSubmitPayLater = async () => {
@@ -392,45 +352,22 @@ export default function CartPage() {
             justifyContent="space-between"
           >
             <Typography variant="h5">Total: ${total.toFixed(2)}</Typography>
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
-              <Button
-                variant="contained"
-                onClick={handleCheckout}
-                disabled={items.length === 0 || isPaying}
-                sx={{
-                  borderRadius: "999px",
-                  px: 4,
-                  py: 1.2,
-                  background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
-                  boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
-                  width: { xs: "100%", md: "auto" },
-                }}
-              >
-                {isPaying ? "Redirecting..." : "Checkout Now"}
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={handleSubmitPayLater}
-                disabled={items.length === 0 || isSubmittingOrder}
-                sx={{
-                  borderRadius: "999px",
-                  px: 3.5,
-                  py: 1.2,
-                  borderColor: "rgba(45, 37, 35, 0.3)",
-                  color: "var(--text-color)",
-                  width: { xs: "100%", md: "auto" },
-                }}
-              >
-                {isSubmittingOrder ? "Submitting..." : "Submit Order - Pay Later"}
-              </Button>
-            </Stack>
+            <Button
+              variant="contained"
+              onClick={handleSubmitPayLater}
+              disabled={items.length === 0 || isSubmittingOrder}
+              sx={{
+                borderRadius: "999px",
+                px: 3.5,
+                py: 1.2,
+                background: "linear-gradient(135deg, #f06f5f, #f2b39b)",
+                boxShadow: "0 8px 18px rgba(240, 111, 95, 0.28)",
+                width: { xs: "100%", md: "auto" },
+              }}
+            >
+              {isSubmittingOrder ? "Submitting..." : "Submit Order - Pay Later"}
+            </Button>
           </Stack>
-        )}
-
-        {paymentError && (
-          <Typography color="error" sx={{ mt: 2 }}>
-            {paymentError}
-          </Typography>
         )}
         {orderMessage && (
           <Typography
